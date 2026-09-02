@@ -22,12 +22,41 @@ Motion must explain state, relationship, or hierarchy. It is not added solely fo
 
 **Build status:** Required in the same Foundation build; do not ask a separate documentation question.
 
-Create `Motion Guidelines` using [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md).
+Build one regular frame named `Documentation / Motion` using [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md).
 
-- Group approved motion roles by intended use and show the duration and easing designers need to select them.
-- Show paired standard and reduced-motion examples.
-- Use `320x160px` frames with `24px` padding and simple geometry.
-- Keep matching layer names consistent between prototype states.
-- Add do-and-don't examples for purposeful and decorative motion.
-- Do not build production components only to demonstrate motion.
-- Do not display reaction metadata or validation results. Verify reactions, labels, and reduced-motion behavior internally.
+### Required visible structure and copy
+
+```text
+Documentation / Motion
+  Header
+    Motion
+    Motion explains state changes, spatial relationships, and hierarchy over time.
+  Overview
+  Motion roles
+  Standard and reduced motion
+  Do and don't
+  Accessibility
+```
+
+Use this overview copy: `Choose motion by the size and meaning of the change. Motion should help a person understand what happened, where an element came from, or which layer is active.`
+
+Create one annotated example block containing the approved motion roles. Each `240px`-wide example contains a simple `192×96px` prototype preview, role name, duration, easing, and usage sentence:
+
+| Role | Visible value | Required usage sentence |
+| --- | --- | --- |
+| Instant | `0ms · none` | `Use for a pressed state or change that must feel immediate.` |
+| Fast | `100ms · ease out` | `Use for hover and small state changes.` |
+| Standard | `160ms · ease out` | `Use for menus, tooltips, and disclosure.` |
+| Emphasized | `240ms · ease in-out` | `Use for modals, drawers, and important transitions.` |
+| Slow | `320ms · ease in-out` | `Use only for a large spatial transition that needs more time to understand.` |
+
+Create three paired demonstrations using `320×160px` frames with `24px` padding: `Reveal`, `Move`, and `Loading`. Place `Standard motion` and `Reduced motion` side by side. Show the visible labels `Duration`, `Easing`, `Property changing`, and `Reduced-motion replacement` beneath each pair. Reduced motion removes non-essential translation and uses an instant change or opacity no longer than `100ms`.
+
+Create one comparison row:
+
+- Do: `Use motion to explain state, origin, destination, or hierarchy.`
+- Don't: `Do not add repeated or decorative movement that communicates nothing.`
+
+Finish with: `Provide a reduced-motion behavior for every non-essential translation, parallax effect, marquee, or repeated shimmer.` Add `✓ WCAG 2.2 AA checked` only after the motion checks pass.
+
+Do not build production components solely for the guide. Do not show reaction metadata or validation logs. The guide fails QA when an example omits its role, duration, easing, purpose, or reduced-motion behavior.

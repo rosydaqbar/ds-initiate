@@ -51,6 +51,8 @@
 - Every specimen remains connected and reflects the finished component's actual API, measurements, bindings, and behavior.
 - Irrelevant sections and unbuilt options are omitted.
 - The visible frame focuses on purpose, usage, actual permutations, and do-and-don't examples.
+- The frame reads as an editorial guide rather than a specimen dashboard or copied recipe table.
+- Every displayed style, size, state, and editable option has a visible label and decision-focused explanation.
 - Accessibility appears as a concise checked status plus any remaining designer responsibility.
 - Inventories, binding tables, alias paths, metadata, contrast calculations, 4px audit output, and validation logs are not shown in the Figma frame.
 - A final metadata inspection and screenshot pass confirms the documentation without changing the component API.

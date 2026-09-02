@@ -18,4 +18,45 @@ Vector mark, wordmark, horizontal and stacked lockups, light and dark versions, 
 
 **Build status:** Required in the same Foundation build; do not ask a separate documentation question.
 
-Create `Logo Guidelines` using [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md). Show connected instances of the approved lockups and appearances, minimum sizes, clear-space measurements, permitted backgrounds, and do-and-don't examples. Specimen containers use at least `24px` padding and expand to preserve vector proportions and clear space. Label each specimen with its familiar asset and appearance name. Missing required identity assets remain a blocker. Keep connection and proportion checks internal. This guide does not automatically create the separate optional [Logo component landing frame](../02-atoms/logo.md).
+Build one regular frame named `Documentation / Logo` using [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md). Missing required identity assets remain a blocker.
+
+### Required visible structure and copy
+
+```text
+Documentation / Logo
+  Header
+    Logo
+    The logo identifies the approved brand and must remain consistent, legible, and undistorted.
+  Overview
+  Approved lockups
+  Appearances and backgrounds
+  Minimum size
+  Clear space
+  Do and don't
+  Accessibility
+```
+
+Use this overview copy: `Use the lockup that fits the available space while preserving the approved artwork, proportions, minimum size, and clear space.`
+
+Show each approved lockup once in its recommended appearance; do not display the full lockup-by-appearance cross-product. Each specimen container uses at least `24px` padding and expands to preserve the asset's proportions. Beneath each instance, show:
+
+- Familiar asset name: `Symbol`, `Wordmark`, `Horizontal`, or the approved lockup name.
+- Appearance: `Default`, `Inverse`, or `Monochrome`.
+- Approved use: one sentence describing the appropriate placement.
+
+Create a `Minimum size` section using the primary horizontal lockup and symbol. Annotate the actual approved width and height in pixels and add: `Do not reproduce this lockup below the labeled size.` Keep the complete asset specifications in this Markdown file and Figma component descriptions.
+
+Create a `Clear space` section with one connected lockup surrounded by its measured exclusion area. Show the actual clear-space value or approved logo-derived unit on all four sides and add: `Keep text, imagery, and other marks outside this area.`
+
+Create a background matrix for `Light`, `Dark`, `Brand`, and `Image` only when each background is approved. Label the required logo appearance for every permitted example. Mark an unapproved combination as `Do not use` rather than recoloring the logo.
+
+Create these comparisons:
+
+- Do: `Use an approved connected logo asset.` / Don't: `Do not redraw or detach the logo.`
+- Do: `Preserve the original proportions.` / Don't: `Do not stretch, compress, rotate, or rearrange the artwork.`
+- Do: `Use the approved appearance for the background.` / Don't: `Do not recolor the logo to create a new variation.`
+- Do: `Preserve the required clear space.` / Don't: `Do not place content inside the exclusion area.`
+
+Finish with: `Choose a logo appearance that remains clearly visible against its background.` Add the approved accessibility checkmark only when relevant checks pass.
+
+Do not show node IDs or connection reports. The guide fails QA when a specimen omits its lockup name, appearance, permitted use, minimum size, or clear-space guidance. This guide does not authorize the optional [Logo component landing frame](../02-atoms/logo.md).

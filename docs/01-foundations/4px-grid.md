@@ -63,4 +63,50 @@ Create role-based corner variables in `Radius` and stroke widths in `Border`; fo
 
 **Build status:** Required in the same Foundation build; do not ask a separate documentation question.
 
-Create or update `4px Grid Guide` using [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md). Show a 4px grid overlay on `160×160px` and `320×160px` examples, then demonstrate common padding, gap, alignment, target-size, and focus-ring decisions. Add focused do-and-don't examples for aligned and off-grid layout. Do not show an implemented-variable inventory, audit output, or rendering-exception report in the Figma guide. Verify all geometry internally before completion.
+Build one regular frame named `Documentation / 4px Grid` using [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md).
+
+### Required visible structure and copy
+
+```text
+Documentation / 4px Grid
+  Header
+    4px construction grid
+    A shared 4px rhythm keeps layout, spacing, sizing, and alignment consistent across the system.
+  Overview
+    How the grid works
+    Common measurements
+  Applying the grid
+    Padding
+    Gap
+    Size and alignment
+    Touch targets
+    Focus treatment
+  Do and don't
+  Accessibility
+```
+
+Use this overview copy: `Start every structural measurement with a multiple of 4. Components may combine these measurements, but their frames, padding, gaps, and positions must remain on the same rhythm.`
+
+Create two bound grid specimens:
+
+- `Basic grid` — `160×160px`, square grid size `4px`, with the caption `Each square represents 4px.`
+- `Composition grid` — `320×160px`, square grid size `4px`, containing aligned `32px`, `48px`, and `64px` shapes with the caption `Different sizes align because each dimension uses the same 4px rhythm.`
+
+Create five `224px`-wide usage examples in one annotated block. Every example must show its title, measurement labels, and this usage sentence:
+
+| Card | Required visual | Required usage sentence |
+| --- | --- | --- |
+| Padding | A `160×96px` frame with `16px` inset measurement | `Use padding to create consistent space between a container and its content.` |
+| Gap | Three `32×32px` items with `8px` and `16px` gap measurements | `Use gap to control space between sibling items in Auto Layout.` |
+| Size and alignment | Two grid-aligned shapes with visible width and height labels | `Keep frame position, width, and height on whole multiples of 4.` |
+| Touch target | A `32px` visible control centered in a `44×44px` target | `A small visible control can use a larger invisible interaction target.` |
+| Focus treatment | A `48×48px` target with a visible `4px` outer focus ring | `Focus treatment must remain visible without changing layout size.` |
+
+Create one comparison row:
+
+- Do: `Align frames, padding, and gaps to the 4px grid.` Show aligned edges and measurement labels.
+- Don't: `Do not introduce one-off structural measurements.` Show an intentionally incorrect `18px` gap and `30px` height, labeled as incorrect.
+
+Finish with: `The 4px grid supports predictable spacing and sufficiently sized controls.` Add `✓ WCAG 2.2 AA checked` only after the related accessibility checks pass.
+
+Do not show the complete spacing-variable inventory, audit output, or rendering-exception report. The guide fails QA if any visual measurement is unlabeled or the correct and incorrect examples lack their written instruction.

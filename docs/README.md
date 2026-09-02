@@ -47,4 +47,4 @@ Every item file states the exact Figma building block to create.
 
 Use [Mandatory Foundation Documentation](06-governance/foundation-documentation.md) for Foundation guides and [Optional Component Documentation](06-governance/optional-component-documentation.md) for component landing frames. Both are adaptive to the actual built result.
 
-Designer-facing Figma frames contain purpose, usage, representative examples, actual variants or properties when relevant, do-and-don't guidance, and a concise accessibility status. Detailed inventories, implementation data, and QA evidence stay in the Markdown specifications and build ledger.
+Designer-facing Figma frames use a readable editorial structure with purpose, usage, focused annotated examples, actual permutations when relevant, do-and-don't guidance, and a concise accessibility status. Every displayed specimen includes its familiar name, resolved designer-facing value, and explanation. Complete implementation inventories, long token tables, specimen dashboards, implementation data, and QA evidence stay in the Markdown specifications, native Figma panels, and build ledger.

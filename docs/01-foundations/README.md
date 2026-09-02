@@ -2,7 +2,7 @@
 
 Foundations define the shared visual language used by every component.
 
-Figma documentation is mandatory for every Foundation item in the requested build. Build it immediately alongside the values, styles, assets, or rules, without a separate documentation question. The item is complete only when both the Foundation and its guide pass internal QA. Follow [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md) and the item-specific recipe below; Atom, Molecule, and Organism landing frames remain optional.
+Figma documentation is mandatory for every Foundation item in the requested build. Build it immediately alongside the values, styles, assets, or rules, without a separate documentation question. The item is complete only when both the Foundation and its guide pass internal QA. Guides use focused, explained examples rather than complete inventories or long token tables; every specimen shown includes its familiar name, resolved designer-facing value, and usage. Follow [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md) and the item-specific recipe below; Atom, Molecule, and Organism landing frames remain optional.
 
 | Foundation | Specification |
 | --- | --- |

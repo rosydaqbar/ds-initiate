@@ -67,6 +67,8 @@ After component QA passes, ask:
 
 If approved, re-inspect the final component metadata and screenshot, then create or update `Documentation / [Component name]` using [Optional Component Documentation](optional-component-documentation.md).
 
+The recipe table below is an internal build instruction. Convert each row into visible headings, short explanations, and annotated connected-instance examples. Never reproduce the table or the complete component-set matrix in Figma. Every displayed style, size, state, and editable option needs a visible label and a sentence explaining when or why to choose it.
+
 ### Adaptive content recipe
 
 | Documentation area | Build from the finished component |
@@ -77,7 +79,7 @@ If approved, re-inspect the final component metadata and screenshot, then create
 | Do and don't | [Component-specific correct and incorrect applications using connected instances; name the exact decision each example teaches] |
 | Accessibility status | Show `✓ WCAG 2.2 AA checked` after internal QA, plus any remaining responsibility for the consuming designer. Do not show ratios or test output. |
 
-Omit a row whose capability does not exist in the finished component. Never expose anatomy, implementation behavior, variable inventories, binding tables, variant-count calculations, metadata, or validation results unless the user explicitly asks for that additional documentation.
+Omit a row whose capability does not exist in the finished component. Never expose anatomy, implementation behavior, variable inventories, binding tables, variant-count calculations, metadata, or validation results unless the user explicitly asks for that additional documentation. Build the guide as an editorial sequence, not a specimen dashboard.
 ````
 
 The shared rules in [Figma Construction Standard](figma-construction-standard.md) apply even when they are not repeated in an item file.

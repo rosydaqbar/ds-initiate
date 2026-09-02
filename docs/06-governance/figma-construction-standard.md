@@ -34,7 +34,7 @@ Every Atom, Molecule, and Organism file must specify:
 8. A 4px and accessibility QA checklist.
 9. An item-specific optional documentation recipe that is used only after the finished component is validated and the user approves the separate documentation step.
 
-These implementation details remain in Markdown and internal QA. The optional Figma landing frame contains designer-facing usage, actual component permutations, do-and-don't examples, and concise accessibility status.
+These implementation details remain in Markdown and internal QA. The optional Figma landing frame uses readable headings and explanations followed by annotated connected instances for designer-facing usage, actual component permutations, do-and-don't examples, and concise accessibility status.
 
 ## 4px construction
 
@@ -96,6 +96,8 @@ Variant presentation is part of component construction. A separate landing frame
 - If approved, derive the frame from the finished Figma component and its item specification; do not rely on a static specimen template.
 - Keep variant math, variables, bindings, metadata, contrast ratios, and validation results out of the designer-facing frame.
 - Show purpose, usage, actual variants and properties, do-and-don't examples, and concise accessibility status.
+- Convert the item recipe into an editorial guide; do not render the Markdown recipe table or recreate the full component-set matrix in Figma.
+- Give every displayed instance a visible label and a sentence explaining when or why a designer chooses it.
 - Documentation approval for one item does not authorize documentation for another item.
 
 ## Naming

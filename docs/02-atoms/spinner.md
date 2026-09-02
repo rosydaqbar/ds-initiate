@@ -83,9 +83,9 @@ After the `Spinner` component and its dependencies pass component QA, ask:
 
 > “The Spinner component is complete. Should I build its optional designer documentation from [spinner.md](spinner.md)?”
 
-If the user approves, inspect the final component metadata and screenshot again, then create or update the regular frame `Documentation / Spinner`. Follow [Optional Component Documentation](../06-governance/optional-component-documentation.md) for the `1200px` default frame, `40px` padding, `48px` section gap, connected-instance rule, adaptive sections, and documentation QA.
+If the user approves, inspect the final component metadata and screenshot again, then create or update the regular frame `Documentation / Spinner`. Follow [Optional Component Documentation](../06-governance/optional-component-documentation.md) for the `1600px` editorial frame, centered reading column, annotated connected-instance examples, adaptive sections, and documentation QA.
 
-The values below are selection targets from this specification, not static documentation data. The finished Figma component is the source of truth for displayed names, counts, values, measurements, and bindings.
+The values below are selection targets from this specification, not static documentation data. The finished Figma component is the source of truth for displayed names, counts, values, measurements, and bindings. Treat the recipe table as internal build instructions: convert each row into visible headings, explanatory paragraphs, and focused connected-instance examples; never reproduce the table in Figma. Every displayed style, size, state, and editable option needs a visible label and one sentence explaining when or why a designer would choose it.
 
 ### Adaptive content recipe
 

@@ -110,19 +110,103 @@ After the `Button` component and its dependencies pass component QA, ask:
 
 > “The Button component is complete. Should I build its optional designer documentation from [button.md](button.md)?”
 
-If the user approves, inspect the final component metadata and screenshot again, then create or update the regular frame `Documentation / Button`. Follow [Optional Component Documentation](../06-governance/optional-component-documentation.md) for the `1200px` default frame, `40px` padding, `48px` section gap, connected-instance rule, adaptive sections, and documentation QA.
+If the user approves, inspect the final component metadata and screenshot again, then create or update the regular frame `Documentation / Button`. Follow [Optional Component Documentation](../06-governance/optional-component-documentation.md) for the `1600px` editorial frame, centered reading column, annotated connected-instance examples, adaptive sections, and documentation QA.
 
-The values below are selection targets from this specification, not static documentation data. The finished Figma component is the source of truth for displayed names, counts, values, measurements, and bindings.
+Build the sections below as visible headings, paragraphs, annotated connected-instance rows, and do-and-don't comparisons. Do not turn this recipe into a Figma table or reproduce all 120 public variants. The finished Figma component remains the source of truth for every displayed selection.
 
-### Adaptive content recipe
+### Header and overview
 
-| Documentation area | Build from the finished Atom |
-| --- | --- |
-| Hero preview | Place one connected `Button/Primary` instance using `Size=Medium`, `Intent=Default`, `State=Default`. Confirm those selections against the finished default metadata before adding labels. Present it on the normal semantic surface with at least `24px` specimen padding. |
-| Purpose and usage | Use Button for a labelled action; use Icon Button when the action is intentionally icon-only. Explain when to use it and when another component is more suitable, using only capabilities present in the finished component. |
-| Do and don't | Show one clear action label, intentional hierarchy, and Destructive intent only for destructive outcomes. Do not use Button for icon-only actions, place competing Primary actions together, or change state manually. |
-| Variants and states | Start with a public-set comparison for `Button/Primary`, `Button/Secondary`, `Button/Tertiary`, `Button/Link`, then build focused connected-instance comparisons for `Size` (`Small`, `Medium`, `Large`); `Intent` (`Default`, `Destructive`); `State` (`Default`, `Hover`, `Pressed`, `Focus`, `Disabled`). Use a full matrix only when each combination teaches a distinct visual or behavioral rule. |
-| Properties | Demonstrate the finished editable API: `Label` (Text, default `Button`); `Show leading icon` (Boolean, default `false`); `Leading icon` (Instance swap, default `Icon/Placeholder`); `Show trailing icon` (Boolean, default `false`); `Trailing icon` (Instance swap, default `Icon/ArrowRight`); `Loading` (Nested boolean/variant, default `false`). Use paired live instances for meaningful boolean changes and only approved connected replacements for instance swaps. |
-| Accessibility status | Show `✓ WCAG 2.2 AA checked` after internal QA, plus any remaining responsibility for the consuming designer. Do not show ratios or test output. |
+Create these visible text layers:
 
-Omit any section whose capability does not exist in the finished component. Never add or detach a component merely to complete the landing frame.
+- Category: `Atoms`
+- Title: `Button`
+- Definition: `Buttons trigger an immediate action and make the next step clear.`
+- Heading: `Use a button for an action`
+- Overview: `Use Button when selecting the control performs an action, such as submitting, saving, confirming, or starting a task.`
+- When not to use: `Use Link for navigation to another destination. Use Icon Button only when space is constrained and the icon has a familiar meaning.`
+
+Below the overview, place one connected `Button/Primary` instance with `Size=Medium`, `Intent=Default`, `State=Default`, and label `Continue`. Add the caption: `Recommended default for the most important action in a focused area.`
+
+### Hierarchy
+
+Heading: `Choose emphasis by importance`
+
+Introductory copy: `Button styles communicate action priority. Start with the least emphasis that still makes the action clear.`
+
+Create one `1120px` annotated example block containing four connected Medium, Default-intent, Default-state instances. Show each public style once; place the visible label and explanation below its instance:
+
+| Instance | Visible label | Visible explanation |
+| --- | --- | --- |
+| `Button/Primary` | `Primary` | `Use for the most important action in a focused area. Keep one Primary action in a related action group.` |
+| `Button/Secondary` | `Secondary` | `Use for a supporting action that still needs clear visual weight.` |
+| `Button/Tertiary` | `Tertiary` | `Use for a lower-emphasis action beside stronger actions or in compact groups.` |
+| `Button/Link` | `Link style` | `Use for the quietest action treatment. Use the Link component instead when the interaction navigates.` |
+
+The table above is an internal build instruction. In Figma, render it as one instance row with four short annotations, not as a table.
+
+### Sizes
+
+Heading: `Choose size for the available space`
+
+Create one focused row using `Button/Primary`, Default intent, Default state, and label `Button`:
+
+- `Small · 32px` — `Use in dense interfaces when a separate minimum interaction target is preserved.`
+- `Medium · 40px` — `Use as the default size for most controls and forms.`
+- `Large · 48px` — `Use when the action needs stronger presence or a larger direct target.`
+
+Show the resolved height beside every instance. Do not show internal padding, token names, or construction measurements in this designer-facing section.
+
+### States and intent
+
+Heading: `States communicate interaction`
+
+Use `Button/Primary`, Medium, Default intent for one five-instance row:
+
+- `Default` — `Ready for interaction.`
+- `Hover` — `Pointer is over the action.`
+- `Pressed` — `The action is being activated.`
+- `Focus` — `Keyboard focus is visible.`
+- `Disabled` — `The action is temporarily unavailable.`
+
+Add a separate two-instance comparison using Medium Primary buttons:
+
+- `Default` — `Use for ordinary actions.`
+- `Destructive` — `Use only when the action removes data, access, or another recoverable or irreversible resource.`
+
+Do not combine every style, size, intent, and state. These focused rows document the actual permutations without duplicating the component-set matrix.
+
+### Labels, icons, and loading
+
+Heading: `Make the outcome predictable`
+
+Create three focused connected-instance examples:
+
+1. `Save changes` with no icon. Caption: `Write a concise action label that starts with a verb.`
+2. `Download file` with one approved trailing or leading icon chosen according to the finished API. Caption: `Add an icon only when it reinforces the same action; do not use it as decoration.`
+3. `Save changes` with `Loading=true`. Caption: `Loading preserves the button width and blocks repeat activation while the action is in progress.`
+
+Do not create separate examples for every possible icon. Do not expose the placeholder icon or private `_Button/Content` component.
+
+### Do and don't
+
+Create three connected-instance comparison pairs. Each pair shows the example and the exact instruction beneath it.
+
+1. Action hierarchy
+   - Do: `Use one Primary button and a quieter style for the supporting action.`
+   - Don't: `Do not place competing Primary actions in the same action group.`
+2. Labels
+   - Do: `Use a specific action label such as “Save changes”.`
+   - Don't: `Do not use a vague label such as “OK” when the result is not obvious.`
+3. Destructive intent
+   - Do: `Use Destructive intent for an action that removes or revokes something.`
+   - Don't: `Do not use Destructive intent only to attract attention.`
+
+### Accessibility
+
+Create this visible copy after component QA passes:
+
+- `Keep the action label clear, preserve visible focus, and provide at least a 44×44px interaction target when the visible button is smaller.`
+- `For icon-only actions, use Icon Button and provide an accessible name.`
+- `✓ WCAG 2.2 AA checked`
+
+Do not show ratios, test logs, variant counts, binding paths, or private component details in the Figma guide. Omit any capability that does not exist in the finished component. Never add, detach, or redraw a component merely to complete the guide.

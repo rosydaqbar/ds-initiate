@@ -56,7 +56,7 @@ Continue the existing build. Inspect the current Figma state first and resume fr
 
 The first implementation lives in one Figma file. It uses Atomic Design levels without product-surface library divisions. [Foundation documentation](docs/06-governance/foundation-documentation.md) is built and validated immediately with each Foundation item, without a separate opt-in question. Individual Atom, Molecule, and Organism documentation frames remain optional: finish and validate the component, ask the user, and build the adaptive frame only after approval.
 
-Figma documentation is written for designers. It explains purpose, usage, examples, variants or properties, and do-and-don't guidance. Variable inventories, alias audits, raw contrast calculations, grid exception reports, and validation logs stay in internal QA notes or the build ledger; they are never placed in designer-facing frames.
+Figma documentation is written for designers as a readable guide: a clear header and overview lead into focused, annotated examples, permutations, and do-and-don't guidance. Every displayed specimen includes its familiar name, resolved designer-facing value, and explanation. Complete implementation inventories, long token tables, specimen dashboards, alias audits, raw contrast calculations, grid exception reports, and validation logs stay in internal QA notes, native Figma panels, or the build ledger; they are never placed in designer-facing frames.
 
 ## Definition of success
 

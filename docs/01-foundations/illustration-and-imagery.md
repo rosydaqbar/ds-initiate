@@ -28,4 +28,46 @@ Decorative media remains separate from functional interface components.
 
 **Build status:** Required in the same Foundation build; do not ask a separate documentation question.
 
-Create `Imagery Guidelines` using [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md). Show approved photography and illustration treatments, crop ratios, focal-point placement, missing-media treatment, and do-and-don't examples. Use the example sizes above and expand the root to `1280px` when a `1200px` specimen is shown at actual size. Keep approved assets connected. Place source, permitted use, alt text, and decorative status in a Hug-height caption where designers need that information. Do not invent imagery when required assets are missing, and do not display validation output.
+Build one regular frame named `Documentation / Illustration and Imagery` using [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md). Expand the root to the next multiple of 4 when an actual-size specimen requires more than the standard content width. Do not invent imagery when approved assets are missing.
+
+### Required visible structure and copy
+
+```text
+Documentation / Illustration and Imagery
+  Header
+    Illustration and imagery
+    Imagery supports meaning, product understanding, and the approved visual character.
+  Overview
+  Approved treatments
+  Ratios and crops
+  Focal points
+  Missing media
+  Asset information
+  Do and don't
+  Accessibility
+```
+
+Use this overview copy: `Choose an approved image or illustration treatment for the content's purpose. Preserve the subject, intended focal point, crop behavior, source rights, and accessibility information.`
+
+Create one treatment section for each approved category: `Photography`, `Illustration`, `Product mockup`, `Avatar`, and `Background`. For every included category, show at least one approved asset at its intended size with a visible treatment name and two-to-four-sentence description of subject, lighting, color, composition, and when to use it.
+
+Create actual-size ratio specimens from the table in `Create in Figma`. Above each specimen show the ratio name and pixel dimensions. Beneath it show `Default crop`, `Common use`, and one crop instruction. Do not use an unlabeled placeholder rectangle as a ratio specimen.
+
+Create a focal-point comparison using the same connected asset in two frames:
+
+- Do: `Keep the important subject inside the safe crop area.` Show and label the approved focal point.
+- Don't: `Do not crop through the important subject or remove necessary context.`
+
+Create a `Missing media` specimen at `320×180px` using the semantic placeholder treatment, centered approved icon, title `Image unavailable`, and supporting copy `The reserved media area remains stable when the asset cannot load.`
+
+Every asset specimen selected for the guide includes a visible Hug-height information block with `Asset name`, `Source`, `Permitted use`, `Crop focal point`, `Alt text`, and `Decorative: Yes/No`. Do not turn the guide into a complete asset inventory, and do not replace missing information with invented text.
+
+Add these comparisons:
+
+- Do: `Use imagery with a clear content purpose and approved treatment.` / Don't: `Do not add generic decoration unrelated to the content.`
+- Do: `Preserve the approved aspect ratio and focal point.` / Don't: `Do not stretch an image or use an arbitrary crop.`
+- Do: `Provide useful alt text for meaningful imagery.` / Don't: `Do not describe decorative imagery to assistive technology.`
+
+Finish with the approved accessibility checkmark only after alt text, contrast, and crop checks pass.
+
+Do not show validation output. The guide fails QA when an asset lacks its treatment explanation or required source, usage, crop, and accessibility information.

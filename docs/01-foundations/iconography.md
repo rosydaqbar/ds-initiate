@@ -26,4 +26,44 @@ Icons align optically with text and remain recognizable at their smallest suppor
 
 **Build status:** Required in the same Foundation build; do not ask a separate documentation question.
 
-Create `Iconography Guide` using [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md). Build a connected gallery of approved `Icon/{Meaning}` components in `64×80px` cells with `16px` wrap gaps and the familiar name below. Add size examples at `16`, `20`, `24`, and `32px`, safe-area and stroke diagrams, standard and inverse-surface usage, naming guidance, and do-and-don't examples. Add `✓ WCAG 2.2 AA checked` after the internal accessibility review. Do not display asset counts, connection reports, contrast calculations, or validation results.
+Build one regular frame named `Documentation / Iconography` using [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md).
+
+### Required visible structure and copy
+
+```text
+Documentation / Iconography
+  Header
+    Iconography
+    Icons communicate common actions, objects, and status in a compact visual form.
+  Overview
+  Visual style
+  Sizes and safe area
+  Icon gallery
+  Color and backgrounds
+  Naming and meaning
+  Do and don't
+  Accessibility
+```
+
+Use this overview copy: `Use an icon when its meaning is familiar or when a text label is also available. Keep stroke, corner treatment, optical size, and naming consistent across the set.`
+
+Create a `Visual style` annotated example that shows the approved `Outline`, `Filled`, or `Two-tone` treatment. Display the approved stroke width, cap style, join style, and corner character as visible text. Add: `All icons in the set use this treatment unless a documented exception is approved.`
+
+Create four size examples in one row showing the same connected icon at `16×16`, `20×20`, `24×24`, and `32×32px`. Each example must show the visible size and one usage label: `Compact`, `Small`, `Default`, or `Large`. Create a separate `24×24px` safe-area diagram with the `2px` optical safe area visibly measured.
+
+Build a representative gallery of no more than twelve connected `Icon/{Meaning}` instances. Choose examples that explain common actions, navigation, objects, and status; do not reproduce the complete icon library. Each `80×96px` cell uses vertical Auto Layout, centers the icon, and places its familiar meaning below it. Use a `16px` wrap gap. An icon without its visible name is incomplete. The full icon set remains searchable in Figma's Assets panel.
+
+Show the same icon on `Standard surface` and `Inverse surface`. Label the resolved icon color value beneath each example and add: `Icons use the icon color role intended for their background and emphasis.`
+
+Create these comparisons:
+
+- Do: `Use one icon consistently for one meaning.`
+- Don't: `Do not reuse the same icon for unrelated actions.`
+- Do: `Pair an unfamiliar or critical icon with a text label.`
+- Don't: `Do not rely on an ambiguous icon without explanation.`
+- Do: `Preserve the approved frame, stroke, and optical balance.`
+- Don't: `Do not stretch, redraw, or recolor a local copy.`
+
+Finish with: `Icons must remain understandable at the smallest supported size and cannot be the only cue for critical status.` Add `✓ WCAG 2.2 AA checked` only after the review passes.
+
+Do not show asset counts, node IDs, connection reports, or contrast calculations. The guide fails QA when gallery items lack names or style, size, color, and meaning guidance is missing.

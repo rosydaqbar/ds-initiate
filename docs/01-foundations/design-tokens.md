@@ -84,12 +84,50 @@ Internal metadata, collection counts, alias IDs, code syntax, and validation log
 
 **Build status:** Required in the same Foundation build; do not ask a separate documentation question.
 
-Create `Design Tokens` using [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md). Include:
+Build one regular frame named `Documentation / Design Tokens` using [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md).
 
-- A plain-language diagram explaining `Primitives` → global semantic role → optional component alias.
-- A short “How to choose a token” section based on property and purpose.
-- Representative examples for color, spacing, radius, typography, and motion.
-- A Light and Dark example showing that the role stays the same while its value changes.
-- Do-and-don't examples for semantic selection and raw-value avoidance.
+### Required visible structure and copy
 
-Do not show a complete implemented inventory, collection counts, alias paths, variable IDs, scopes, code syntax, or QA results in the Figma frame.
+```text
+Documentation / Design Tokens
+  Header
+    Design tokens
+    Design tokens store reusable design decisions and connect those decisions to components.
+  Overview
+  How tokens are organized
+  How to choose a token
+  Examples
+  Appearance modes
+  Do and don't
+```
+
+Use this overview copy: `A token gives a shared design decision a stable meaning. Designers choose a token by what an element does; the system resolves the approved value.`
+
+Create a three-step horizontal diagram inside one annotated example block. Use `304px`-wide steps, `24px` padding, and visible arrows between them:
+
+| Card | Required title | Required copy | Example label |
+| --- | --- | --- | --- |
+| 1 | Palette values | `Approved raw values provide the source material for the system.` | `Brand 600 · #RRGGBB` using the actual approved value |
+| 2 | Reusable roles | `A role names how a value is used across interfaces.` | `Background / Brand / Default` |
+| 3 | Component choices | `A component uses the reusable role unless it needs an independent, stable decision.` | `Primary action background` |
+
+Do not expose the internal alias path in the diagram. The arrows explain the relationship; the labels explain the designer choice.
+
+Create `How to choose a token` as three numbered steps with this exact copy:
+
+1. `Identify the property you are styling: background, text, icon, border, spacing, size, radius, type, elevation, or motion.`
+2. `Choose the role that matches the element's purpose and state.`
+3. `Use the component-specific choice only when the component documentation explicitly provides one.`
+
+Create five `240px`-wide examples for `Color`, `Spacing`, `Radius`, `Typography`, and `Motion` inside one wrapping annotated block. Each example must contain a familiar name, its resolved value, and one sentence explaining the decision. Use implemented values rather than placeholder values.
+
+Create two `480×240px` appearance cards labeled `Light` and `Dark`. Demonstrate the same `Background / Surface` role resolving to the current value in each mode. Show both resolved hex values and add: `The role and purpose remain the same while the resolved value changes.`
+
+Create these comparisons:
+
+- Do: `Choose the reusable role that describes the element's purpose.`
+- Don't: `Do not select a raw value only because it looks similar.`
+- Do: `Reuse one decision everywhere it has the same meaning.`
+- Don't: `Do not create a component-specific choice without a distinct component need.`
+
+Do not show collection counts, IDs, scopes, implementation paths, code syntax, or QA logs. The guide fails QA when the diagram contains only abstract boxes, an example omits its resolved value, or a token choice lacks a plain-language explanation.
