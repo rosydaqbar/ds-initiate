@@ -1,0 +1,106 @@
+# Metric Card
+
+**Atomic level:** Molecule  
+**Library section:** Base Components  
+**Figma page:** `Cards`  
+**Deliverable:** one public component set named `MetricCard`
+
+## Create in Figma
+
+Create one public component set named `MetricCard`. Component-set math: Size (2) × State (4) = 8 variants. No private helper is required.
+
+Presents one key value, label, change, and optional sparkline.
+
+## Layer tree
+
+```text
+MetricCard [COMPONENT, vertical Auto Layout, Fill × Hug]
+  Label row [INSTANCE; Hug × Hug]
+  Value text [INSTANCE; Hug × Hug]
+  Badge [INSTANCE; Hug × Hug]
+  Chart slot [INSTANCE; Hug × Hug]
+```
+
+Keep the listed order in the Layers panel. Use absolute positioning only when the behavior section explicitly requires it.
+
+## Exact construction
+
+| Context | Width | Height | Padding (T/R/B/L) | Gap | Radius | Alignment and resizing |
+| --- | --- | --- | --- | ---: | ---: | --- |
+| Small | Fill, min 240 | Hug, min 128 | 20/20/20/20 | 12 | 12 | Fill × Hug |
+| Large | Fill, min 280 | Hug, min 160 | 24/24/24/24 | 16 | 12 | Fill × Hug |
+
+Bind every supported number to its matching Spacing, Sizing, Radius, Border, or Layout variable. All structural measurements are whole-number multiples of 4.
+
+## Variants
+
+| Axis | Values |
+| --- | --- |
+| `Size` | Small · Large |
+| `State` | Default · Loading · Error · Empty |
+
+Do not turn editable text, icon choice, or optional content into variants.
+
+## Component properties
+
+| Property | Type | Default | Consumer control |
+| --- | --- | --- | --- |
+| `Label` | Text | `Metric` | Required |
+| `Value` | Text | `1,234` | Formatted value |
+| `Change` | Text | `+12%` | Optional delta |
+| `Show chart` | Boolean | `false` | Toggle chart slot |
+| `Chart` | Instance swap | `Chart placeholder` | Approved chart |
+
+## Variable and Style bindings
+
+| Layer/property | Binding |
+| --- | --- |
+| Container fill | `color/background/surface` |
+| Text content, when present | `color/text/primary` |
+| Icon or vector content, when present | `color/icon/primary` |
+| Border | `color/border/default` |
+| Focus | `color/border/focus` |
+| Radius | `radius/control` |
+
+Use semantic variables only; Primitives never bind directly to component layers. Text uses approved Text Styles and shadows use Effect Styles.
+
+## Behavior
+
+Value uses tabular numerals. Loading swaps content for Skeleton while preserving height. Error and Empty replace data only; header remains.
+
+## 4px and accessibility QA
+
+- The variant count matches the calculation above and no component set exceeds 30 variants.
+- X, Y, W, H, padding, gap, and finite radius values are divisible by 4 with no fractional coordinates.
+- Only 1px borders/dividers, approved icon strokes, vector optics, shadows, and pill rendering may be off-grid.
+- Every visual property is bound to a semantic variable or approved Style.
+- Text expansion to 200% does not clip or overlap adjacent content.
+- Delta includes direction text or icon in addition to color.
+- Numeric formatting follows locale.
+
+## Optional documentation landing frame
+
+**Build status:** Optional. Do not create during the component build.
+
+After the `Metric Card` component and its dependencies pass component QA, ask:
+
+> “The Metric Card component is complete. Should I build its optional designer documentation from [metric-card.md](metric-card.md)?”
+
+If the user approves, inspect the final component metadata and screenshot again, then create or update the regular frame `Documentation / Metric Card`. Follow [Optional Component Documentation](../06-governance/optional-component-documentation.md) for the `1200px` default frame, `40px` padding, `48px` section gap, connected-instance rule, adaptive sections, and documentation QA.
+
+The values below are selection targets from this specification, not static documentation data. The finished Figma component is the source of truth for displayed names, counts, values, measurements, and bindings.
+
+### Adaptive content recipe
+
+| Documentation area | Build from the finished Molecule |
+| --- | --- |
+| Hero preview | Place one connected `MetricCard` instance using `Size=Small`, `State=Default`. Confirm those selections against the finished default metadata before adding labels. Present it on a semantic transparency checker plus the normal surface. |
+| Purpose and usage | Presents one key value, label, change, and optional sparkline. Explain when to use it and when another component is more suitable, using only capabilities present in the finished component. |
+| Do and don't | Show one key value with its unit, time context, and comparison meaning. Do not combine unrelated metrics, imply positive or negative meaning through color alone, or decorate with an unexplained sparkline. |
+| Variants and states | Build focused connected-instance comparisons for `Size` (`Small`, `Large`); `State` (`Default`, `Loading`, `Error`, `Empty`). Use a full matrix only when each combination teaches a distinct visual or behavioral rule. |
+| Properties | Demonstrate the finished editable API: `Label` (Text, default `Metric`); `Value` (Text, default `1,234`); `Change` (Text, default `+12%`); `Show chart` (Boolean, default `false`); `Chart` (Instance swap, default `Chart placeholder`). Use paired live instances for meaningful boolean changes and only approved connected replacements for instance swaps. |
+| Accessibility status | Show `✓ WCAG 2.2 AA checked` after internal QA, plus any remaining responsibility for the consuming designer. Do not show ratios or test output. |
+
+Omit any section whose capability does not exist in the finished component. Never add or detach a component merely to complete the landing frame.
+
+Shared construction rules: [Figma Construction Standard](../06-governance/figma-construction-standard.md).

@@ -1,0 +1,83 @@
+# Executable Component Specification Format
+
+Copy this file for every Atom, Molecule, or Organism. Replace every bracketed value; unresolved placeholders block component construction.
+
+````markdown
+# [Component name]
+
+**Atomic level:** [Atom / Molecule / Organism]  
+**Library section:** [Foundations / Base Components / Components]  
+**Figma page:** `[Page name]`  
+**Deliverable:** [one component / one component set / named component sets plus private helpers]
+
+## Create in Figma
+
+- Create `[exact public component or set name]`.
+- Create private `[exact helper name]` for [independent responsibility].
+- Component-set math: `[axis count] × [axis count] = [total]` variants.
+
+## Layer tree
+
+```text
+[Component]
+  [Layer: type and resizing]
+    [Child: type and resizing]
+```
+
+## Exact construction
+
+| Size/region | Width | Height | Padding | Gap | Radius | Resizing |
+| --- | ---: | ---: | --- | --- | ---: | --- |
+| [value] | [value] | [value] | [T/R/B/L] | [value] | [value] | [Hug/Fill/Fixed] |
+
+## Variants and properties
+
+| Name | Type | Values/default | Purpose |
+| --- | --- | --- | --- |
+| [property] | [Variant/Text/Boolean/Instance swap] | [values] | [consumer edit] |
+
+## Variable and Style bindings
+
+| Layer/property | Binding |
+| --- | --- |
+| [property] | [semantic variable or Style] |
+
+## Prototype behavior
+
+[Exact Change to, overlay, hover, press, keyboard, and disabled behavior.]
+
+## Responsive behavior
+
+[Exact resizing or replacement at 360, 768, and 1440 example frames.]
+
+## QA
+
+- [Exact variant count]
+- [Exact pixel measurements]
+- [4px grid checks and controlled exceptions]
+- [Accessibility and content stress tests]
+
+## Optional documentation landing frame
+
+**Build status:** Optional. Do not create during the component build.
+
+After component QA passes, ask:
+
+> “The [Component name] component is complete. Should I build its optional designer documentation from [[filename].md]([filename].md)?”
+
+If approved, re-inspect the final component metadata and screenshot, then create or update `Documentation / [Component name]` using [Optional Component Documentation](optional-component-documentation.md).
+
+### Adaptive content recipe
+
+| Documentation area | Build from the finished component |
+| --- | --- |
+| Hero preview | [Exact recommended instance and the rule for choosing its final values] |
+| Purpose and usage | [When to use and when not to use the component] |
+| Variants and properties | [Actual styles, sizes, states, text properties, booleans, and instance swaps that designers need to choose] |
+| Do and don't | [Component-specific correct and incorrect applications using connected instances; name the exact decision each example teaches] |
+| Accessibility status | Show `✓ WCAG 2.2 AA checked` after internal QA, plus any remaining responsibility for the consuming designer. Do not show ratios or test output. |
+
+Omit a row whose capability does not exist in the finished component. Never expose anatomy, implementation behavior, variable inventories, binding tables, variant-count calculations, metadata, or validation results unless the user explicitly asks for that additional documentation.
+````
+
+The shared rules in [Figma Construction Standard](figma-construction-standard.md) apply even when they are not repeated in an item file.
