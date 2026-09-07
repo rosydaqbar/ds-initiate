@@ -28,7 +28,7 @@ Do not create product pages or business-specific screens to document this Founda
 
 **Build status:** Required in the same Foundation build; do not ask a separate documentation question.
 
-Build one regular frame named `Documentation / Grid and Layout` using [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md). Use the shared `1600px` width so the desktop specimen can be shown at actual size with surrounding labels.
+Build one regular frame named `Documentation / Grid and Layout` using [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md). Use a `1664px` root for the 1440px desktop specimen: 1440px actual width + 64px specimen padding + 160px article padding = 1664px. The specimen wrapper is 1504px wide. Do not scale the grid to fit a 1280px example block.
 
 ### Required visible structure and copy
 
@@ -38,6 +38,7 @@ Documentation / Grid and Layout
     Grid and layout
     Layout grids align content and define how compositions adapt across available space.
   Overview
+  Complete layout token reference
   Breakpoint examples
     Mobile
     Tablet
@@ -53,6 +54,8 @@ Documentation / Grid and Layout
 ```
 
 Use this overview copy: `Choose the layout example closest to the available width, align content to its columns, and define an intentional behavior when space changes. Breakpoint examples guide layout decisions; they are not product screens.`
+
+Before the examples, list EVERY approved layout token and breakpoint with its exact name, unit, resolved value, use and interval of application. Distinguish an example frame width from a responsive breakpoint threshold; the three example widths do not define transition ranges by themselves. Define ranges in the approved implementation scope and show max/min container behavior. Include column count, margins, gutters, content bounds and supported sidebar/header dimensions when used.
 
 Show all three frames at actual size with their Figma layout grids enabled. Place a visible specification block above each frame:
 
@@ -81,6 +84,6 @@ Create these comparisons:
 - Do: `Choose the responsive behavior that preserves task priority.`
 - Don't: `Do not shrink every element until it fits.`
 
-Finish with: `Layout changes must preserve reading order, focus order, and usable target sizes.` Add `✓ WCAG 2.2 AA checked` only after the related checks pass.
+Finish with: `Layout changes must preserve reading order, focus order, and usable target sizes.` Report the design checks actually performed and the remaining implementation checks under [Accessibility](accessibility.md).
 
 Do not display metadata or audit output. The guide fails QA if any breakpoint omits its measurements or any responsive example omits its written behavior.

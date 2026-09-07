@@ -76,10 +76,12 @@ The recipe table below is an internal build instruction. Convert each row into v
 | Hero preview | [Exact recommended instance and the rule for choosing its final values] |
 | Purpose and usage | [When to use and when not to use the component] |
 | Variants and properties | [Actual styles, sizes, states, text properties, booleans, and instance swaps that designers need to choose] |
+| Anatomy and dimensions | [Public parts, complete size measurements, Text Styles, target geometry and resizing limits] |
+| Appearance modes | [Connected specimens in each supported mode and material state/style differences] |
 | Do and don't | [Component-specific correct and incorrect applications using connected instances; name the exact decision each example teaches] |
-| Accessibility status | Show `✓ WCAG 2.2 AA checked` after internal QA, plus any remaining responsibility for the consuming designer. Do not show ratios or test output. |
+| Accessibility status | State the design checks actually performed, relevant pairing results and remaining implementation checks under the shared [Accessibility contract](../01-foundations/accessibility.md). Keep raw test logs internal; do not infer full WCAG conformance from Figma. |
 
-Omit a row whose capability does not exist in the finished component. Never expose anatomy, implementation behavior, variable inventories, binding tables, variant-count calculations, metadata, or validation results unless the user explicitly asks for that additional documentation. Build the guide as an editorial sequence, not a specimen dashboard.
+Omit only capabilities explicitly outside the approved scope; a required capability missing from the component must be fixed before documentation is accepted. Show public anatomy, dimensions, complete property options and actual state/appearance behavior. Keep private bindings, multiplication tables, internal IDs and raw QA logs outside the guide. Build the guide as an editorial sequence, not a specimen dashboard.
 ````
 
 The shared rules in [Figma Construction Standard](figma-construction-standard.md) apply even when they are not repeated in an item file.

@@ -38,6 +38,7 @@ Documentation / Illustration and Imagery
     Illustration and imagery
     Imagery supports meaning, product understanding, and the approved visual character.
   Overview
+  Complete treatment and ratio reference
   Approved treatments
   Ratios and crops
   Focal points
@@ -60,7 +61,7 @@ Create a focal-point comparison using the same connected asset in two frames:
 
 Create a `Missing media` specimen at `320×180px` using the semantic placeholder treatment, centered approved icon, title `Image unavailable`, and supporting copy `The reserved media area remains stable when the asset cannot load.`
 
-Every asset specimen selected for the guide includes a visible Hug-height information block with `Asset name`, `Source`, `Permitted use`, `Crop focal point`, `Alt text`, and `Decorative: Yes/No`. Do not turn the guide into a complete asset inventory, and do not replace missing information with invented text.
+List EVERY approved treatment, ratio and reusable reference asset in the visible reference, with its exact searchable name, dimensions and usage. Every asset specimen includes a visible Hug-height information block with `Asset name`, `Source`, `Permitted use`, `Crop focal point`, `Alt text`, and `Decorative: Yes/No`. Runtime content images need not be exhaustively cataloged; every reusable treatment and approved reference asset does. Retain actual source/license credits and do not replace missing information with invented text.
 
 Add these comparisons:
 
@@ -68,6 +69,6 @@ Add these comparisons:
 - Do: `Preserve the approved aspect ratio and focal point.` / Don't: `Do not stretch an image or use an arbitrary crop.`
 - Do: `Provide useful alt text for meaningful imagery.` / Don't: `Do not describe decorative imagery to assistive technology.`
 
-Finish with the approved accessibility checkmark only after alt text, contrast, and crop checks pass.
+Finish with the alt-text, contrast and crop checks actually performed, and list remaining implementation checks under [Accessibility](accessibility.md).
 
 Do not show validation output. The guide fails QA when an asset lacks its treatment explanation or required source, usage, crop, and accessibility information.

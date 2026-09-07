@@ -51,7 +51,7 @@ Create a `Visual style` annotated example that shows the approved `Outline`, `Fi
 
 Create four size examples in one row showing the same connected icon at `16×16`, `20×20`, `24×24`, and `32×32px`. Each example must show the visible size and one usage label: `Compact`, `Small`, `Default`, or `Large`. Create a separate `24×24px` safe-area diagram with the `2px` optical safe area visibly measured.
 
-Build a representative gallery of no more than twelve connected `Icon/{Meaning}` instances. Choose examples that explain common actions, navigation, objects, and status; do not reproduce the complete icon library. Each `80×96px` cell uses vertical Auto Layout, centers the icon, and places its familiar meaning below it. Use a `16px` wrap gap. An icon without its visible name is incomplete. The full icon set remains searchable in Figma's Assets panel.
+Build a complete, grouped reference of EVERY icon approved for this library. Use linked continuation frames for large sets. Each entry has a connected instance, exact asset name, familiar meaning, intended use, supported sizes/treatments, and an accessible-label rule. Use `240px`-wide Hug-height entries with `16px` padding and a `16px` wrap gap. Names and explanations wrap without truncation. Group by familiar purposes such as Actions, Navigation and Status; do not publish those groups as new component variants. The native Assets panel supplements this reference.
 
 Show the same icon on `Standard surface` and `Inverse surface`. Label the resolved icon color value beneath each example and add: `Icons use the icon color role intended for their background and emphasis.`
 
@@ -64,6 +64,6 @@ Create these comparisons:
 - Do: `Preserve the approved frame, stroke, and optical balance.`
 - Don't: `Do not stretch, redraw, or recolor a local copy.`
 
-Finish with: `Icons must remain understandable at the smallest supported size and cannot be the only cue for critical status.` Add `✓ WCAG 2.2 AA checked` only after the review passes.
+Finish with: `Icons must remain understandable at the smallest supported size and cannot be the only cue for critical status.` Report the design checks actually performed and the remaining implementation checks under [Accessibility](accessibility.md).
 
 Do not show asset counts, node IDs, connection reports, or contrast calculations. The guide fails QA when gallery items lack names or style, size, color, and meaning guidance is missing.

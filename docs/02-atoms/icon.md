@@ -65,7 +65,7 @@ Draw paths inside a 24×24 frame. Keep a 2px minimum safe area. Use the approved
 
 - The variant count matches the calculation above and no component set exceeds 30 variants.
 - X, Y, W, H, padding, gap, and finite radius values are divisible by 4 with no fractional coordinates.
-- Only 1px borders/dividers, approved icon strokes, vector optics, shadows, and pill rendering may be off-grid.
+- Only 1px/2px inside borders, 1px dividers, approved icon strokes, vector optics, shadows, and pill rendering may be off-grid.
 - Every visual property is bound to a semantic variable or approved Style.
 - Text expansion to 200% does not clip or overlap adjacent content.
 - Names describe meaning, not appearance.
@@ -91,8 +91,8 @@ The values below are selection targets from this specification, not static docum
 | Purpose and usage | Provides the approved interface symbol set. Each symbol is a separate public component, not a variant. Explain when to use it and when another component is more suitable, using only capabilities present in the finished component. |
 | Do and don't | Show approved symbols at their supported sizes with consistent semantic coloring. Do not redraw, stretch, apply raw colors, or reuse one symbol for conflicting meanings. |
 | Icon gallery | Place every finished `Icon/{Meaning}` as a connected `24×24px` master instance inside a `64×80px` gallery cell. Use horizontal wrap Auto Layout with `16px` row and column gaps, show the semantic component name below each instance, and never encode icon names as variants. |
-| Accessibility status | Show `✓ WCAG 2.2 AA checked` after internal QA, plus any remaining responsibility for the consuming designer. Do not show ratios or test output. |
+| Accessibility status | State the design checks actually performed, relevant pairing results and remaining implementation checks under the shared [Accessibility contract](../01-foundations/accessibility.md). Keep raw test logs internal; do not infer full WCAG conformance from Figma. |
 
-Omit any section whose capability does not exist in the finished component. Never add or detach a component merely to complete the landing frame.
+Omit a capability section only when the approved scope explicitly excludes it. Missing required capabilities must be completed before documenting the component as ready. Document every approved public property, option, size, state and supported appearance under the shared documentation contract; representative examples do not replace the complete reference. Never add or detach a component merely to complete the landing frame.
 
 Shared construction rules: [Figma Construction Standard](../06-governance/figma-construction-standard.md).

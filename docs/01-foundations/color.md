@@ -4,267 +4,236 @@
 
 ## Required input
 
-Approved primary and secondary brand colors, neutral direction, status-color direction, supported appearance modes, and accessibility target.
+Approved brand and supporting colors, neutral and feedback directions, appearance modes, accessibility target, and any production tokens to preserve. Values are populated only after Discovery approval. Preserve an approved catalog; document any explicit departures from the default contract.
 
 ## Raw colors
 
-Create raw scales in `Primitives`:
+Create approved raw families in `Primitives`. The default ramp steps are `50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950`.
 
-- `color/brand/50–950`
-- `color/secondary/50–950`
-- `color/neutral/50–950`
-- `color/red/50–950`
-- `color/green/50–950`
-- `color/yellow/50–950`
-- `color/blue/50–950`
-- `color/white`, `color/black`, `color/transparent`, and approved alpha values
+- `color/brand/{step}` and `color/neutral/{step}`.
+- `color/secondary/{step}` when an independent secondary family is approved.
+- `color/red/{step}`, `color/green/{step}`, `color/yellow/{step}` and `color/blue/{step}` for approved feedback source families.
+- `color/white`, `color/black`, `color/transparent` and approved alpha values.
 
-Raw names describe color families, not UI meaning. Keep them hidden from normal component-property scopes.
+Family names and steps describe raw color, never actions such as hover or pressed. Do not create a second identical ramp when the brand already uses an approved source family; preserve a named source relationship. Document every approved shade, including values unused by current components. Missing shades in the approved scope cannot be hidden by documenting only those that were created.
+
+Raw hex values do not imply UI permission or contrast eligibility. Populate each variable's description with its family/step and approved role mappings, or explicitly say that it is reserved and has no current semantic mapping. Keep raw variables hidden from normal component property scopes.
 
 ## Global semantic colors
 
-Create mode-aware roles in `Color`. These are the reusable colors that designers and components normally use.
+Create these roles in `Color`, with independently resolved `Light` and `Dark` aliases to `Primitives`. Each row below supplies the purpose for both the visible reference and native variable description. Additional approved roles must meet the same documentation contract. Optional visited-link behavior may be marked out of scope explicitly.
 
-| Property | Minimum roles |
-| --- | --- |
-| Background | `color/background/canvas`, `surface`, `subtle`, `strong`, `inverse`, `disabled`, `overlay` |
-| Brand background | `color/background/brand/default`, `hover`, `pressed`, `disabled` |
-| Danger background | `color/background/danger/default`, `hover`, `pressed`, `disabled` |
-| Text | `color/text/primary`, `secondary`, `subtle`, `disabled`, `inverse`, `on-brand`, `brand`, `danger` |
-| Icon | `color/icon/primary`, `secondary`, `subtle`, `disabled`, `inverse`, `on-brand`, `brand`, `danger` |
-| Border | `color/border/subtle`, `default`, `strong`, `focus`, `disabled`, `brand`, `danger` |
-| Status | `color/status/information/*`, `success/*`, `warning/*`, `error/*`, each with `background`, `text`, `icon`, and `border` when required |
+| Group | Exact token | Purpose and usage |
+| --- | --- | --- |
+| Background | `color/background/canvas` | Base area behind the interface; use around content regions, not as a substitute for elevated surfaces. |
+| Background | `color/background/transparent` | No visible surface fill for text-like or unfilled controls; underlying content remains visible, so evaluate foreground contrast against that actual surface. |
+| Background | `color/background/surface` | Default content surface for panels and containers; pair with primary and secondary content roles. |
+| Background | `color/background/subtle` | Low-emphasis grouping surface; use to distinguish related content without implying selection. |
+| Background | `color/background/strong` | Emphasized neutral surface; verify its content pairing rather than assuming primary text works. |
+| Background | `color/background/inverse` | Contrasting surface for inverse content; pair with inverse text and icons. |
+| Background | `color/background/disabled` | Unavailable neutral control background; do not use for active content. |
+| Background | `color/background/overlay` | Translucent backdrop behind temporary content; document alpha and the underlying canvas. |
+| Background | `color/background/selected` | Persistent selected-item background; combine with a label, mark or shape and distinguish it from hover. |
+| Background | `color/background/selected-hover` | Pointer-hover background for an already selected item; retain the selection cue. |
+| Brand actions | `color/background/brand/default` | Primary action background; pair with on-brand content. |
+| Brand actions | `color/background/brand/hover` | Pointer-hover background for primary actions; preserve layout and validate the foreground pairing. |
+| Brand actions | `color/background/brand/pressed` | Background while a primary action is actively pressed; do not use for persistent selection. |
+| Brand actions | `color/background/brand/disabled` | Unavailable primary action background; pair with disabled text and icon roles and remove activation. |
+| Destructive actions | `color/background/danger/default` | Destructive action background; pair with on-danger content, not error-message content. |
+| Destructive actions | `color/background/danger/hover` | Pointer-hover background for destructive actions; preserve layout and validate the foreground pairing. |
+| Destructive actions | `color/background/danger/pressed` | Background while a destructive action is actively pressed; do not use for persistent selection. |
+| Destructive actions | `color/background/danger/disabled` | Unavailable destructive action background; pair with disabled text and icon roles and remove activation. |
+| Text | `color/text/primary` | Main readable content and headings on normal surfaces; use for highest neutral emphasis. |
+| Text | `color/text/secondary` | Supporting descriptions and secondary labels; preserve readable contrast on the specified surface. |
+| Text | `color/text/subtle` | Low-emphasis metadata and helper content; it remains readable active content, not disabled text. |
+| Text | `color/text/disabled` | Content of unavailable controls; do not use for active instructions or data. |
+| Text | `color/text/inverse` | Content on the inverse neutral surface; validate against that surface in each mode. |
+| Text | `color/text/on-brand` | Content on the brand action background; check default, hover and pressed pairings separately. |
+| Text | `color/text/on-danger` | Content on destructive action backgrounds; do not reuse neutral-surface danger ink without testing. |
+| Text | `color/text/brand` | Branded emphasis on ordinary surfaces; this is not the foreground for a filled brand action. |
+| Text | `color/text/danger` | Destructive action label on ordinary surfaces; use status/error roles for validation feedback. |
+| Text | `color/text/selected` | Content that identifies a persistent selection; pair with the selected background and another selection cue. |
+| Icons | `color/icon/primary` | Main functional icon on normal surfaces; keep a separate contract from text. |
+| Icons | `color/icon/secondary` | Supporting icon with less emphasis than the main content icon. |
+| Icons | `color/icon/subtle` | Low-emphasis noncritical icon; validate contrast whenever the icon conveys necessary information. |
+| Icons | `color/icon/disabled` | Content of unavailable controls; do not use for active actions or status. |
+| Icons | `color/icon/inverse` | Content on the inverse neutral surface; validate against that surface in each mode. |
+| Icons | `color/icon/on-brand` | Content on the brand action background; check default, hover and pressed pairings separately. |
+| Icons | `color/icon/on-danger` | Content on destructive action backgrounds; do not reuse neutral-surface danger ink without testing. |
+| Icons | `color/icon/brand` | Branded icon on ordinary surfaces; this is not the foreground for a filled brand action. |
+| Icons | `color/icon/danger` | Destructive action icon on ordinary surfaces; use status/error roles for validation feedback. |
+| Icons | `color/icon/selected` | Content that identifies a persistent selection; pair with the selected background and another selection cue. |
+| Links | `color/text/link/default` | Navigable inline text on a documented surface; retain an underline or equivalent non-color identification. |
+| Links | `color/text/link/hover` | Link text while pointed at; preserve its destination meaning and non-color cue. |
+| Links | `color/text/link/pressed` | Link text during activation; do not use as a selected navigation indicator. |
+| Links | `color/text/link/visited` | Previously visited destination text when that behavior is supported; preserve readability and link identification. |
+| Borders | `color/border/subtle` | Quiet, nonessential separation; do not rely on it as the sole boundary of a required control. |
+| Borders | `color/border/default` | Normal field and container boundary; validate non-text contrast where the boundary identifies a control. |
+| Borders | `color/border/strong` | Emphasized boundary for a region needing stronger separation. |
+| Borders | `color/border/focus` | Visible keyboard-focus boundary; use with the approved width and offset, independently of selection. |
+| Borders | `color/border/disabled` | Boundary of an unavailable control; do not use for active inputs. |
+| Borders | `color/border/brand` | Brand-related emphasis on a boundary; use focus for keyboard focus and selected for persistent selection. |
+| Borders | `color/border/danger` | Destructive action outline; use status/error/border to identify invalid content. |
+| Borders | `color/border/selected` | Persistent selection boundary paired with a mark, label or other non-color cue. |
+| Status | `color/status/information/background` | Background for neutral informative feedback; use with the matching status roles and a specific message. |
+| Status | `color/status/information/text` | Readable message text for neutral informative feedback; use with the matching status roles and a specific message. |
+| Status | `color/status/information/icon` | Meaningful icon for neutral informative feedback; use with the matching status roles and a specific message. |
+| Status | `color/status/information/border` | Supporting boundary for neutral informative feedback; use with the matching status roles and a specific message. |
+| Status | `color/status/success/background` | Background for confirmation of a successful outcome; use with the matching status roles and a specific message. |
+| Status | `color/status/success/text` | Readable message text for confirmation of a successful outcome; use with the matching status roles and a specific message. |
+| Status | `color/status/success/icon` | Meaningful icon for confirmation of a successful outcome; use with the matching status roles and a specific message. |
+| Status | `color/status/success/border` | Supporting boundary for confirmation of a successful outcome; use with the matching status roles and a specific message. |
+| Status | `color/status/warning/background` | Background for a condition requiring caution; use with the matching status roles and a specific message. |
+| Status | `color/status/warning/text` | Readable message text for a condition requiring caution; use with the matching status roles and a specific message. |
+| Status | `color/status/warning/icon` | Meaningful icon for a condition requiring caution; use with the matching status roles and a specific message. |
+| Status | `color/status/warning/border` | Supporting boundary for a condition requiring caution; use with the matching status roles and a specific message. |
+| Status | `color/status/error/background` | Background for validation or system failure requiring correction; use with the matching status roles and a specific message. |
+| Status | `color/status/error/text` | Readable message text for validation or system failure requiring correction; use with the matching status roles and a specific message. |
+| Status | `color/status/error/icon` | Meaningful icon for validation or system failure requiring correction; use with the matching status roles and a specific message. |
+| Status | `color/status/error/border` | Supporting boundary for validation or system failure requiring correction; use with the matching status roles and a specific message. |
 
-Name interaction states under the property they change: background, text, icon, or border. One design decision has one semantic role.
+The name describes property, purpose, then state. Keep `pressed` for temporary activation and `selected` for persistent choice. Keep `danger` for destructive actions and `error` for invalid input or system feedback. Equal resolved values do not make those roles interchangeable.
 
-Use `danger` for destructive actions and `error` for validation or system-status feedback. Do not use a red value merely because it visually matches.
+The existing `color/status/{status}/{property}` group is a deliberate grouped contract: bind its text member only to text, icon member only to icons, border member only to strokes and background member only to surfaces. Do not create parallel synonyms such as `color/action/primary` for `color/background/brand/default`, or `color/border/error` for `color/status/error/border`.
 
 ## Component color rule
 
-Bind components directly to global `Color` roles first. Add a component-specific alias only when the criteria in [Design Tokens](design-tokens.md) are met.
+Use global semantic roles by default. Introduce component aliases only under [Design Tokens](design-tokens.md).
 
-When one component contains both text and icons, bind them separately:
-
-- Text layers use `color/text/*`.
-- Icon and vector layers use `color/icon/*`.
-- Containers use `color/background/*`.
-- Strokes use `color/border/*`.
+- Containers use `color/background/*` or the matching status background.
+- Text uses `color/text/*` or the matching status text.
+- Icons use `color/icon/*` or the matching status icon.
+- Strokes use `color/border/*` or the matching status border.
+- Destructive filled actions use `color/text/on-danger` and `color/icon/on-danger`; outline actions use the ordinary-surface danger roles.
+- Transparent fills resolve to an approved variable; state changes do not introduce local raw colors.
 
 ## Internal QA
 
-- No production component binds to `Primitives` or a hard-coded color.
-- Light and Dark values resolve correctly.
-- Text, non-text controls, focus, and interaction states meet the approved WCAG target.
-- Status and selection do not rely on color alone.
-- Hover, pressed, focus, and disabled states remain distinguishable without changing geometry.
+Check approved versus implemented names, values, scopes, modes, alias targets and descriptions. Inspect each foreground/background pairing in every state and mode, including alpha compositing. Verify selection, focus and feedback retain non-color cues. Do not collapse scope to match an incomplete implementation.
 
-Keep measured ratios and test evidence in internal QA records.
+The full approved Light/Dark contract remains required unless the downstream user explicitly approves a departure. A technical mode limit or the absence of dark values is a recorded blocker, not permission to silently ship Light only.
 
 ## Mandatory Figma documentation
 
 **Build status:** Required in the same Foundation build; do not ask a separate documentation question.
 
-Build one regular frame named `Documentation / Color`. Follow [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md) and the exact content contract below.
+Build `Documentation / Color` and any linked reference continuations using [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md). A complete palette and complete semantic role reference are required.
 
-### Frame construction
-
-| Property | Specification |
-| --- | --- |
-| Root | Vertical Auto Layout; `1600px` Fixed × Hug; `0px` padding; `0px` gap; semantic canvas fill |
-| Header | Fill × Hug; `80px` horizontal and `64px` vertical padding; `12px` gap |
-| Article | Fill × Hug; vertical Auto Layout; `80px` padding; `64px` section gap; center alignment |
-| Reading column | `800px` Fixed × Hug; vertical Auto Layout; `16px` gap; left aligned |
-| Section | Vertical Auto Layout; Fill × Hug; `32px` gap; center alignment |
-| Annotated example | `800px` default width; up to `1280px`; Hug height; `32px` padding; `24px` gap |
-| Palette rows | Horizontal wrap Auto Layout; Fill × Hug; `12px` gap |
-| Comparison row | Horizontal wrap Auto Layout; up to `1120px`; `24px` gap |
-
-Use the approved documentation Text Styles and semantic colors. Bind every preview fill, text fill, icon fill, stroke, focus ring, and overlay to the actual `Color` or `Primitives` variable it demonstrates. The visible hex label must show the current resolved value of that binding.
-
-### Required layer tree
+### Required visible structure and copy
 
 ```text
-Documentation / Color [FRAME]
-  Header [FRAME, Fill × Hug]
-    Foundations
+Documentation / Color
+  Header
     Color
-    Color creates hierarchy, communicates state, and expresses the approved visual identity.
-  Article [FRAME, Fill × Hug]
-    Section / Overview
-      Copy [FRAME, 800 Fixed × Hug]
-        Overview
-        Color is organized into a palette and reusable color roles. The palette defines the available values. Color roles explain where those values belong in an interface.
-        Usage principles
-          Choose by purpose
-          Preserve hierarchy
-          Communicate more than color
-    Section / Palette overview
-      Copy [FRAME, 800 Fixed × Hug]
-      Palette example [FRAME, 800 Fixed × Hug]
-        Brand
-        Secondary
-        Neutral
-        Feedback
-    Section / Using color
-      Copy [FRAME, 800 Fixed × Hug]
-      Focused usage examples [FRAME, up to 1120 Fixed × Hug]
-        Surfaces
-        Content
-        Actions
-        Boundaries and focus
-        Feedback
-        Overlays
-    Section / Appearance modes
-      Copy [FRAME, 800 Fixed × Hug]
-      Light and Dark comparison [FRAME, up to 1120 Fixed × Hug]
-    Section / Interaction states
-      Copy [FRAME, 800 Fixed × Hug]
-      Brand action
-      Danger action
-    Section / Feedback colors
-      Copy [FRAME, 800 Fixed × Hug]
-      Information
-      Success
-      Warning
-      Error
-    Section / Do and don't
-      Copy [FRAME, 800 Fixed × Hug]
-      Semantic choice comparison
-      Hierarchy comparison
-    Section / Accessibility [FRAME, 800 Fixed × Hug]
-      Accessibility guidance
-      ✓ {approved accessibility target} checked
+    Color establishes hierarchy, identifies actions, and communicates state.
+  Overview
+  Contents
+  Palette
+    Base and alpha colors
+    Brand
+    Secondary, when approved
+    Neutral
+    Every approved feedback/source family
+  Semantic color reference
+    Backgrounds
+    Brand actions
+    Destructive actions
+    Text
+    Icons
+    Links
+    Borders and focus
+    Information, Success, Warning, Error
+  Appearance modes
+  Interaction states and selection
+  Foreground/background pairings
+  Feedback and overlays
+  Do and don't
+  Accessibility and remaining checks
 ```
 
-Every text line shown in this tree is a visible Figma text layer. Do not replace the overview or section introductions with layer names, annotations, or descriptions stored only in Figma metadata.
+Overview copy: `Choose a semantic color by the purpose and state of the element. The palette provides source values; the role reference explains how those values are used in each appearance.`
 
-### Header and overview copy
+### Complete palette reference
 
-Create the following visible text exactly:
+Show EVERY approved family and EVERY approved shade, plus base and alpha colors. A three-shade overview cannot replace the full ramp.
 
-- Title: `Color`
-- Definition: `Color creates hierarchy, communicates state, and expresses the approved visual identity.`
-- Overview: `Color is organized into a palette and reusable color roles. The palette defines the available values. Color roles explain where those values belong in an interface.`
-- Principle: `Choose by purpose` — `Use a color role that describes the job of the element instead of selecting a palette value by appearance.`
-- Principle: `Preserve hierarchy` — `Reserve the strongest colors for the most important actions, messages, and areas of emphasis.`
-- Principle: `Communicate more than color` — `Pair status and selection colors with text, icons, shape, or another visible cue.`
+Give each family a visible heading and an original sentence explaining its role in the approved identity. Give each shade:
 
-### Palette section
+1. Familiar family and step, plus exact variable name.
+2. Bound swatch showing the actual color.
+3. Uppercase resolved `#RRGGBB`, plus opacity when not opaque.
+4. A concise explanation of its approved use or an explicit reserved/no-current-semantic-use label.
+5. Links or names of semantic roles that use it where helpful. Do not imply direct primitive use in components.
 
-Introductory copy: `The palette contains the approved color families used to create interface roles. Each swatch shows its familiar family name, step, and current resolved value.`
+Use a `1440px` reference width. A family header spans the row; shade cells are `240px` wide with `16px` padding and a `208×72px` bound preview. Five cells plus four `16px` gaps require `1264px`; wrap additional shades in ascending order. There is no cap on total shades or rows.
 
-Create four compact family groups where the approved values exist. Place a visible title and purpose above each group:
+Put labels on a readable neutral background. An optional text sample inside a swatch must identify its foreground and pairing; the swatch is not certified by an unlabeled AA/AAA badge. Transparent swatches use a checkerboard or named compositing surface and visible alpha. White has a subtle inside boundary so it remains perceptible.
 
-| Group title | Required purpose copy |
-| --- | --- |
-| Brand | `Primary identity color used to create the strongest branded emphasis and primary action roles.` |
-| Secondary | `Supporting identity color used for secondary emphasis, accents, and approved complementary moments.` |
-| Neutral | `Foundation for canvases, surfaces, text, icons, borders, and disabled states.` |
-| Feedback | `Supporting colors communicate information, success, warning, and error.` |
+### Complete semantic role reference
 
-For Brand, Secondary, and Neutral, select exactly three steps that explain the usable range: one light value, the approved core value, and one dark value. For Feedback, show only the core Information, Success, Warning, and Error values. This is a palette overview, not a complete implemented inventory.
+Create a row for EVERY implemented semantic role and verify it covers EVERY approved role. Use the exact contract table above plus approved additions. Split by property and purpose, and repeat headings for continuation frames.
 
-Create this structure for each selected value:
+| Column | Width | Required visible content |
+| --- | ---: | --- |
+| Token | 304px | Familiar name plus exact searchable slash-separated token |
+| Purpose and usage | 448px | Specific use, applicable state, relevant pairing and misuse restriction |
+| Light | 344px | Bound sample, resolved source name, hex and alpha under explicit Light mode |
+| Dark | 344px | Bound sample, resolved source name, hex and alpha under explicit Dark mode |
 
-```text
-{Family} {Step} [FRAME, vertical Auto Layout, 112 Fixed × Hug, 8px gap]
-  Preview [RECTANGLE, 112×72, 8px radius, variable-bound fill]
-  {Family} {Step} [TEXT]
-  #{RRGGBB} [TEXT]
-```
+Column widths sum to `1440px`; use `16px` cell padding, no inter-column gap, and Hug rows. Every mode cell has a `48×48px` swatch plus an applied preview when needed. Text and icon samples use their intended surface; borders surround a visible surface; overlays composite over a named background. Documentation text remains readable outside the sample.
 
-Use an inside `1px` subtle border on a preview only when necessary to make a very light color edge visible. Preserve the actual alpha value when a color is translucent and display it as `#RRGGBB · {opacity}%`. A swatch without both its familiar name and resolved value is incomplete.
+Show a primitive source name such as `Brand 600` as well as the resolved hex, never an alias ID in place of the value. Resolve the actual chain internally, including its mode behavior. Show both modes even when they have equal values. Do not merge distinct roles because their colors happen to match.
 
-`#RRGGBB` and `{opacity}` are instructions in this specification, never literal Figma copy. Replace them with the selected variable's actual uppercase hex value and opacity. If the value has not been approved or implemented, stop instead of showing a placeholder.
+Every role has its own usage text; a paragraph for Text or Backgrounds alone is insufficient. Native variable descriptions mirror the purpose, state and constraints. They supplement the visible entry.
 
-### Using color section
+### Appearance modes and interaction states
 
-Introductory copy: `Choose color according to the job it performs. These focused examples show the common decisions; the complete implementation remains in Figma's variables panel.`
+Show the same neutral composition in Light and Dark with Canvas, Surface, primary/secondary text, an icon, default border, brand action and focus. Set each specimen's mode explicitly. Label the roles and values; do not create a product screen.
 
-Create exactly six focused usage examples inside one or two annotated example blocks. Do not create a role inventory table or a dashboard of six equal cards. Each example contains one applied visual, no more than three representative role chips, a heading, and one written explanation. Every role chip shows its familiar name and current resolved hex value.
+Create separate Brand and Destructive action state rows with Default, Hover, Pressed, Focus and Disabled. Each state has a named `176×48px` bound preview, foreground and background token/value labels and one sentence explaining its trigger. Focus adds the focus treatment to the current appearance; it does not replace selection.
 
-1. `Surfaces` — demonstrate Canvas, Surface, and Subtle. Copy: `Use surface roles to separate levels of content while keeping the canvas visually quiet.`
-2. `Content` — demonstrate Primary text, Secondary text, and Primary icon on one surface. Copy: `Use text and icon roles to create readable emphasis without changing content size.`
-3. `Actions` — demonstrate Brand background with On-brand text, plus a quieter supporting treatment. Copy: `Reserve brand emphasis for the most important action or selected state.`
-4. `Boundaries and focus` — demonstrate Default border and Focus treatment. Copy: `Use borders for boundaries and the focus role only for visible keyboard focus.`
-5. `Feedback` — demonstrate one compact status message using background, icon, text, and border together. Copy: `Combine feedback roles with a label and icon so meaning never depends on color alone.`
-6. `Overlays` — demonstrate Overlay behind an elevated neutral surface. Copy: `Use the overlay role to separate temporary content from the underlying interface.`
+Add Selected and Selected + Hover examples using the selection roles, with a visible mark or label. Show that selection persists after activation, while press is momentary. Show enabled and disabled content pairings independently.
 
-When Light and Dark modes are supported, show the resolved Light and Dark value as two compact chips beside the relevant example. If one mode is supported, show one value. These examples explain representative use; they must not enumerate every role.
+Use `224px` state cells, `24px` padding and `16px` gaps inside a `1280px` unpadded row; five cells and four gaps require `1184px`. Grow cells vertically for the labels.
 
-### Appearance modes section
+### Foreground/background pairings
 
-Introductory copy: `Color roles keep the same meaning in every supported appearance. Their resolved values change to preserve hierarchy and readability.`
+Provide a pair reference for every permitted text/icon/meaningful boundary combination used by the documented examples and components. Include the actual foreground and background token names, mode, state, resolved colors, alpha/compositing background, measured ratio, use class and result.
 
-Create two `548×320px` specimen frames named `Light` and `Dark` in one `1120px` comparison block with a `24px` gap. Give each specimen `32px` padding and `24px` internal gap. Apply the corresponding mode to each frame. In both frames, show the same neutral composition made only from geometry and text: Canvas, Surface, Primary text, Secondary text, Default border, Brand emphasis, and Focus. Label every example with its role name and resolved hex value. Do not create a product screen.
+Distinguish normal text, large text and necessary non-text graphics. A result applies only to its named pair and use class. A palette shade does not pass or fail accessibility in isolation. Use [Accessibility](accessibility.md) for thresholds and evidence boundaries; compute the result before rounding its displayed ratio.
 
-### Interaction states section
+Do not label disabled content as suitable for active information. Mark inactive controls as a scoped exception where applicable. If a pairing fails, repair the approved mapping or restrict its use visibly and record the unresolved decision.
 
-Introductory copy: `Interactive colors change predictably to communicate hover, press, focus, and unavailable states without changing layout.`
+### Feedback and overlays
 
-Create one group for `Brand action` and one for `Danger action`. Each group contains five `224px`-wide state cards in a wrapping row with a `16px` gap:
+Show Information, Success, Warning and Error as complete bound treatments, each with background, text, icon and border names and values. Use specific, neutral messages and a visible symbol or label. Put mode comparisons alongside each treatment.
 
-| State | Required visible explanation |
-| --- | --- |
-| Default | `Resting interactive color.` |
-| Hover | `Pointer-hover color; geometry stays unchanged.` |
-| Pressed | `Active-press color; geometry stays unchanged.` |
-| Focus | `Default color with the approved visible focus treatment.` |
-| Disabled | `Unavailable color with reduced emphasis and no interactive reaction.` |
+Use a `1440px` unpadded row with four `320px` examples and three `24px` gaps (`1352px` total); each example has `24px` internal padding. If the available width is smaller, wrap rather than compressing the content.
 
-Each card contains the state name, a `176×48px` variable-bound preview with the neutral label `Action`, the background's resolved hex value, and the explanation above. Use `20px` card padding, `12px` gap, and `12px` radius. The preview uses the approved control radius. Do not build a Button component solely for this section.
+Show an overlay over its named canvas with the actual alpha value and the elevated surface above it. Explain which content is dimmed and which stays active.
 
-### Feedback colors section
+### Do and don't
 
-Introductory copy: `Feedback colors communicate a situation and its severity. Always combine the color treatment with a clear label and icon or equivalent cue.`
+Create distinct visual comparisons with a caption under each side:
 
-Create four `260px`-wide, Hug-height status examples in one `1120px` annotated block with `24px` gaps. Give each example `24px` padding and `16px` internal gap. Bind each background, border, icon, and text layer to its status role. Use these visible examples:
+- Choose a semantic surface role for a container / avoid a similar-looking raw swatch applied directly.
+- Keep one primary action and quieter supporting actions / avoid competing primary actions.
+- Combine error color with a correction message and cue / avoid a red boundary with no explanation.
+- Preserve selection while showing focus / avoid using focus color as the only selection indicator.
 
-| Card | Title | Supporting copy |
-| --- | --- | --- |
-| Information | `Information` | `Additional details are available.` |
-| Success | `Success` | `The action was completed.` |
-| Warning | `Warning` | `Review this before continuing.` |
-| Error | `Error` | `Something needs attention.` |
-
-Below each card, show four compact rows labeled `Background`, `Text`, `Icon`, and `Border`, each with its resolved hex value. The status title and icon must remain visible; a colored rectangle by itself is not a status example.
-
-### Do-and-don't section
-
-Create these two comparison rows. Each side must contain the example, heading, and exact instruction.
-
-**Semantic selection**
-
-- Do: `Choose a color role by the purpose of the element.` Show a surface using `Background / Surface`, with that role name visible.
-- Don't: `Do not choose a visually similar palette value for a component.` Show the same surface using a raw neutral swatch, with `Raw palette value` visible.
-
-**Hierarchy and meaning**
-
-- Do: `Reserve strong brand color for the most important action or emphasis.` Show one strong action and one quieter supporting action.
-- Don't: `Do not give every action the same visual emphasis.` Show two competing strong actions.
-
-### Accessibility section
-
-Create this visible guidance:
-
-- `Use only approved foreground and background combinations.`
-- `Pair status, selection, and error colors with text, icons, or another visible cue.`
-- `Do not use disabled colors for active information.`
-- `✓ WCAG 2.2 AA checked` after the required checks pass, or replace the target with the approved stricter target.
-
-Do not show raw contrast ratios or testing calculations.
+Generic advice such as “apply the documented decision” is not a substitute for these examples.
 
 ### Documentation QA
 
-The Color guide fails documentation QA when any of these conditions is true:
+Use [Documentation Acceptance](../06-governance/documentation-acceptance.md). Fail when:
 
-- A swatch omits its familiar name or resolved hex value.
-- A color family omits its purpose.
-- A usage example omits its explanation or the resolved value for a role it shows.
-- Interaction-state examples are unlabeled or fail to explain the state change.
-- A feedback example communicates only through a colored box.
-- Do-and-don't examples omit their written instruction.
-- The frame contains a long inventory table or attempts to reproduce every implemented value or role.
-- The frame contains only palette or role boxes without the required overview and usage guidance.
+- Any approved shade, base/alpha color or semantic role is missing from implementation or its visible reference.
+- A role lacks its exact name, individual usage, bound sample or resolved mode value.
+- Variable descriptions are empty or generic.
+- A label differs from its binding, mode or composited appearance.
+- A pairing claim has no named foreground/background or evidence.
+- State, feedback, overlay, mode or do-and-don't examples are absent or consist only of text boxes.
+- A complete reference is replaced by a summary or deferred to the variables panel.
+- Rows clip, text becomes too small, or unrelated generic guidance fills the guide.
 
-Keep variable IDs, alias chains, code syntax, collection counts, raw contrast ratios, and validation logs internal. Their exclusion does not permit removing any visible designer-facing content specified above.
+Record missing content as incomplete and repair it before accepting the Foundation. Keep raw IDs and test logs internal while preserving all designer-facing specifications.

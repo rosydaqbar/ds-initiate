@@ -8,7 +8,7 @@ Complete the brand questionnaire, collect approved brand assets and product inpu
 
 Create approved tokens, modes, Text Styles, Effect Styles, icons, logos, and mandatory Foundation guides.
 
-For each Foundation item, create or update its mandatory guide immediately after its values, assets, or rules are ready. Do not ask a separate documentation question. The visible guide contains usage, representative examples, do-and-don't guidance, and a concise accessibility check when relevant. Keep inventories, implementation details, and QA evidence in the Markdown specification or build ledger.
+For each Foundation item, create or update its mandatory guide immediately after its values, assets, or rules are ready. Do not ask a separate documentation question. The visible guide contains a complete grouped reference of approved names, values, modes and individual usage, plus actual specimens and specific do-and-don't examples. Follow [Documentation Acceptance](documentation-acceptance.md); compare approved, implemented and documented sets before proceeding. A generic guide shell or a few examples cannot satisfy completion. Keep internal IDs and raw QA logs in the build ledger.
 
 ## Phase 2 — Atoms
 

@@ -24,7 +24,7 @@ Build a readable usage guide supported by connected component instances. The gui
 - What the component does.
 - When to use it and when another component is a better choice.
 - How its visual hierarchy or styles differ.
-- Which sizes, states, and editable options matter to designers.
+- Every supported size, state, public property and option, with its default and usage.
 - How to use it correctly and what to avoid.
 - The concise accessibility status and any remaining designer responsibility.
 
@@ -44,12 +44,12 @@ Build the guide from the finished Figma component and its Markdown specification
 Do not place these in the visible guide:
 
 - Variant-count calculations or the private helper matrix.
-- Variable and Style binding tables.
-- Alias paths, scopes, IDs, code syntax, or metadata dumps.
-- Raw contrast ratios, accessibility test output, keyboard logs, or screen-reader logs.
+- Private implementation binding dumps. Public token and Style references remain visible where they help a designer choose.
+- Raw alias traversal, scopes, internal IDs, code syntax, or metadata dumps.
+- Raw contrast calculations and accessibility test logs. Named foreground/background contrast results may be shown when useful.
 - 4px audit output, rendering-exception reports, screenshots, connection reports, or validation logs.
 - A long table or exhaustive list of every cross-product permutation.
-- Anatomy diagrams or implementation-layer breakdowns unless the user explicitly requests them.
+- Private implementation-layer breakdowns. Public anatomy and meaningful measurements belong in the guide.
 
 ## Figma landing-frame structure
 
@@ -74,6 +74,9 @@ Documentation / {Component} [FRAME, vertical Auto Layout, 1600 Fixed × Hug]
       Copy [FRAME, vertical Auto Layout, 800 Fixed × Hug]
       Instance row [FRAME, horizontal wrap Auto Layout, up to 1120 Fixed × Hug]
         {Connected instance and visible annotation} [FRAME]
+    Section / Anatomy and dimensions [FRAME; annotated connected instance and complete size reference]
+    Section / Public properties [FRAME; property, type, default, options and usage]
+    Section / Appearance modes [FRAME; connected mode comparisons]
     Section / States and options [FRAME, vertical Auto Layout, Fill × Hug]
       {Focused connected-instance rows} [FRAME]
     Section / Do and don't [FRAME, vertical Auto Layout, Fill × Hug]
@@ -82,7 +85,7 @@ Documentation / {Component} [FRAME, vertical Auto Layout, 1600 Fixed × Hug]
         Don't [FRAME]
     Section / Accessibility [FRAME, vertical Auto Layout, 800 Fixed × Hug]
       {Remaining designer responsibility} [TEXT]
-      ✓ {Approved accessibility target} checked [TEXT]
+      {Actual design checks and pending implementation checks} [TEXT]
 ```
 
 Rename the primary decision section for the component, such as `Hierarchy`, `Selection behavior`, `Validation`, `Placement`, or `Responsive behavior`.
@@ -108,6 +111,8 @@ All structural values below are multiples of 4.
 
 Expand the guide only when a real Organism or responsive specimen cannot fit at actual size. Never scale a component instance to make it fit.
 
+Calculate usable width after padding and gaps. An 1120px example block with 32px side padding has 1056px of content width; a paired 548px comparison needs an unpadded 1120px wrapper. Wrap examples or expand the guide by multiples of 4 when necessary. Keep every required entry visible and readable.
+
 ## Permutation guidance
 
 Use connected instances and visible plain-language annotations.
@@ -115,11 +120,15 @@ Use connected instances and visible plain-language annotations.
 - Show each public visual style once and explain its hierarchy or purpose.
 - Show each size once and explain where that size belongs.
 - Show interaction states in one focused row for the most representative visual style. Add another row only when a state behaves differently.
-- Demonstrate a meaningful Boolean as a before-and-after pair.
-- Demonstrate the default and one approved replacement for an instance-swap property when that choice changes usage.
-- Demonstrate Text properties with realistic content and applicable content rules.
+- Document EVERY public Boolean, including both values, its default, visibility effect and interaction with other options.
+- Document EVERY public instance-swap property, its default, allowed family and constraints; show a default and a meaningful permitted replacement. An unbounded icon library does not need every icon repeated in the component guide.
+- Document EVERY public Text property, its default, required/optional status, wrapping/truncation rules and a realistic example.
 - Use a full matrix only when the interaction between axes changes the meaning. Never recreate the entire component-set cross-product by default.
-- Keep one example block to no more than six connected specimens unless the item specification requires a small, meaningful permutation.
+- Split large rows into readable groups or continuation frames; do not drop required public values or properties to meet a specimen count.
+
+Include the complete size/specification table: resolved height, min/max width, padding, gap, radius, icon size, Text Style and minimum interaction target as applicable. Explain public anatomy with labeled connected instances. Show all supported states and Light/Dark behavior, including materially different style/state combinations. Every public option must be documented even when a full variant cross-product is unnecessary.
+
+The approved specification defines what must exist; the actual component defines the values to display. If they disagree, fix the missing capability or obtain an explicit scope change. Do not quietly omit a required capability merely because it was not built.
 
 Every displayed instance needs a visible label and a sentence explaining why a designer would choose it. A row labeled only `Small`, `Default`, or `Hover` is insufficient.
 
@@ -131,25 +140,19 @@ Never manufacture an invalid component variant. The incorrect example changes th
 
 ## Accessibility status
 
-After internal accessibility QA passes, show:
-
-```text
-✓ WCAG 2.2 AA checked
-```
-
-Replace the target only when Discovery approved a stricter standard. Add a short responsibility only when accessibility still depends on composition, such as providing an accessible name, preserving reading order, or maintaining the minimum target size.
+State the approved target, actual design checks and remaining implementation checks. Use [Accessibility](../01-foundations/accessibility.md) for the evidence boundary. Figma visuals cannot establish production keyboard or screen-reader behavior; do not claim blanket WCAG conformance from a component specimen.
 
 ## Documentation QA
 
 After building the approved guide, verify internally:
 
-- The guide reads as usage guidance rather than an inventory or specimen dashboard.
+- The guide combines complete public reference information with specific usage guidance and applied examples.
 - Every displayed component is a connected instance at 100% scale.
 - Displayed styles, sizes, states, and properties match the finished public API.
 - Every instance row has visible labels and decision-focused explanations.
-- No unbuilt or private option is shown.
+- No private option is shown. Required public options missing from the implementation fail the component contract and cannot be waived by hiding them from the guide.
 - Text, focus rings, shadows, menus, and overlays do not clip.
 - The frame follows the 4px structural rule.
 - The final screenshot is legible and free of overflow.
 
-Record results in the build ledger or chat summary, not in the Figma guide.
+Use [Documentation Acceptance](documentation-acceptance.md) to reconcile approved, implemented and documented public choices. Record raw review evidence in the build ledger; show scoped outcomes and usage restrictions where they help the designer.

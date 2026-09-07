@@ -46,7 +46,7 @@ Create three writing-principle examples in one annotated block:
 - `Concise` — `Include the information needed to decide or act; remove repetition.`
 - `Helpful` — `Explain what happened and provide the next action when one is available.`
 
-Create six focused content examples across two annotated blocks, not a catalogue of every content pattern. Each example contains a correct sample, a short explanation, and an incorrect comparison:
+Create a complete reference for EVERY approved content rule, each with individual usage and correct/incorrect copy. Then show the following applied examples: Each example contains a correct sample, a short explanation, and an incorrect comparison:
 
 1. `Actions` — Correct: `Save changes`. Explanation: `Start action labels with a specific verb.` Incorrect: `OK`.
 2. `Links` — Correct: `View order details`. Explanation: `Describe the destination instead of the interaction.` Incorrect: `Click here`.
@@ -55,10 +55,12 @@ Create six focused content examples across two annotated blocks, not a catalogue
 5. `Empty states` — Correct: `No results match these filters. Clear filters to view all items.` Explanation: `Distinguish no data, no results, no permission, and failure.` Incorrect: `Nothing here.`
 6. `Notifications` — Correct: `Your changes were saved.` Explanation: `State what happened and name the affected object when needed.` Incorrect: `Success!`.
 
+Document all four empty-state meanings separately: no data (explain how to add it), no results (explain how to adjust the search/filter), no permission (explain the access limitation and available next action), and failure (explain what failed and a valid recovery). Do not make one no-results example stand for all four. Include notification outcome, affected object and next action when relevant.
+
 Create one `Locale and formatting` panel showing the approved locale and one real example each for date, time, number, currency, percentage, and file size. Label the locale and formatting rule; do not invent a locale when Discovery has not approved one.
 
 Create one `Wrapping` comparison with a short label, long supporting text, and empty value. Add: `Control and navigation labels remain concise. Body, help, error, alert, and empty-state content wraps. Truncated data requires access to the full value.` Include every approved script only when the script is in scope.
 
-Finish with: `Content must remain understandable when read out of visual context and when text expands.` Add the approved accessibility checkmark only after the content checks pass.
+Finish with: `Content must remain understandable when read out of visual context and when text expands.` Report the design checks actually performed and the remaining implementation checks under [Accessibility](accessibility.md).
 
 Use existing connected component instances only when they already exist; otherwise use text and neutral geometry. Do not build components solely for this guide. Do not show stress-test results or validation logs. The guide fails QA if an example lacks its explanation or correct and incorrect copy.

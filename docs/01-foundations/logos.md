@@ -38,15 +38,15 @@ Documentation / Logo
 
 Use this overview copy: `Use the lockup that fits the available space while preserving the approved artwork, proportions, minimum size, and clear space.`
 
-Show each approved lockup once in its recommended appearance; do not display the full lockup-by-appearance cross-product. Each specimen container uses at least `24px` padding and expands to preserve the asset's proportions. Beneath each instance, show:
+Show EVERY approved lockup and appearance combination. Use a permission matrix to identify unavailable combinations without manufacturing artwork for them. Each permitted combination receives a connected instance and individual specification. Each specimen container uses at least `24px` padding and expands to preserve the asset's proportions. Beneath each instance, show:
 
 - Familiar asset name: `Symbol`, `Wordmark`, `Horizontal`, or the approved lockup name.
 - Appearance: `Default`, `Inverse`, or `Monochrome`.
 - Approved use: one sentence describing the appropriate placement.
 
-Create a `Minimum size` section using the primary horizontal lockup and symbol. Annotate the actual approved width and height in pixels and add: `Do not reproduce this lockup below the labeled size.` Keep the complete asset specifications in this Markdown file and Figma component descriptions.
+Create a `Minimum size` section for EVERY approved lockup. Annotate the actual approved width and height in pixels and add: `Do not reproduce this lockup below the labeled size.` Show the complete asset specifications visibly and mirror the usage and restrictions in native component descriptions.
 
-Create a `Clear space` section with one connected lockup surrounded by its measured exclusion area. Show the actual clear-space value or approved logo-derived unit on all four sides and add: `Keep text, imagery, and other marks outside this area.`
+Create a `Clear space` section for each distinct lockup rule with a connected instance surrounded by its measured exclusion area. Show the actual clear-space value or approved logo-derived unit on all four sides and add: `Keep text, imagery, and other marks outside this area.`
 
 Create a background matrix for `Light`, `Dark`, `Brand`, and `Image` only when each background is approved. Label the required logo appearance for every permitted example. Mark an unapproved combination as `Do not use` rather than recoloring the logo.
 
@@ -57,6 +57,6 @@ Create these comparisons:
 - Do: `Use the approved appearance for the background.` / Don't: `Do not recolor the logo to create a new variation.`
 - Do: `Preserve the required clear space.` / Don't: `Do not place content inside the exclusion area.`
 
-Finish with: `Choose a logo appearance that remains clearly visible against its background.` Add the approved accessibility checkmark only when relevant checks pass.
+Finish with: `Choose a logo appearance that remains clearly visible against its background.` Report the design checks actually performed and the remaining implementation checks under [Accessibility](accessibility.md).
 
 Do not show node IDs or connection reports. The guide fails QA when a specimen omits its lockup name, appearance, permitted use, minimum size, or clear-space guidance. This guide does not authorize the optional [Logo component landing frame](../02-atoms/logo.md).

@@ -71,12 +71,16 @@ Use this overview copy: `Choose a Text Style for the purpose of the content, not
 
 Create one annotated font-family example for each approved family. Show the family name, approved role (`Interface`, `Display`, or `Monospace`), licensed weights, and a complete uppercase, lowercase, numeral, and punctuation sample. Do not invent an unavailable weight.
 
-Create six representative type examples across two annotated blocks, not a complete Text Style inventory: one Display, two Heading levels, one Body, one Label, and one Code style. Choose the styles that best explain the approved hierarchy. Each `400px`-wide example contains:
+Create a complete Text Style reference grouped by Display, Heading, Body, Label and Code. Include EVERY approved and implemented style, with one row per style; do not collapse different weights or sizes into one representative sample. An approved scope change may remove a family, but a missing implementation is not an exclusion. Each row contains:
 
 1. Familiar style name.
 2. Realistic sample text rendered with the actual Text Style.
 3. A specification line showing `{family} · {weight}` and `{size}px / {line height}px`.
-4. One complete sentence explaining when to use the style.
+4. Letter spacing, casing and decoration, including explicit zero/none values.
+5. One complete sentence explaining when to use this style and when to choose an adjacent level.
+6. Every approved responsive or script-specific variation, labeled with its applicable width or language.
+
+Use a 1440px table with 240px Name, 480px actual-size Sample, 400px Specification and 320px Usage columns. Use 16px cell padding and Hug rows; expand the sample region when long display text needs more space. Show exact searchable Text Style names and put the same purpose in native Style descriptions.
 
 Use these sample patterns:
 
@@ -97,6 +101,6 @@ Create these comparisons:
 - Do: `Allow body and supporting text to wrap naturally.`
 - Don't: `Do not shrink text or clip essential content to preserve a fixed height.`
 
-Finish with: `Use the approved minimum text sizes and preserve readability during text expansion.` Add `✓ WCAG 2.2 AA checked` only after the required checks pass.
+Finish with: `Use the approved minimum text sizes and preserve readability during text expansion.` Report the design checks actually performed and the remaining implementation checks under [Accessibility](accessibility.md).
 
-The full Text Style list remains in Figma's Text Styles panel and this Markdown file. Do not reproduce it as a long table in the guide. Do not show code syntax, metadata, or font-loading results. The guide fails QA if any selected style omits its sample, family, weight, size, line height, or intended use.
+The visible reference, native Text Styles and approved scope must contain the same style names and values. Native panels supplement the guide. Do not show internal IDs or font-loading logs. The guide fails QA if any approved style or required field is absent, if a sample does not use its named Style, or if one Body sample replaces the full hierarchy.

@@ -32,10 +32,13 @@ Documentation / Radius
 
 Use this overview copy: `Choose radius by the role of an element. Reusing role-based corners creates a consistent shape language and preserves hierarchy between nested elements.`
 
-Create four `224px`-wide specimens in one annotated example block for the representative roles below. Each specimen contains a `176×112px` variable-bound preview, familiar role name, actual pixel value, and the required usage sentence:
+Create a complete reference for EVERY approved radius role, including None, Small and Large. Use wrapping `224px`-wide entries and as many rows as needed. Each specimen contains a `176×112px` variable-bound preview, familiar role name, actual pixel value, and the required usage sentence:
 
 | Role | Value | Required usage sentence |
 | --- | ---: | --- |
+| None | `0px` | `Use for square corners where no rounding is intended.` |
+| Small | `4px` | `Use for compact details needing less rounding than controls.` |
+| Large | `16px` | `Use for large surfaces assigned stronger rounding by the approved shape direction.` |
 | Control | `8px` | `Use for buttons, fields, and other interactive controls.` |
 | Surface | `12px` | `Use for cards, panels, menus, and grouped surfaces.` |
 | Media | `12px` | `Use for images and media containers.` |
@@ -48,6 +51,6 @@ Create one comparison row:
 - Do: `Use the assigned radius role consistently for the same element type.`
 - Don't: `Do not choose corners independently for each instance.`
 
-Finish with: `Corner shape must not reduce the usable area or obscure focus treatment.` Add `✓ WCAG 2.2 AA checked` after the related checks pass.
+Finish with: `Corner shape must not reduce the usable area or obscure focus treatment.` Report the design checks actually performed and the remaining implementation checks under [Accessibility](accessibility.md).
 
-The complete Radius collection stays in Figma's variables panel and this Markdown file. Do not reproduce it as an inventory table. Do not show alias paths, code syntax, or QA logs. The guide fails QA when a selected tile lacks its role, value, or usage sentence.
+Show the exact variable name beside every role and derive labels from approved values, not the defaults printed here. For Pill, show `Full · radius/pill = 9999 (rendering sentinel)` and explain that Figma clamps rounding to the shape; do not label 9999 as a measured corner. The guide fails QA when any role is absent or lacks its name, actual value, bound preview or individual usage sentence. Keep IDs and QA logs internal.

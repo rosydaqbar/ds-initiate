@@ -71,7 +71,7 @@ Use the same state reactions and semantic action roles as Button. Loading keeps 
 
 - The variant count matches the calculation above and no component set exceeds 30 variants.
 - X, Y, W, H, padding, gap, and finite radius values are divisible by 4 with no fractional coordinates.
-- Only 1px borders/dividers, approved icon strokes, vector optics, shadows, and pill rendering may be off-grid.
+- Only 1px/2px inside borders, 1px dividers, approved icon strokes, vector optics, shadows, and pill rendering may be off-grid.
 - Every visual property is bound to a semantic variable or approved Style.
 - Text expansion to 200% does not clip or overlap adjacent content.
 - Every instance has a specific accessible label.
@@ -98,8 +98,8 @@ The values below are selection targets from this specification, not static docum
 | Do and don't | Show a familiar single icon with an accessible name and supporting Tooltip when its meaning needs reinforcement. Do not use an ambiguous symbol when a labelled Button is clearer. |
 | Variants and states | Start with a public-set comparison for `IconButton/Primary`, `IconButton/Secondary`, `IconButton/Tertiary`, then build focused connected-instance comparisons for `Size` (`Small`, `Medium`, `Large`); `Intent` (`Default`, `Destructive`); `State` (`Default`, `Hover`, `Pressed`, `Focus`, `Disabled`). Use a full matrix only when each combination teaches a distinct visual or behavioral rule. |
 | Properties | Demonstrate the finished editable API: `Icon` (Instance swap, default `Icon/Placeholder`); `Accessible label` (Text, default `Action`); `Loading` (Boolean, default `false`). Use paired live instances for meaningful boolean changes and only approved connected replacements for instance swaps. |
-| Accessibility status | Show `✓ WCAG 2.2 AA checked` after internal QA, plus any remaining responsibility for the consuming designer. Do not show ratios or test output. |
+| Accessibility status | State the design checks actually performed, relevant pairing results and remaining implementation checks under the shared [Accessibility contract](../01-foundations/accessibility.md). Keep raw test logs internal; do not infer full WCAG conformance from Figma. |
 
-Omit any section whose capability does not exist in the finished component. Never add or detach a component merely to complete the landing frame.
+Omit a capability section only when the approved scope explicitly excludes it. Missing required capabilities must be completed before documenting the component as ready. Document every approved public property, option, size, state and supported appearance under the shared documentation contract; representative examples do not replace the complete reference. Never add or detach a component merely to complete the landing frame.
 
 Shared construction rules: [Figma Construction Standard](../06-governance/figma-construction-standard.md).

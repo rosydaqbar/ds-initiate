@@ -75,7 +75,7 @@ Use 4px gaps between label/control and control/message. Message row uses horizon
 
 - The variant count matches the calculation above and no component set exceeds 30 variants.
 - X, Y, W, H, padding, gap, and finite radius values are divisible by 4 with no fractional coordinates.
-- Only 1px borders/dividers, approved icon strokes, vector optics, shadows, and pill rendering may be off-grid.
+- Only 1px/2px inside borders, 1px dividers, approved icon strokes, vector optics, shadows, and pill rendering may be off-grid.
 - Every visual property is bound to a semantic variable or approved Style.
 - Text expansion to 200% does not clip or overlap adjacent content.
 - Label association and message IDs are documented for implementation.
@@ -102,8 +102,8 @@ The values below are selection targets from this specification, not static docum
 | Do and don't | Show one visible label, one connected control, and the message appropriate to the current state. Do not duplicate labels, show help and error as competing messages, or place validation away from its control. |
 | Variants and states | Build focused connected-instance comparisons for `Size` (`Small`, `Medium`, `Large`); `State` (`Default`, `Disabled`, `Error`, `Success`). Use a full matrix only when each combination teaches a distinct visual or behavioral rule. |
 | Properties | Demonstrate the finished editable API: `Label` (Text, default `Field label`); `Required` (Boolean, default `false`); `Control` (Instance swap, default `TextInput`); `Help text` (Text, default `Helpful information`); `Show help` (Boolean, default `false`); `Message` (Text, default `Validation message`); `Show count` (Boolean, default `false`); `Count` (Text, default `0/100`). Use paired live instances for meaningful boolean changes and only approved connected replacements for instance swaps. |
-| Accessibility status | Show `✓ WCAG 2.2 AA checked` after internal QA, plus any remaining responsibility for the consuming designer. Do not show ratios or test output. |
+| Accessibility status | State the design checks actually performed, relevant pairing results and remaining implementation checks under the shared [Accessibility contract](../01-foundations/accessibility.md). Keep raw test logs internal; do not infer full WCAG conformance from Figma. |
 
-Omit any section whose capability does not exist in the finished component. Never add or detach a component merely to complete the landing frame.
+Omit a capability section only when the approved scope explicitly excludes it. Missing required capabilities must be completed before documenting the component as ready. Document every approved public property, option, size, state and supported appearance under the shared documentation contract; representative examples do not replace the complete reference. Never add or detach a component merely to complete the landing frame.
 
 Shared construction rules: [Figma Construction Standard](../06-governance/figma-construction-standard.md).

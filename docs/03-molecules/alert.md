@@ -70,7 +70,7 @@ Dismissible layout exposes CloseButton at the top-right. Actions remain below co
 
 - The variant count matches the calculation above and no component set exceeds 30 variants.
 - X, Y, W, H, padding, gap, and finite radius values are divisible by 4 with no fractional coordinates.
-- Only 1px borders/dividers, approved icon strokes, vector optics, shadows, and pill rendering may be off-grid.
+- Only 1px/2px inside borders, 1px dividers, approved icon strokes, vector optics, shadows, and pill rendering may be off-grid.
 - Every visual property is bound to a semantic variable or approved Style.
 - Text expansion to 200% does not clip or overlap adjacent content.
 - Critical alerts include a specific recovery action when one exists.
@@ -96,8 +96,8 @@ The values below are selection targets from this specification, not static docum
 | Do and don't | Show Alert beside the content or task it explains, with status text and a relevant action only when needed. Do not use it for a transient confirmation or a decision that must block the user. |
 | Variants and states | Build focused connected-instance comparisons for `Intent` (`Neutral`, `Info`, `Success`, `Warning`, `Critical`); `Layout` (`Static`, `Dismissible`). Use a full matrix only when each combination teaches a distinct visual or behavioral rule. |
 | Properties | Demonstrate the finished editable API: `Title` (Text, default `Alert title`); `Description` (Text, default `Supporting message`); `Show action` (Boolean, default `false`); `Action` (Instance swap, default `Button/Tertiary`); `Show close` (Boolean, default `false`). Use paired live instances for meaningful boolean changes and only approved connected replacements for instance swaps. |
-| Accessibility status | Show `✓ WCAG 2.2 AA checked` after internal QA, plus any remaining responsibility for the consuming designer. Do not show ratios or test output. |
+| Accessibility status | State the design checks actually performed, relevant pairing results and remaining implementation checks under the shared [Accessibility contract](../01-foundations/accessibility.md). Keep raw test logs internal; do not infer full WCAG conformance from Figma. |
 
-Omit any section whose capability does not exist in the finished component. Never add or detach a component merely to complete the landing frame.
+Omit a capability section only when the approved scope explicitly excludes it. Missing required capabilities must be completed before documenting the component as ready. Document every approved public property, option, size, state and supported appearance under the shared documentation contract; representative examples do not replace the complete reference. Never add or detach a component merely to complete the landing frame.
 
 Shared construction rules: [Figma Construction Standard](../06-governance/figma-construction-standard.md).

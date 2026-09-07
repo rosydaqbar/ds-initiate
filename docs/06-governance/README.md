@@ -8,3 +8,5 @@
 - [Quality checklist](quality-checklist.md)
 - [Naming and publishing](naming-and-publishing.md)
 - [Change management](change-management.md)
+
+- [Documentation acceptance and coverage checks](documentation-acceptance.md)

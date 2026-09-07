@@ -24,7 +24,7 @@ These files define the Figma objects, construction measurements, bindings, behav
 
 Open the [documentation index](docs/README.md) to browse the building-block specifications. Start with the [4px construction grid](docs/01-foundations/4px-grid.md) and [Figma construction standard](docs/06-governance/figma-construction-standard.md).
 
-Agents completing or executing these specifications must follow the repository [orchestrator instructions](AGENTS.md).
+Agents maintaining these specifications must follow the repository [maintainer instructions](AGENTS.md). Downstream Figma execution requires a separate, explicit request and the applicable build documents.
 
 ## Before implementation
 
@@ -35,7 +35,7 @@ The architecture is reusable, but its visual values are not predetermined. The [
 Copy this and replace the brackets:
 
 ```text
-Build a design system for [brand and product] in [Figma URL] using this repository. Start with Discovery: inspect the file, ask me up to 10 specific brand-style questions, summarize the approved direction and scope, then wait for my approval. After approval, build Foundations → Atoms → Molecules → Organisms using the 4px construction rule. Foundation documentation is mandatory; component documentation is optional after component QA. Do not introduce Templates or Pages as Atomic Design levels, product screens, or product-surface categories.
+Build a design system for [brand and product] in [Figma URL] using this repository. Start with Discovery: inspect the file, ask me up to 10 specific brand-style questions, summarize the approved direction and scope, then wait for my approval. After approval, build Foundations → Atoms → Molecules → Organisms using the 4px construction rule. Foundation documentation must include complete palette and semantic role references, every approved Style and shared value, resolved values in every mode, individual usage, bound examples, and the documentation acceptance checks. Component documentation is optional after component QA. Do not introduce Templates or Pages as Atomic Design levels, product screens, or product-surface categories.
 ```
 
 Short follow-up prompts:
@@ -56,8 +56,12 @@ Continue the existing build. Inspect the current Figma state first and resume fr
 
 The first implementation lives in one Figma file. It uses Atomic Design levels without product-surface library divisions. [Foundation documentation](docs/06-governance/foundation-documentation.md) is built and validated immediately with each Foundation item, without a separate opt-in question. Individual Atom, Molecule, and Organism documentation frames remain optional: finish and validate the component, ask the user, and build the adaptive frame only after approval.
 
-Figma documentation is written for designers as a readable guide: a clear header and overview lead into focused, annotated examples, permutations, and do-and-don't guidance. Every displayed specimen includes its familiar name, resolved designer-facing value, and explanation. Complete implementation inventories, long token tables, specimen dashboards, alias audits, raw contrast calculations, grid exception reports, and validation logs stay in internal QA notes, native Figma panels, or the build ledger; they are never placed in designer-facing frames.
+Figma documentation is written for designers as a readable guide: a clear header and overview lead into focused, annotated examples, permutations, and do-and-don't guidance. Every displayed specimen includes its familiar name, resolved designer-facing value, and explanation. Complete, grouped references are mandatory for every approved color, token, Style, shared size and asset treatment. Show exact searchable names, individual usage, resolved values, bound samples and all mode values; a few representative examples cannot replace the reference. Keep IDs, raw API/alias dumps and validation logs internal.
 
 ## Definition of success
 
 The eventual Figma library will be successful when it is identified as the approved brand's design system, every built Foundation has validated Figma documentation, and every public component has a complete Markdown construction specification, bounded properties, semantic token bindings, responsive behavior where relevant, and accessibility requirements. Approved component landing frames must use connected instances and represent the finished component accurately. No public component should depend on detached copies, hard-coded brand values, generic brand placeholders, or brand-specific component variants.
+
+## Documentation acceptance
+
+Use [Documentation Acceptance](docs/06-governance/documentation-acceptance.md) to compare approved, implemented and documented names and values. A guide is incomplete if any required entry, sample, mode or section is missing. Run `node scripts/validate-documentation.mjs` after maintaining the specs. This checks repository contracts; Figma content and appearance require separate inspection during an authorized build.

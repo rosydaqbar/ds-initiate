@@ -63,7 +63,7 @@ Example:
 ```text
 component/button/primary/background/default
 → color/background/brand/default
-→ primitives/color/brand/600
+→ Primitives collection: color/brand/600
 ```
 
 Do not reuse a `component/button/*` token in another component. If several unrelated components need the same decision, that decision belongs in a global semantic collection instead.
@@ -74,7 +74,7 @@ Do not reuse a `component/button/*` token in another component. If several unrel
 2. Create global semantic roles with narrow scopes and mode-aware aliases.
 3. Create the required non-color collections using common, specific names.
 4. Create Text Styles and Effect Styles.
-5. Set code syntax only when an actual production token source exists.
+5. Populate EVERY variable and Style description with its purpose, state and usage restrictions. Descriptions must distinguish neighboring roles, even if their values match. Set code syntax only when an actual production token source exists.
 6. Verify aliases, scopes, modes, and hard-coded-value absence internally.
 7. Add component aliases later only when a built component meets the criteria above.
 
@@ -94,6 +94,7 @@ Documentation / Design Tokens
     Design tokens
     Design tokens store reusable design decisions and connect those decisions to components.
   Overview
+  Collection and naming reference
   How tokens are organized
   How to choose a token
   Examples
@@ -111,13 +112,15 @@ Create a three-step horizontal diagram inside one annotated example block. Use `
 | 2 | Reusable roles | `A role names how a value is used across interfaces.` | `Background / Brand / Default` |
 | 3 | Component choices | `A component uses the reusable role unless it needs an independent, stable decision.` | `Primary action background` |
 
-Do not expose the internal alias path in the diagram. The arrows explain the relationship; the labels explain the designer choice.
+Show exact searchable names and resolved values alongside those plain-language labels. Trace one actual source → semantic role → consumer relationship, naming the collection separately from the variable. Do not prepend `primitives/` to a variable that is actually named `color/brand/600`. If no component exists yet, use a labeled bound shape as the consumer.
 
 Create `How to choose a token` as three numbered steps with this exact copy:
 
 1. `Identify the property you are styling: background, text, icon, border, spacing, size, radius, type, elevation, or motion.`
 2. `Choose the role that matches the element's purpose and state.`
 3. `Use the component-specific choice only when the component documentation explicitly provides one.`
+
+Create a visible naming reference for EVERY used collection from the table above. Explain its purpose, exact naming grammar, type, mode behavior and owning guide. Point to the complete Color, Typography, Spacing/Sizing, Radius, Border, Layout, Elevation and Motion references rather than duplicating their catalogs. Use stable property/purpose/state naming. Never replace `spacing/*` with `space/*`, or `color/background/brand/default` with `color/action/primary`, without an explicit migration.
 
 Create five `240px`-wide examples for `Color`, `Spacing`, `Radius`, `Typography`, and `Motion` inside one wrapping annotated block. Each example must contain a familiar name, its resolved value, and one sentence explaining the decision. Use implemented values rather than placeholder values.
 
@@ -130,4 +133,4 @@ Create these comparisons:
 - Do: `Reuse one decision everywhere it has the same meaning.`
 - Don't: `Do not create a component-specific choice without a distinct component need.`
 
-Do not show collection counts, IDs, scopes, implementation paths, code syntax, or QA logs. The guide fails QA when the diagram contains only abstract boxes, an example omits its resolved value, or a token choice lacks a plain-language explanation.
+Keep exact searchable token names, resolved sources and values visible. Do not show IDs, raw binding/alias dumps, execution counts or QA logs. The guide fails QA when the diagram contains only abstract boxes, an example omits its resolved value, or a token choice lacks a plain-language explanation.

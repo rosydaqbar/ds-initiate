@@ -12,7 +12,7 @@ Attach or link the logo files, brand guidelines, color specifications, licensed 
 
 ## 3. What exact color direction should the system use?
 
-Provide the primary, secondary, and accent colors as values; choose a cool, balanced, or warm neutral direction; select Light, Dark, or both appearance modes; and list any prohibited colors. State whether missing supporting and status colors should be supplied or proposed for approval.
+Provide the primary, secondary, and accent colors as values; choose a cool, balanced, or warm neutral direction; confirm the default Light and Dark modes, or explicitly record an approved departure from that default; and list any prohibited colors. State whether missing ramps, supporting and status colors should be supplied or proposed for approval. Approve the complete family/step and semantic-role inventory before implementation; a core brand hex alone does not resolve those values.
 
 ## 4. What typography should define the interface?
 
@@ -61,6 +61,10 @@ Use `WCAG 2.2 AA` unless a different target is approved.
 Choose no more than fifteen components and put them in build-priority order. Confirm whether the scope stops at Foundations, Atoms, Molecules, and Organisms. Do not add Templates, Pages, product screens, or product-surface categories.
 
 Suggested component list: `Avatar` · `Badge` · `Button` · `Button group` · `Checkbox` · `Dropdown` · `Input` · `Progress` · `Radio group` · `Select` · `Slider` · `Tag` · `Toggle` · `Tooltip` · `Tabs` · `Alert` · `Modal` · `Navigation` · `Pagination` · `Table`
+
+## Foundation scope record
+
+For the selected Foundations, record all approved palette steps, semantic roles, Text Styles, sizes, radii, borders, effects, motion roles, layouts and required assets. Mark exclusions with their approved reason. Compact density, minimal visual style or flat surfaces do not authorize sampled documentation. Every implemented choice still needs its full reference entry.
 
 ## Required output
 

@@ -49,10 +49,22 @@
 - The user explicitly approved documentation for this named component.
 - The frame follows [Optional Component Documentation](optional-component-documentation.md).
 - Every specimen remains connected and reflects the finished component's actual API, measurements, bindings, and behavior.
-- Irrelevant sections and unbuilt options are omitted.
+- Only explicitly out-of-scope capabilities and repetitive combinations are omitted; missing required capabilities fail acceptance.
 - The visible frame focuses on purpose, usage, actual permutations, and do-and-don't examples.
 - The frame reads as an editorial guide rather than a specimen dashboard or copied recipe table.
 - Every displayed style, size, state, and editable option has a visible label and decision-focused explanation.
-- Accessibility appears as a concise checked status plus any remaining designer responsibility.
-- Inventories, binding tables, alias paths, metadata, contrast calculations, 4px audit output, and validation logs are not shown in the Figma frame.
+- Accessibility names the design checks actually performed and remaining runtime checks; no blanket conformance badge is inferred from Figma.
+- Public names, values, measurements and pair-specific contrast results remain visible when relevant. Internal IDs, raw binding/alias dumps and test logs stay internal.
 - A final metadata inspection and screenshot pass confirms the documentation without changing the component API.
+
+## Complete reference acceptance
+
+- Approved, implemented and visibly documented inventories reconcile under [Documentation Acceptance](documentation-acceptance.md).
+- Every approved color shade and semantic role has its own name, purpose, usage, bound sample and resolved mode values.
+- Every Text Style, spacing/size, radius, border width, Effect Style layer, motion role and layout rule has its complete reference entry.
+- Every variable and Style description is meaningful and matches the guide.
+- Exact token/Style names match the native objects; labels and samples resolve from those objects.
+- Palette, mode, state, pairing and reference rows have readable screenshots, including all continuation frames.
+- Applied specimens actually demonstrate the relevant value; documentation chrome bindings are not counted as specimen evidence.
+- Every required comparison has separate correct/incorrect examples with specific captions.
+- Generic repeated copy, missing entries or required sections, stale values and silent mode omissions fail acceptance.

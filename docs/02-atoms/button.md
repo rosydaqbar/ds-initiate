@@ -69,11 +69,18 @@ Do not create icon-position or label-content variants. Expose the Icon instances
 | Primary icon | `color/icon/on-brand` | same role | same role | same role | `color/icon/disabled` |
 | Secondary fill | `color/background/surface` | `color/background/subtle` | `color/background/strong` | Default + ring | `color/background/disabled` |
 | Secondary stroke | `color/border/default` | `color/border/strong` | `color/border/strong` | `color/border/focus` | `color/border/disabled` |
-| Tertiary fill | transparent | `color/background/subtle` | `color/background/strong` | transparent + ring | transparent |
-| Link fill | transparent | transparent | transparent | transparent + ring | transparent |
+| Tertiary fill | `color/background/transparent` | `color/background/subtle` | `color/background/strong` | transparent role + ring | transparent role |
+| Link fill | `color/background/transparent` | transparent role | transparent role | transparent role + ring | transparent role |
 | Default label | `color/text/brand` | same role | same role | same role | `color/text/disabled` |
 | Default icon | `color/icon/brand` | same role | same role | same role | `color/icon/disabled` |
-| Destructive roles | Replace brand backgrounds, text, icons, and borders with their matching `danger` roles | | | | |
+| Destructive Primary fill | `color/background/danger/default` | `color/background/danger/hover` | `color/background/danger/pressed` | Default danger fill + focus ring | `color/background/danger/disabled` |
+| Destructive Primary label | `color/text/on-danger` | same role | same role | same role | `color/text/disabled` |
+| Destructive Primary icon | `color/icon/on-danger` | same role | same role | same role | `color/icon/disabled` |
+| Destructive non-Primary label | `color/text/danger` | same role | same role | same role | `color/text/disabled` |
+| Destructive non-Primary icon | `color/icon/danger` | same role | same role | same role | `color/icon/disabled` |
+| Destructive Secondary stroke | `color/border/danger` | same role | same role | `color/border/focus` | `color/border/disabled` |
+
+Destructive Secondary and Tertiary retain their neutral fill states; Link retains its transparent semantic fill. Inactive roles remain disabled, and keyboard focus always uses the focus role. Do not substitute validation-error roles for destructive actions.
 
 Text binds to `Label/Small` or `Label/Medium`; radius binds to `radius/control`; content spacing binds to `spacing/8`. No layer may use a raw color.
 
@@ -154,7 +161,7 @@ Create one focused row using `Button/Primary`, Default intent, Default state, an
 - `Medium · 40px` — `Use as the default size for most controls and forms.`
 - `Large · 48px` — `Use when the action needs stronger presence or a larger direct target.`
 
-Show the resolved height beside every instance. Do not show internal padding, token names, or construction measurements in this designer-facing section.
+Show the resolved height beside every instance. Include all approved sizes in the specification table with their exact size token, height, padding, gap, icon size and text style. Keep private construction helpers out of the guide; public dimensions and meaningful token names are required.
 
 ### States and intent
 
@@ -207,6 +214,6 @@ Create this visible copy after component QA passes:
 
 - `Keep the action label clear, preserve visible focus, and provide at least a 44×44px interaction target when the visible button is smaller.`
 - `For icon-only actions, use Icon Button and provide an accessible name.`
-- `✓ WCAG 2.2 AA checked`
+- The design checks actually completed, pair-specific contrast results and remaining implementation checks; do not imply whole-product WCAG conformance.
 
-Do not show ratios, test logs, variant counts, binding paths, or private component details in the Figma guide. Omit any capability that does not exist in the finished component. Never add, detach, or redraw a component merely to complete the guide.
+Show meaningful public specifications, exact token names and pair-specific contrast results. Keep raw test logs, binding IDs and private construction helpers internal. Omit a capability only when the approved scope explicitly excludes it; complete missing required capabilities before marking the component ready. Never add, detach or redraw a component merely to complete the guide.

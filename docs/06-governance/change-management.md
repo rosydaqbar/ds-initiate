@@ -13,3 +13,5 @@ Describe the user problem, identify dependencies, prototype safely, review acces
 Foundation changes include updating and validating their mandatory Figma documentation in the same change. For Atoms, Molecules, and Organisms, update already-approved landing frames when their sources change; do not create an absent optional landing frame without the user's approval.
 
 Every public component records design owner, code owner when available, status, last review date, and next review trigger.
+
+Reference completeness is part of every change: update the approved inventory, underlying object, native description, visible entry, resolved mode values and pairing/usage guidance together. Reconcile all three sets under [Documentation Acceptance](documentation-acceptance.md). A renamed or removed public token needs a replacement mapping and migration note; never silently rename consumers.

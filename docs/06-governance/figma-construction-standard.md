@@ -38,7 +38,7 @@ These implementation details remain in Markdown and internal QA. The optional Fi
 
 ## 4px construction
 
-Follow [the 4px construction grid](../01-foundations/4px-grid.md). Structural values must be divisible by 4. The controlled exceptions are `1px` borders/dividers, approved icon strokes, vector-path optical adjustment, shadow details, and the pill-rendering radius.
+Follow [the 4px construction grid](../01-foundations/4px-grid.md). Structural values must be divisible by 4. The controlled exceptions are `1px` or `2px` inside borders and `1px` dividers, approved icon strokes, vector-path optical adjustment, shadow details, and the pill-rendering radius.
 
 ## Auto Layout rules
 
@@ -68,10 +68,10 @@ Expose only properties that consumers should edit. Keep internal slot mechanics 
 
 Create variables before components. Bind fills, strokes, text colors, padding, gaps, dimensions, radii, opacity, and boolean visibility wherever Figma permits. `Color` roles must alias `Primitives`; component layers must not bind directly to `Primitives`.
 
-- Containers use `color/background/*`.
-- Text uses `color/text/*`.
-- Icons and vectors use `color/icon/*`.
-- Strokes use `color/border/*`.
+- Containers use `color/background/*` or the matching `color/status/*/background`.
+- Text uses `color/text/*` or the matching `color/status/*/text`.
+- Icons and vectors use `color/icon/*` or the matching `color/status/*/icon`.
+- Strokes use `color/border/*` or the matching `color/status/*/border`.
 - Components bind global semantic roles by default. Add `component/{name}/*` aliases only when the component-token criteria in [Design Tokens](../01-foundations/design-tokens.md) are met.
 
 Text uses Text Styles. Shadows use Effect Styles. Code syntax is set only after the production token names are known.
@@ -94,8 +94,8 @@ Variant presentation is part of component construction. A separate landing frame
 - Do not create a landing frame, placeholder frame, or documentation-only helper during the default component build.
 - Ask the item-specific documentation question only after metadata and screenshot validation pass.
 - If approved, derive the frame from the finished Figma component and its item specification; do not rely on a static specimen template.
-- Keep variant math, variables, bindings, metadata, contrast ratios, and validation results out of the designer-facing frame.
-- Show purpose, usage, actual variants and properties, do-and-don't examples, and concise accessibility status.
+- Show public names, dimensions, usage, anatomy, state behavior and relevant color pairings. Keep variant multiplication, private bindings, internal IDs and raw QA logs outside the guide.
+- Show purpose, usage, every public variant-axis value and property, dimension/specification rows, mode behavior, concrete do-and-don't examples and scoped accessibility status.
 - Convert the item recipe into an editorial guide; do not render the Markdown recipe table or recreate the full component-set matrix in Figma.
 - Give every displayed instance a visible label and a sentence explaining when or why a designer chooses it.
 - Documentation approval for one item does not authorize documentation for another item.
@@ -121,3 +121,7 @@ Variant presentation is part of component construction. A separate landing frame
 - Light and Dark modes are reviewed for the approved brand; additional branded themes are reviewed only when explicitly included in scope.
 - The published asset name, description, status, and owner are present.
 - Component completion does not depend on an optional documentation landing frame.
+
+## Documentation completeness gate
+
+Follow [Documentation Acceptance](documentation-acceptance.md) for every guide. Do not accept a Foundation with an incomplete reference or an approved component guide missing public options. Verify actual specimen bindings, visible text, names and resolved values per entry. A native variable description, text box containing a hex value, or generic example does not replace the required visual reference.

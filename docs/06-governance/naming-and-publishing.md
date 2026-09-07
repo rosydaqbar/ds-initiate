@@ -21,3 +21,9 @@ Variant properties use `Property=Value` with Title Case values, for example `Siz
 ## Status
 
 Use Draft, Beta, Stable, Deprecated. Deprecated items include a replacement and migration note.
+
+## Reference names and descriptions
+
+Use the same exact name in the specification, native variable/Style panel and visible guide. Display a familiar label alongside it, never instead of it. Define property, purpose and state consistently; avoid a second vocabulary such as `space/*` for `spacing/*` or `color/action/*` for action backgrounds already owned by `color/background/*`. The deliberate `color/status/{status}/{property}` family retains separate text, icon, border and background members.
+
+Every variable and Style has a concise description stating its meaning, use, applicable state and important restriction. Equal values do not justify empty descriptions or merging distinct roles. Values shown in guides resolve from the same current source. Reference naming changes require explicit migration of all affected bindings and documentation.
