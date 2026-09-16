@@ -22,7 +22,7 @@ These files define the Figma objects, construction measurements, bindings, behav
 
 ## Documents
 
-Open the [documentation index](docs/README.md) to browse the building-block specifications. Start with the [4px construction grid](docs/01-foundations/4px-grid.md) and [Figma construction standard](docs/06-governance/figma-construction-standard.md).
+Open the [documentation index](docs/README.md) to browse the building-block specifications. Start with the [4px construction grid](docs/01-foundations/4px-grid.md), [Figma construction standard](docs/06-governance/figma-construction-standard.md), and [Documentation Visual Language](docs/06-governance/documentation-visual-language.md).
 
 Agents maintaining these specifications must follow the repository [maintainer instructions](AGENTS.md). Downstream Figma execution requires a separate, explicit request and the applicable build documents.
 
@@ -35,7 +35,7 @@ The architecture is reusable, but its visual values are not predetermined. The [
 Copy this and replace the brackets:
 
 ```text
-Build a design system for [brand and product] in [Figma URL] using this repository. Start with Discovery: inspect the file, ask me up to 10 specific brand-style questions, summarize the approved direction and scope, then wait for my approval. After approval, build Foundations → Atoms → Molecules → Organisms using the 4px construction rule. Foundation documentation must include complete palette and semantic role references, every approved Style and shared value, resolved values in every mode, individual usage, bound examples, and the documentation acceptance checks. Component documentation is optional after component QA. Do not introduce Templates or Pages as Atomic Design levels, product screens, or product-surface categories.
+Build a design system for [brand and product] in [Figma URL] using this repository. Start with Discovery: inspect the file, ask me up to 10 specific brand-style questions, summarize the approved direction and scope, then wait for my approval. After approval, build Foundations → Atoms → Molecules → Organisms using the 4px construction rule. Foundation documentation is mandatory and must follow the repository Documentation Visual Language: inspect any supplied Figma reference and the target file's existing approved guides, extract the information pattern rather than copying the reference literally, and choose the documentation structure that matches the actual content. Semantic variables should use hierarchical mode tables when appropriate; primitive palettes should use swatch families; dimensions should use measured diagrams; visual assets should use focused specimen rows. Screenshot-QA the result for hierarchy, grouping, alignment, legibility, and brand consistency. Component documentation is optional after component QA. Do not introduce Templates or Pages as Atomic Design levels, product screens, or product-surface categories.
 ```
 
 Short follow-up prompts:
@@ -56,7 +56,9 @@ Continue the existing build. Inspect the current Figma state first and resume fr
 
 The first implementation lives in one Figma file. It uses Atomic Design levels without product-surface library divisions. [Foundation documentation](docs/06-governance/foundation-documentation.md) is built and validated immediately with each Foundation item, without a separate opt-in question. Individual Atom, Molecule, and Organism documentation frames remain optional: finish and validate the component, ask the user, and build the adaptive frame only after approval.
 
-Figma documentation is written for designers as a readable guide: a clear header and overview lead into focused, annotated examples, permutations, and do-and-don't guidance. Every displayed specimen includes its familiar name, resolved designer-facing value, and explanation. Complete, grouped references are mandatory for every approved color, token, Style, shared size and asset treatment. Show exact searchable names, individual usage, resolved values, bound samples and all mode values; a few representative examples cannot replace the reference. Keep IDs, raw API/alias dumps and validation logs internal.
+Designer-facing Figma documentation uses one shared visual grammar without forcing one body layout onto every topic. Reuse the approved documentation chrome, section rhythm, typography hierarchy, dividers, value pills, and spacing language already present in the target file. Then choose the body structure from the information: semantic tables for semantic lookup, swatch families for raw palettes, measured diagrams for dimensions, specimen rows for visual systems, and prose/comparisons for behavioral guidance. External references are structural evidence only and must not override the current project's brand, naming, typography, token model, or scope.
+
+Every displayed choice remains traceable to its familiar/searchable name, resolved designer-facing value, supported mode behavior, bound or measured specimen, and usage guidance. Keep IDs, raw API/alias dumps and validation logs internal.
 
 ## Definition of success
 
@@ -64,4 +66,4 @@ The eventual Figma library will be successful when it is identified as the appro
 
 ## Documentation acceptance
 
-Use [Documentation Acceptance](docs/06-governance/documentation-acceptance.md) to compare approved, implemented and documented names and values. A guide is incomplete if any required entry, sample, mode or section is missing. Run `node scripts/validate-documentation.mjs` after maintaining the specs. This checks repository contracts; Figma content and appearance require separate inspection during an authorized build.
+Use [Documentation Acceptance](docs/06-governance/documentation-acceptance.md) to compare approved, implemented and documented names and values. A guide is incomplete if any required entry, sample, mode or section is missing, or if its screenshot is structurally unclear despite technical completeness. Run `node scripts/validate-documentation.mjs` after maintaining the specs. This checks repository contracts; Figma content and appearance require separate inspection during an authorized build.
