@@ -2,178 +2,159 @@
 
 Every Foundation item includes a designer-facing Figma guide in the same build. Its values, Styles, assets, or rules and its guide must both pass review before the item is complete. Component guides retain their separate opt-in rule.
 
-Read [Documentation Visual Language](documentation-visual-language.md) before creating or revising any designer-facing guide. That file defines the canonical visual grammar and the rule for adapting external references without copying them literally.
+Before building or revising a guide, read:
+
+1. [Project Data Boundary](project-data-boundary.md)
+2. [Documentation Construction Contract](documentation-visual-language.md)
+3. [Documentation Acceptance](documentation-acceptance.md)
+4. The owning Foundation specification
+
+The construction contract is normative. Do not improvise a different shell, width, page placement, table anatomy, or specimen layout because another reference looks attractive.
 
 ## Documentation outcome
 
-A complete guide provides an introduction, a complete reference for the approved scope, and applied guidance. Designers must be able to find a specific choice, read its specification, and understand when to use it without opening the variables panel or this repository.
+A complete guide lets a designer find a specific approved choice, read its resolved specification, understand its purpose, and see the correct bound/measured specimen without opening this repository.
 
-Every implemented color, token, Text Style, Effect Style, shared size, and asset treatment must have a visible reference entry. Every approved rule must have visible guidance. A reference entry contains:
+Every implemented color, token, Text Style, Effect Style, shared size, and reusable asset treatment in approved scope requires a visible reference entry. Every approved behavioral rule requires visible guidance.
 
-- A familiar name and the exact searchable token, Style, or asset name when needed.
-- The actual resolved value and unit; all supported mode values where applicable.
-- A concise, specific purpose and usage sentence.
-- An actual bound specimen, connected instance, or measured diagram.
-- Applicable state, permitted pairing, restriction, or alternative.
+A reference entry contains:
 
-A family description does not replace the specification of its individual values. A guide documenting only a few selected values is incomplete. Keep individual entries concise and split long references into meaningful sections or continuation frames when necessary.
+- familiar designer-facing name;
+- exact searchable token, Style, or asset name when applicable;
+- actual resolved value and unit;
+- all supported mode values when applicable;
+- concise row-specific purpose and usage;
+- actual bound specimen, connected instance, or measured diagram;
+- applicable restriction, pairing, state, or alternative when needed.
+
+A family description does not replace individual entries. A small selection of examples does not replace complete approved reference coverage.
 
 ## Public reference and internal evidence
 
-These are required designer-facing information:
+Required designer-facing information:
 
-- Complete palette ramps with every approved shade, base color, and alpha value.
-- Semantic token references grouped by property and purpose, including each role's usage and Light/Dark values when those modes exist.
-- Exact searchable names and the resolved source name, such as `brand-600`, alongside the applied specimen.
-- Full typography, spacing, sizing, radius, border, elevation, and motion references.
-- Public component properties, dimensions, state behavior, and usage restrictions when documenting a component.
-- Named foreground/background pairings and measured contrast results when they help select a valid combination.
+- complete approved palette ramps, base colors, and alpha values;
+- complete semantic roles with every supported mode resolution;
+- every implemented Text Style and its usable metrics;
+- every shared spacing, size, radius, border, layout, elevation, and motion role;
+- every approved icon and reusable asset treatment in scope;
+- concrete usage and misuse guidance;
+- pair-specific contrast results only when actually tested and useful for a designer decision.
 
-These remain internal: node and variable IDs, scopes, serialized bindings, alias traversal logs, raw API responses, test logs, and screenshot evidence.
+Keep internal:
 
-Do not reproduce external systems' names, logos, proprietary wording, token catalogs, or branding. Write original guidance using this repository's conventions and the approved project's identity.
+- node IDs and variable IDs;
+- alias traversal logs;
+- scopes and serialized bindings;
+- raw API responses;
+- screenshot evidence;
+- validation logs;
+- variant calculations and build ledgers.
+
+Do not reproduce another design system's brand, names, proprietary wording, palette, or asset catalog.
 
 ## Coverage by Foundation
 
-| Foundation | Complete reference required | Applied guidance required |
+| Foundation | Complete reference required | Canonical documentation pattern |
 | --- | --- | --- |
-| Color | Every approved palette shade/base/alpha value and every semantic role; exact name, purpose, usage, source, and mode resolution | Pairings, interaction states, feedback, overlays, selection and focus where relevant |
-| Typography | Every implemented Text Style; family, available weight, size, line height, letter spacing, casing, intended use, responsive changes | Real samples, hierarchy, wrapping, emphasis, numbers and approved scripts |
-| Spacing and sizing | Every spacing and shared control/icon/target size; exact name, pixels, purpose | True-size gap/inset/dimension measurements, including zero and invisible target bounds |
-| Radius and borders | Every radius and stroke-width role; values, purposes, applicable border colors | Bound corners and strokes, nested corners, focus, validation, dashed treatment when approved |
-| Elevation | Every Effect Style and every layer of each effect; offsets, blur, spread, color, alpha and mode behavior | Surface hierarchy, paired surface roles, border fallback and focus separation |
-| Grid and layout | Every breakpoint, column/margin/gutter/container token and behavior; actual dimensions and ranges | True-size grids, reflow, stacking, collapse, scroll and replacement |
-| Motion | Every duration and easing role; exact timing, curve, animated property, trigger and reduced-motion replacement | Before/after states and working prototype demonstrations |
-| Iconography | Every approved icon with exact name, meaning and usage; every supported treatment and size | Safe area, alignment, surfaces and accessible-label rules |
-| Logos | Every approved lockup and appearance, minimum dimensions, clear space and background permission | Connected artwork, measured exclusions and permitted/forbidden background combinations |
-| Illustration and imagery | Every approved treatment and ratio, dimensions, crop, source rights and accessibility requirements | Approved media, focal points and missing-media behavior |
-| Accessibility | Every approved design requirement with its value/behavior, reason and verification boundary | Target bounds, focus, contrast pairings, text expansion, keyboard order, status and motion |
-| Content | Every approved writing/formatting rule with specific correct and incorrect examples | Labels, help, errors, all empty-state meanings, notifications, locale and wrapping |
-| Design tokens | Every collection's purpose and naming grammar, with links to the owning complete references | Traceable primitive → semantic role → consumer example, mode behavior and token selection |
+| Design Tokens | Collection purposes, naming grammar, mode behavior, primitive → semantic → consumer traceability | `P5 — Guidance and traceability` |
+| Colors | Every approved primitive/source value, base value, and alpha value | `P1 — Palette families` |
+| Color variables | Every approved semantic role and every supported mode resolution | `P2 — Semantic variable table` |
+| Typography | Every implemented Text Style and approved typeface/weight capability | `P3 — Specimen rows` |
+| 4px Grid | Construction rule, exceptions, and measured examples | `P4 — Measured diagrams` |
+| Spacing | Every spacing token and zero behavior | `P4 — Measured diagrams` |
+| Grid and Layout | Every breakpoint, margin, gutter, column, container, and reflow rule | `P4 — Measured diagrams` |
+| Radius | Every radius role | `P4 — Measured diagrams` |
+| Borders | Every stroke/focus-width role and approved treatment | `P4 — Measured diagrams` |
+| Elevation | Every Effect Style and every effect layer | `P3 — Specimen rows` |
+| Iconography | Every approved icon and supported treatment/size | `P3 — Specimen rows` |
+| Illustration and Imagery | Every approved reusable treatment and ratio | `P3 — Specimen rows` |
+| Motion | Every duration/easing role, trigger, animated property, and reduced-motion replacement | `P3 — Specimen rows` plus prototypes |
+| Accessibility | Every approved design requirement and verification boundary | `P5 — Guidance and comparisons` |
+| Content | Every approved writing/formatting rule with correct/incorrect examples | `P5 — Guidance and comparisons` |
 
-Content collections may contain an unlimited number of runtime images or arbitrary user text. Cover every reusable treatment and rule plus approved reference assets; do not attempt to catalog future content.
+This mapping is fixed. Do not choose another body pattern for variety.
 
-## Structure is chosen by the information
+## Canonical shell and canvas placement
 
-Do not force every Foundation into the same table, card grid, or article template.
+All Foundation guides use the exact root width, header shell, body padding, section rhythm, footer, canvas order, and `200px` horizontal frame spacing defined in [Documentation Construction Contract](documentation-visual-language.md).
 
-Use the information pattern that best matches the Foundation:
+Do not restate alternative geometry inside an item file. If an item recipe conflicts with the construction contract, the construction contract wins unless the user explicitly approves a repository-level change.
 
-- Semantic variables with mode comparison → hierarchical reference table.
-- Primitive color ramps → horizontal swatch families.
-- Spacing, sizing, radius, borders, grids → measured rows or diagrams.
-- Typography, iconography, elevation, imagery, motion → specimen rows or focused visual examples.
-- Accessibility and content rules → prose, comparisons, and applied examples.
-
-The recurring visual language comes from [Documentation Visual Language](documentation-visual-language.md): restrained chrome, clear section hierarchy, consistent typography, compact value pills, subtle dividers, stable alignment, and usage attached to the value it explains.
-
-## Recommended guide anatomy
-
-The exact body changes by Foundation, but the guide should normally contain:
-
-```text
-Documentation / {Foundation}
-  Page header
-    Context / breadcrumb
-    {Foundation title}
-    Short definition
-    Optional compact system metadata
-  Section / {Reference group}
-    Section heading
-      {Group title}
-      Optional type badge such as Variables, Styles, Assets, or Guidance
-    Concise explanation
-    {Reference structure appropriate to this information}
-  Section / {Applied decision}
-    Specimen / diagram / comparison
-    Explanation
-  Do and don't, when the Foundation has misuse patterns worth showing
-  Accessibility scope or verification boundary, when relevant
-  Quiet footer / system context, when used elsewhere in the approved file
-```
-
-Do not add a section simply because another design system has it. Do not omit a required section simply because the external reference lacks it.
-
-## Semantic-variable table pattern
-
-When a Foundation contains semantic variables with multiple modes, the preferred reference structure is:
-
-`Name | Light mode | Dark mode | Usage`
-
-Adapt the mode columns to the actual approved modes.
-
-Each row shows:
-
-- the semantic role name;
-- its resolved primitive source in each mode as a compact swatch pill;
-- one concise usage sentence.
-
-Use indentation and a subtle connector line only when a real parent/child relationship exists, for example:
-
-- `default` with `hover`, `pressed`, and `disabled` children;
-- a status family with `background`, `text`, `icon`, and `border` children;
-- another explicitly defined state family.
-
-Do not manufacture hierarchy for visual similarity.
-
-## Primitive-scale pattern
-
-When documenting a raw palette or comparable scale:
-
-- show the complete approved sequence;
-- use compact swatch cards or measured samples;
-- show the familiar step/name and resolved value;
-- identify an approved anchor/default when one exists;
-- keep the family description separate from per-value labels;
-- do not imply that primitives are component-facing permissions.
-
-## Page width and construction
-
-There is no single mandatory documentation-frame width.
-
-Use a 4px-aligned width appropriate to the information:
-
-- `1600px` is a strong default for prose-heavy or specimen-focused guides.
-- Wide references may use `2528px`, `2848px`, or another 4px-aligned width when token names, multiple mode columns, or complete ramps need more space.
-- Do not shrink text or crush columns to preserve a predetermined width.
-- Reposition neighboring top-level frames after a width change so no documentation frames overlap.
-
-All structural padding, gaps, row heights, measurements, and placement still follow the 4px construction rule except documented rendering details.
+When a guide exceeds a reasonable canvas height, create a continuation frame using the same canonical width and shell. Do not compress the guide, shrink text, change its assigned root width, or omit approved entries.
 
 ## Values and bindings
 
-- Read values and names from the implemented variables, Styles and assets. Populate visible labels and native descriptions from the same resolved record.
-- A visible hex label is insufficient without a swatch or applied color sample bound to that specific role.
-- Set modes explicitly on Light and Dark sample containers. Derive labels under the same effective modes, including cross-collection aliases and alpha.
-- Show RGB hex and alpha separately for translucent values and name the compositing surface when relevant.
-- Text samples use their actual Text Style. Spacing bars measure their token value; zero is labeled without inventing a visible bar.
-- Use connected assets without detaching. Documentation chrome uses approved Text Styles and semantic roles where possible.
-- Never resolve placeholders from memory. Missing approved inputs remain explicit blockers for the affected item.
+- Read implemented values and names from Figma after the underlying Foundation exists.
+- Populate visible labels and native descriptions from the same resolved record.
+- Bind each specimen to the value it claims to demonstrate.
+- A hex or numeric label without an actual bound/measured specimen is incomplete.
+- Set appearance mode explicitly on mode-dependent sample containers.
+- Resolve cross-collection aliases and alpha internally; show designer-facing resolved source names, never raw alias IDs.
+- Text samples use their actual Text Style.
+- Spacing, size, radius, border, and layout specimens measure the actual value at true size.
+- Effect specimens use the actual Effect Style.
+- Connected assets remain connected.
+- Missing project-sensitive input is a blocker under [Project Data Boundary](project-data-boundary.md); never borrow another project's value.
+
+## Reference-specific requirements
+
+### Colors
+
+Use `P1 — Palette families`. The family sequence comes from the approved project palette. Do not assume brand, neutral, red, green, or yellow families exist unless they are approved for that project.
+
+### Color variables
+
+Use `P2 — Semantic variable table`. The semantic-group order comes from the owning Color specification. Parent/child connectors appear only for relationships explicitly declared in the specification.
+
+### Typography, effects, assets, motion
+
+Use `P3 — Specimen rows`. Each displayed specimen uses the actual project object, not a redrawn stand-in.
+
+### Dimensions and layout
+
+Use `P4 — Measured diagrams`. Measurements render at true size and use the project's actual values.
+
+### Design Tokens, Accessibility, Content
+
+Use `P5 — Guidance and comparisons`. Do not convert these into a dashboard of equal cards or a long implementation dump.
 
 ## Reference adaptation
 
-If the user supplies a reference Figma file or screenshot, inspect it before building.
+If the user supplies a reference, inspect it to understand the information problem, then select the already-defined canonical pattern. Do not copy its arbitrary frame width, card style, font, token names, copy, or palette.
 
-The goal is to understand its information architecture and visual grammar, not to clone it. Reuse aligned patterns such as section hierarchy, table relationships, swatch treatment, spacing rhythm, and density. Preserve the current project's own typography, colors, token structure, language, and asset style.
+A reference does not authorize new repository geometry. If the current canonical patterns genuinely cannot represent the approved information, stop and request approval to extend the reusable contract.
 
-When an approved guide already exists in the target Figma file, its established documentation pattern outranks a generic external reference. New guides should extend that language rather than redesign it independently.
+## Build sequence
 
-## Build sequence and acceptance
+1. Read approved Discovery and project inputs.
+2. Read the four documents listed at the top of this file.
+3. Determine the Foundation's canonical pattern from the fixed mapping.
+4. Record the expected approved inventory before implementation.
+5. Build or repair the underlying Foundation.
+6. Reconcile approved versus implemented values.
+7. Build the guide using the exact canonical shell and assigned pattern.
+8. Reconcile approved versus implemented versus documented entries.
+9. Screenshot-review the whole hierarchy and the first/last reference rows.
+10. Fix any contract, binding, content, clipping, or brand-leak failure before marking complete.
 
-1. Read the approved brief, item specification, [Documentation Visual Language](documentation-visual-language.md), and dependencies.
-2. If the user supplied a reference, inspect its design context and at least one readable screenshot before authoring the guide.
-3. Inspect existing approved documentation in the target Figma file and record the established chrome, hierarchy, row styling, pill styling, divider treatment, and spacing rhythm.
-4. Record expected names, modes, values and required sections using [Documentation Acceptance](documentation-acceptance.md).
-5. Build or repair the underlying Foundation. Check naming, values, modes, aliases and native descriptions.
-6. Build the complete reference using a structure derived from the current Foundation, not copied mechanically from the reference.
-7. Compare the expected set, implemented set and visibly documented set. Missing, duplicated, stale or unsupported entries fail.
-8. Inspect screenshots of every reference group and application at readable scale, including first and last rows.
-9. Fix structural randomness, clipping, weak hierarchy, incorrect relationships, or brand drift before accepting the guide.
+## Acceptance failures
 
-Documentation fails if any required entry, field, mode, section or visual example is missing. It also fails when all data is technically present but the screenshot reads as an arbitrary wall of rows with no clear grouping or hierarchy.
+A Foundation guide is incomplete when any of these occur:
+
+- an approved value, role, Style, asset, or rule is missing;
+- the visible value differs from the implemented value;
+- a specimen is unbound, stale, reused incorrectly, detached, or not true-size where measurement matters;
+- usage text is generic or duplicated across distinct entries;
+- the wrong canonical pattern is used;
+- root width, header shell, body rhythm, table anatomy, or canvas placement differs from the construction contract;
+- another project's brand name, palette, font, copy, or token mapping appears as a default;
+- a reference is copied literally instead of being represented through the repository contract;
+- text clips, rows overlap, mode labels are wrong, or hierarchy is structurally ambiguous;
+- screenshot QA was not actually performed.
 
 ## Accessibility status
 
-Use a scoped statement such as `Design checks completed: text contrast and target geometry; keyboard and assistive-technology checks pending in implementation.` Name only checks actually performed. Record unresolved requirements explicitly.
+Use scoped evidence statements only. A design specimen can establish visual checks such as a named contrast pairing or target geometry, but it cannot prove production keyboard, screen-reader, or whole-product conformance.
 
-A Figma specimen cannot establish production keyboard behavior, screen-reader semantics or whole-product WCAG conformance. Do not print a blanket WCAG checked badge from design-only evidence. Pair-specific contrast labels are permitted with the tested foreground, background, mode and use class. See [Accessibility](../01-foundations/accessibility.md).
+Name completed design checks and remaining implementation checks separately. See [Accessibility](../01-foundations/accessibility.md).
