@@ -1,44 +1,85 @@
 # Figma Design System Build Specifications
 
-This repository contains executable Figma construction specifications for a reusable design-system framework organized with Atomic Design.
+This repository is a reusable, brand-agnostic design-system generation framework organized with Atomic Design.
 
-These files define the Figma objects, construction measurements, bindings, behavior, QA, and adaptive documentation recipes. Foundation documentation is mandatory in the same Figma build; Atom, Molecule, and Organism landing frames are optional. These specifications do not yet modify the Figma file. Once discovery is approved, the implementation becomes the named brand's design system and must not retain generic brand placeholders.
+It standardizes **how** a design system is discovered, specified, constructed, documented, and validated. It does not define the identity or visual values of the project being generated.
 
-## Direction locked for v1
+Foundation documentation is mandatory in the same Figma build. Atom, Molecule, and Organism documentation is optional after component QA and explicit approval.
 
-- Follow the building-block levels currently in scope: foundations, atoms, molecules, and organisms.
-- Place those items in neutral Figma sections: Foundations, Base Components, Components, Shared Assets, and Utility.
-- Use private base components for implementation details and publish only useful product-facing components.
-- Use a clear token architecture: primitives → globally reusable semantic roles → optional component-specific aliases.
-- Keep approved brand colors in `Primitives`; express reusable UI purposes through `Color`.
-- Create component-specific tokens only when a real component needs an independent, stable contract.
-- Resolve colors, typefaces, shape character, and identity assets to the approved brand during implementation.
-- Support Light and Dark semantic color modes from the start.
-- Add multiple branded themes only when they are explicitly included in the approved project scope.
-- Keep examples and business-specific content out of component variant sets.
-- Prefer composition, boolean properties, text properties, and instance swaps over large variant matrices.
-- Build every structural measurement on the mandatory 4px construction grid.
-- Keep every public component set at 30 variants or fewer; split by primary visual style when needed.
+## What the repository owns
+
+The reusable framework owns:
+
+- Discovery workflow and approval gates.
+- Foundations → Atoms → Molecules → Organisms build order.
+- Neutral Figma library organization.
+- Primitive → semantic → optional component-token architecture.
+- 4px structural construction rule.
+- Component object-selection rules and `≤30` public-variant limit.
+- Auto Layout/property/binding construction rules.
+- Deterministic Foundation-documentation page order, frame widths, shell geometry, body-pattern mapping, table anatomy, canvas placement, and QA.
+- Release and validation procedure.
+
+## What each project owns
+
+Project-specific values come from approved Discovery or explicitly supplied production inputs:
+
+- brand/product identity;
+- colors and palette values;
+- typefaces and licensed weights;
+- radius, density, shadow, and motion character;
+- logos, icons, imagery, and illustration treatment;
+- appearance modes;
+- accessibility/language/content requirements;
+- first-release component scope;
+- product-specific behavior and copy.
+
+An example project is never a reusable default. See [Project Data Boundary](docs/06-governance/project-data-boundary.md).
+
+## Determinism goal
+
+For the same repository revision and the same approved project input, independent runs must make the same framework decisions and produce the same documentation structure and construction geometry.
+
+Brand-sensitive output may differ only when project input differs.
+
+The canonical designer-documentation structure is defined in [Documentation Construction Contract](docs/06-governance/documentation-visual-language.md). It fixes page order, root widths, header/footer construction, typography scale, pattern selection, semantic table geometry, palette swatches, measured/specimen layouts, and canvas spacing.
 
 ## Documents
 
-Open the [documentation index](docs/README.md) to browse the building-block specifications. Start with the [4px construction grid](docs/01-foundations/4px-grid.md), [Figma construction standard](docs/06-governance/figma-construction-standard.md), and [Documentation Visual Language](docs/06-governance/documentation-visual-language.md).
+Start with:
 
-Agents maintaining these specifications must follow the repository [maintainer instructions](AGENTS.md). Downstream Figma execution requires a separate, explicit request and the applicable build documents.
+- [Documentation index](docs/README.md)
+- [Brand style questionnaire](docs/00-discovery/brand-style-questionnaire.md)
+- [Project Data Boundary](docs/06-governance/project-data-boundary.md)
+- [4px construction grid](docs/01-foundations/4px-grid.md)
+- [Figma construction standard](docs/06-governance/figma-construction-standard.md)
+- [Documentation Construction Contract](docs/06-governance/documentation-visual-language.md)
+- [Mandatory Foundation Documentation](docs/06-governance/foundation-documentation.md)
+- [Documentation Acceptance](docs/06-governance/documentation-acceptance.md)
+
+Agents maintaining these specifications must follow [AGENTS.md](AGENTS.md).
 
 ## Before implementation
 
-The architecture is reusable, but its visual values are not predetermined. The [brand style questionnaire](docs/00-discovery/brand-style-questionnaire.md) must be completed and approved before colors, typography, shape, imagery, motion character, or brand-specific assets are created.
+Complete and approve Discovery before creating project-sensitive visual values.
+
+If a required brand-sensitive value is missing, ask for it or propose it for explicit approval. Never reuse another project's value as a fallback.
 
 ## Start prompt
 
-Copy this and replace the brackets:
-
 ```text
-Build a design system for [brand and product] in [Figma URL] using this repository. Start with Discovery: inspect the file, ask me up to 10 specific brand-style questions, summarize the approved direction and scope, then wait for my approval. After approval, build Foundations → Atoms → Molecules → Organisms using the 4px construction rule. Foundation documentation is mandatory and must follow the repository Documentation Visual Language: inspect any supplied Figma reference and the target file's existing approved guides, extract the information pattern rather than copying the reference literally, and choose the documentation structure that matches the actual content. Semantic variables should use hierarchical mode tables when appropriate; primitive palettes should use swatch families; dimensions should use measured diagrams; visual assets should use focused specimen rows. Screenshot-QA the result for hierarchy, grouping, alignment, legibility, and brand consistency. Component documentation is optional after component QA. Do not introduce Templates or Pages as Atomic Design levels, product screens, or product-surface categories.
+Build a design system for [brand and product] in [Figma URL] using this repository.
+
+Start with Discovery: inspect the target file, ask me up to 10 specific brand-style questions, summarize the resolved project direction and first-release scope, list unresolved project-sensitive values, then wait for approval.
+
+After approval, build Foundations → Atoms → Molecules → Organisms using the mandatory 4px construction rule.
+
+Foundation documentation is mandatory. Follow docs/06-governance/documentation-visual-language.md exactly for page order, assigned root widths, canonical header/footer shell, body pattern, semantic-table geometry, specimen/measured layouts, canvas placement, and screenshot QA. Populate that fixed construction only with the current project's approved brand values, typography, tokens, assets, and copy. Do not inherit brand values from any example project or external reference.
+
+Component documentation is optional after component QA. Do not introduce Templates or Pages as Atomic Design levels, product screens, or product-surface categories.
 ```
 
-Short follow-up prompts:
+Short follow-ups:
 
 ```text
 Discovery approved. Build these Foundations only: [list].
@@ -49,21 +90,38 @@ Build [component] as an [Atom, Molecule, or Organism] using [specification path]
 ```
 
 ```text
-Continue the existing build. Inspect the current Figma state first and resume from the first incomplete validated step.
+Continue the existing build. Inspect the target Figma state first and resume from the first incomplete validated step. Use the repository's canonical documentation construction; do not reinterpret the layout from scratch.
 ```
 
 ## Figma file boundary
 
-The first implementation lives in one Figma file. It uses Atomic Design levels without product-surface library divisions. [Foundation documentation](docs/06-governance/foundation-documentation.md) is built and validated immediately with each Foundation item, without a separate opt-in question. Individual Atom, Molecule, and Organism documentation frames remain optional: finish and validate the component, ask the user, and build the adaptive frame only after approval.
+A generated project uses one target Figma file unless the user explicitly changes the architecture.
 
-Designer-facing Figma documentation uses one shared visual grammar without forcing one body layout onto every topic. Reuse the approved documentation chrome, section rhythm, typography hierarchy, dividers, value pills, and spacing language already present in the target file. Then choose the body structure from the information: semantic tables for semantic lookup, swatch families for raw palettes, measured diagrams for dimensions, specimen rows for visual systems, and prose/comparisons for behavioral guidance. External references are structural evidence only and must not override the current project's brand, naming, typography, token model, or scope.
+Atomic Design is the build/composition structure. Product-surface categories do not become library levels.
 
-Every displayed choice remains traceable to its familiar/searchable name, resolved designer-facing value, supported mode behavior, bound or measured specimen, and usage guidance. Keep IDs, raw API/alias dumps and validation logs internal.
+Foundation documentation is built and validated immediately with its Foundation. Optional component guides are created only after the finished component passes QA and the user explicitly approves the guide.
 
 ## Definition of success
 
-The eventual Figma library will be successful when it is identified as the approved brand's design system, every built Foundation has validated Figma documentation, and every public component has a complete Markdown construction specification, bounded properties, semantic token bindings, responsive behavior where relevant, and accessibility requirements. Approved component landing frames must use connected instances and represent the finished component accurately. No public component should depend on detached copies, hard-coded brand values, generic brand placeholders, or brand-specific component variants.
+A successful generated library:
 
-## Documentation acceptance
+- reflects the current project's approved identity rather than an example project;
+- follows the repository's deterministic construction rules;
+- has complete mandatory Foundation documentation;
+- uses semantic variables and approved Styles rather than hard-coded component values;
+- contains bounded, reusable public component APIs;
+- preserves the 4px structural system;
+- passes the documented metadata, structural, screenshot, and coverage checks.
 
-Use [Documentation Acceptance](docs/06-governance/documentation-acceptance.md) to compare approved, implemented and documented names and values. A guide is incomplete if any required entry, sample, mode or section is missing, or if its screenshot is structurally unclear despite technical completeness. Run `node scripts/validate-documentation.mjs` after maintaining the specs. This checks repository contracts; Figma content and appearance require separate inspection during an authorized build.
+## Validation
+
+Use [Documentation Acceptance](docs/06-governance/documentation-acceptance.md) to reconcile approved, implemented, and documented values.
+
+Run:
+
+```sh
+node scripts/validate-documentation.mjs
+node --test scripts/validate-documentation.test.mjs
+```
+
+Static validation checks repository contracts. Figma content and screenshot quality still require direct inspection during an authorized build.
