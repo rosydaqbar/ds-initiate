@@ -31,6 +31,7 @@ export function validateCoverage(data) {
   if (!record(data)) return ['Coverage must be a JSON object.'];
   if (!nonempty(data.guide)) errors.push('guide is required.');
   if (!nonempty(data.approvedSource)) errors.push('approvedSource is required; expected scope must precede implementation.');
+
   const inventory = key => {
     const result = new Map();
     if (!Array.isArray(data[key]) || data[key].length === 0) {
@@ -44,15 +45,19 @@ export function validateCoverage(data) {
     }
     return result;
   };
+
   const approved = inventory('approved');
   const implemented = inventory('implemented');
   const documented = inventory('documented');
+
   for (const [label, entries] of [['implemented', implemented], ['documented', documented]]) {
     for (const name of entries.keys()) if (!approved.has(name)) errors.push(`${label}: unexpected ${name}.`);
     for (const name of approved.keys()) if (!entries.has(name)) errors.push(`${label}: missing ${name}.`);
   }
+
   const samplesSeen = new Set();
   const rowsSeen = new Set();
+
   for (const [name, expected] of approved) {
     if (!record(expected.values) || Object.keys(expected.values).length === 0) {
       errors.push(`approved: ${name} needs resolved values by mode.`);
@@ -61,22 +66,28 @@ export function validateCoverage(data) {
     if (!Object.entries(expected.values).every(([mode, value]) => nonempty(mode) && resolved(value))) {
       errors.push(`approved: ${name} has an empty mode or unresolved value.`);
     }
+
     const built = implemented.get(name);
     const shown = documented.get(name);
+
     if (built && (!nonempty(built.description) || !nonempty(built.nodeId))) errors.push(`implemented: ${name} needs identity and description.`);
     if (shown && (!nonempty(shown.usage) || !nonempty(shown.rowNodeId))) errors.push(`documented: ${name} needs visible row identity and individual usage.`);
+
     if (shown && nonempty(shown.rowNodeId)) {
       if (rowsSeen.has(shown.rowNodeId)) errors.push(`documented: reused row ${shown.rowNodeId}.`);
       rowsSeen.add(shown.rowNodeId);
     }
+
     for (const [label, item] of [['implemented', built], ['documented', shown]]) {
       if (!item) continue;
       if (canonical(item.values) !== canonical(expected.values)) errors.push(`${label}: ${name} values or modes differ from approved scope.`);
     }
+
     if (!shown) continue;
     if (!record(shown.samples) || canonical(Object.keys(shown.samples).sort()) !== canonical(Object.keys(expected.values).sort())) {
       errors.push(`documented: ${name} specimen modes differ from approved scope.`);
     }
+
     for (const [mode, value] of Object.entries(expected.values)) {
       const sample = record(shown.samples) ? shown.samples[mode] : undefined;
       if (!record(sample) || !nonempty(sample.nodeId)) { errors.push(`documented: ${name}/${mode} is missing a specimen.`); continue; }
@@ -86,6 +97,7 @@ export function validateCoverage(data) {
       if (canonical(sample.value) !== canonical(value)) errors.push(`documented: ${name}/${mode} specimen value is stale.`);
     }
   }
+
   if (!Array.isArray(data.requiredSections) || data.requiredSections.length === 0 || data.requiredSections.some(x => !nonempty(x))) {
     errors.push('requiredSections must list the canonical required sections.');
   } else {
@@ -102,6 +114,7 @@ export function validateCoverage(data) {
       }
     }
   }
+
   return errors;
 }
 
@@ -118,20 +131,44 @@ export async function validateRepository(directory = root) {
   const errors = [];
   const files = await markdownFiles(directory);
   const contents = new Map();
+
   const obsoleteRules = [
-    /select exactly three steps/i,
-    /six representative type examples/i,
-    /do not create a role inventory table/i,
-    /complete (?:scale|Radius collection).*stays in Figma/i,
-    /✓ WCAG 2\.2 AA checked/,
-    /irrelevant sections and unbuilt options are omitted/i,
-    /Anatomy diagrams.*unless the user explicitly requests/i
+    /choose what looks best/i,
+    /use an appropriate width/i,
+    /adapt freely/i,
+    /root width is content-driven/i,
+    /recommended root width/i,
+    /reuse .* where appropriate/i,
+    /✓ WCAG 2\.2 AA checked/
   ];
+
+  const knownExampleLeakage = [
+    { pattern: /\bGokGok\b/i, label: 'example brand name' },
+    { pattern: /#0066FF/i, label: 'example brand hex' },
+    { pattern: /\bGeist(?: Mono)?\b/i, label: 'example project typeface' },
+    { pattern: /f3mBCrYbPWMqophBUjmdsF/i, label: 'example target Figma identity' }
+  ];
+
+  const leakageExempt = new Set([
+    'scripts/validate-documentation.mjs',
+    'scripts/validate-documentation.test.mjs'
+  ]);
+
   for (const file of files) {
     const relative = path.relative(directory, file).replaceAll('\\', '/');
     const source = await readFile(file, 'utf8');
     contents.set(relative, source);
-    for (const rule of obsoleteRules) if (rule.test(source)) errors.push(`${relative}: obsolete omission or unscoped conformance rule ${rule}.`);
+
+    for (const rule of obsoleteRules) {
+      if (rule.test(source)) errors.push(`${relative}: nondeterministic or obsolete construction wording ${rule}.`);
+    }
+
+    if (!leakageExempt.has(relative)) {
+      for (const leak of knownExampleLeakage) {
+        if (leak.pattern.test(source)) errors.push(`${relative}: reusable repository contains ${leak.label}.`);
+      }
+    }
+
     const prose = withoutFences(source);
     for (const link of prose.matchAll(/!?\[[^\]\n]*\]\(([^)\n]+)\)/g)) {
       const target = link[1].trim().replace(/^<|>$/g, '');
@@ -141,44 +178,94 @@ export async function validateRepository(directory = root) {
       try { await access(path.resolve(path.dirname(file), decodeURIComponent(destination))); }
       catch { errors.push(`${relative}: missing local link ${target}.`); }
     }
+
     if (/^docs\/01-foundations\/(?!README\.md$)[^/]+\.md$/.test(relative) && !source.includes('## Mandatory Figma documentation')) {
       errors.push(`${relative}: missing mandatory documentation recipe.`);
     }
   }
+
   const requirements = {
+    'docs/06-governance/project-data-boundary.md': [
+      '## Non-negotiable boundary',
+      '## Deterministic generation rule',
+      '## Pre-commit brand-agnostic audit'
+    ],
     'docs/06-governance/documentation-visual-language.md': [
-      '## Core rule',
-      '## Documentation grammar',
-      '## Choose the structure from the information',
-      '## Semantic-variable table pattern',
+      '## Canonical page order and placement',
+      '## Canonical frame-width decision table',
+      '## Canonical documentation chrome',
+      '## Canonical pattern selection',
+      '## P1 — Palette families',
+      '## P2 — Semantic variable table',
+      '## P3 — Specimen rows',
+      '## P4 — Measured diagrams',
+      '## P5 — Guidance and comparisons',
       '## Screenshot QA'
     ],
     'docs/06-governance/foundation-documentation.md': [
+      'project-data-boundary.md',
       'documentation-visual-language.md',
-      '## Structure is chosen by the information',
-      '## Semantic-variable table pattern',
-      '## Reference adaptation'
+      '## Canonical shell and canvas placement',
+      '## Reference-specific requirements',
+      '## Acceptance failures'
     ],
-    'docs/01-foundations/color.md': [
-      '### Documentation / Colors',
-      '### Documentation / Color variables',
-      '#### Name column',
-      '#### Light and Dark mode columns',
-      '### Color documentation QA'
+    'docs/06-governance/optional-component-documentation.md': [
+      '## Canonical component-guide shell',
+      '## Required section order',
+      '## Anatomy and dimensions',
+      '## Public properties',
+      '## Documentation QA'
     ],
-    'docs/06-governance/optional-component-documentation.md': ['complete size/specification table', 'EVERY public Boolean', 'documentation-acceptance.md'],
-    'docs/06-governance/documentation-acceptance.md': ['## Three independent inventories', '## Visual and semantic checks']
+    'docs/06-governance/documentation-acceptance.md': [
+      '## Canonical structural checks',
+      '## Pattern-specific structural checks',
+      '## Project-data isolation checks'
+    ],
+    'docs/00-discovery/brand-style-questionnaire.md': [
+      '## Deterministic project resolution record',
+      'Project Data Boundary'
+    ],
+    'docs/00-discovery/discovery-brief-format.md': [
+      '## Deterministic project-resolution record',
+      'REQUIRES APPROVAL',
+      'BLOCKED'
+    ],
+    'README.md': [
+      '## What the repository owns',
+      '## What each project owns',
+      '## Determinism goal',
+      'Project Data Boundary'
+    ]
   };
+
   for (const [file, markers] of Object.entries(requirements)) {
-    for (const marker of markers) if (!contents.get(file)?.includes(marker)) errors.push(`${file}: missing contract ${marker}.`);
+    for (const marker of markers) {
+      if (!contents.get(file)?.includes(marker)) errors.push(`${file}: missing contract ${marker}.`);
+    }
   }
+
   const agents = contents.get('AGENTS.md') ?? '';
-  if (!agents.includes('documentation-visual-language.md')) errors.push('AGENTS.md: must require the canonical documentation visual language.');
+  for (const marker of ['Project Data Boundary', 'Determinism requirement', 'documentation-visual-language.md']) {
+    if (!agents.includes(marker)) errors.push(`AGENTS.md: missing ${marker}.`);
+  }
+
+  const contract = contents.get('docs/06-governance/documentation-visual-language.md') ?? '';
+  for (const exact of [
+    '`200px` horizontal guide gap',
+    'header is always `476px` high',
+    '`820px | 360px | 360px | 828px`',
+    '`160 × 156px`',
+    '`112px` gap between major sections'
+  ]) {
+    if (!contract.includes(exact)) errors.push(`Documentation contract: missing deterministic geometry ${exact}.`);
+  }
+
   const color = contents.get('docs/01-foundations/color.md') ?? '';
   const roles = [...color.matchAll(/^\| [^|]+ \| `([^`]+)` \| (.+) \|$/gm)].map(match => ({ name: match[1], usage: match[2] }));
   const roleNames = roles.map(role => role.name);
   if (roleNames.length === 0 || new Set(roleNames).size !== roleNames.length) errors.push('Color semantic role table is empty or contains duplicate names.');
   for (const role of roles) if (!role.name.startsWith('color/') || !nonempty(role.usage)) errors.push(`Color: invalid role ${role.name}.`);
+
   return { errors, fileCount: files.length, colorRoles: roles.length };
 }
 
@@ -187,9 +274,11 @@ async function main() {
   if (args.length && !(args.length === 2 && args[0] === '--coverage')) {
     throw new Error('Usage: node scripts/validate-documentation.mjs [--coverage path/to/coverage.json]');
   }
+
   const result = await validateRepository();
   const errors = [...result.errors];
   if (args[0] === '--coverage') errors.push(...validateCoverage(JSON.parse(await readFile(args[1], 'utf8'))));
+
   if (errors.length) {
     console.error(errors.map(error => `- ${error}`).join('\n'));
     process.exitCode = 1;
