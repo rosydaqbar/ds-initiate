@@ -2,32 +2,34 @@
 
 Every Foundation item includes a designer-facing Figma guide in the same build. Its values, Styles, assets, or rules and its guide must both pass review before the item is complete. Component guides retain their separate opt-in rule.
 
+Read [Documentation Visual Language](documentation-visual-language.md) before creating or revising any designer-facing guide. That file defines the canonical visual grammar and the rule for adapting external references without copying them literally.
+
 ## Documentation outcome
 
 A complete guide provides an introduction, a complete reference for the approved scope, and applied guidance. Designers must be able to find a specific choice, read its specification, and understand when to use it without opening the variables panel or this repository.
 
 Every implemented color, token, Text Style, Effect Style, shared size, and asset treatment must have a visible reference entry. Every approved rule must have visible guidance. A reference entry contains:
 
-- A familiar name and the exact searchable token, Style, or asset name.
+- A familiar name and the exact searchable token, Style, or asset name when needed.
 - The actual resolved value and unit; all supported mode values where applicable.
 - A concise, specific purpose and usage sentence.
 - An actual bound specimen, connected instance, or measured diagram.
 - Applicable state, permitted pairing, restriction, or alternative.
 
-A family description does not replace the specification of its individual colors. A guide documenting only a few selected values is incomplete. Keep individual entries concise and split long references into labeled sections or continuation frames.
+A family description does not replace the specification of its individual values. A guide documenting only a few selected values is incomplete. Keep individual entries concise and split long references into meaningful sections or continuation frames when necessary.
 
 ## Public reference and internal evidence
 
 These are required designer-facing information:
 
 - Complete palette ramps with every approved shade, base color, and alpha value.
-- Semantic token tables grouped by property and purpose, including each role's usage and Light/Dark values.
-- Exact searchable names and the resolved source name, such as Brand 600, alongside a color value.
+- Semantic token references grouped by property and purpose, including each role's usage and Light/Dark values when those modes exist.
+- Exact searchable names and the resolved source name, such as `brand-600`, alongside the applied specimen.
 - Full typography, spacing, sizing, radius, border, elevation, and motion references.
 - Public component properties, dimensions, state behavior, and usage restrictions when documenting a component.
 - Named foreground/background pairings and measured contrast results when they help select a valid combination.
 
-These remain internal: node and variable IDs, scopes, serialized bindings, alias traversal logs, raw API responses, test logs, and screenshot evidence. A searchable name, resolved source, numeric specification, or pairing result is useful reference information, even when it originates in implementation data.
+These remain internal: node and variable IDs, scopes, serialized bindings, alias traversal logs, raw API responses, test logs, and screenshot evidence.
 
 Do not reproduce external systems' names, logos, proprietary wording, token catalogs, or branding. Write original guidance using this repository's conventions and the approved project's identity.
 
@@ -35,7 +37,7 @@ Do not reproduce external systems' names, logos, proprietary wording, token cata
 
 | Foundation | Complete reference required | Applied guidance required |
 | --- | --- | --- |
-| Color | Every approved palette shade/base/alpha value and every semantic role; exact name, purpose, usage, source, hex/opacity per mode | Paired foreground/background previews, interaction states, feedback, overlays, selection and focus |
+| Color | Every approved palette shade/base/alpha value and every semantic role; exact name, purpose, usage, source, and mode resolution | Pairings, interaction states, feedback, overlays, selection and focus where relevant |
 | Typography | Every implemented Text Style; family, available weight, size, line height, letter spacing, casing, intended use, responsive changes | Real samples, hierarchy, wrapping, emphasis, numbers and approved scripts |
 | Spacing and sizing | Every spacing and shared control/icon/target size; exact name, pixels, purpose | True-size gap/inset/dimension measurements, including zero and invisible target bounds |
 | Radius and borders | Every radius and stroke-width role; values, purposes, applicable border colors | Bound corners and strokes, nested corners, focus, validation, dashed treatment when approved |
@@ -51,74 +53,124 @@ Do not reproduce external systems' names, logos, proprietary wording, token cata
 
 Content collections may contain an unlimited number of runtime images or arbitrary user text. Cover every reusable treatment and rule plus approved reference assets; do not attempt to catalog future content.
 
-## Required guide structure
+## Structure is chosen by the information
+
+Do not force every Foundation into the same table, card grid, or article template.
+
+Use the information pattern that best matches the Foundation:
+
+- Semantic variables with mode comparison → hierarchical reference table.
+- Primitive color ramps → horizontal swatch families.
+- Spacing, sizing, radius, borders, grids → measured rows or diagrams.
+- Typography, iconography, elevation, imagery, motion → specimen rows or focused visual examples.
+- Accessibility and content rules → prose, comparisons, and applied examples.
+
+The recurring visual language comes from [Documentation Visual Language](documentation-visual-language.md): restrained chrome, clear section hierarchy, consistent typography, compact value pills, subtle dividers, stable alignment, and usage attached to the value it explains.
+
+## Recommended guide anatomy
+
+The exact body changes by Foundation, but the guide should normally contain:
 
 ```text
-Documentation / {Foundation} [FRAME, vertical Auto Layout, 1600 Fixed × Hug]
-  Header [FRAME, Fill × Hug]
-    Foundations [TEXT]
-    {Foundation name} [TEXT]
-    {Specific definition} [TEXT]
-  Article [FRAME, vertical Auto Layout, Fill × Hug]
-    Overview [FRAME, 800 Fixed × Hug]
-    Contents [FRAME, 800 Fixed × Hug; links to reference groups/continuations]
-    Reference / {Group} [FRAME, vertical Auto Layout, Fill × Hug; repeat for ALL groups]
-      {Group heading and purpose} [TEXT]
-      {Column headings when using a table} [FRAME]
-      Entry / {Exact name} [FRAME; repeat for EVERY required item]
-        {Name and searchable identifier} [TEXT]
-        {Purpose, use and restriction} [TEXT]
-        {Resolved values with units and mode labels} [TEXT]
-        {Bound specimen / connected instance / measured diagram}
-    Application / {Specific decision} [FRAME; actual visual example and explanation]
-    Do and don't [FRAME; separate correct/incorrect visual examples and captions]
-    Accessibility [FRAME; checked scope and remaining work]
+Documentation / {Foundation}
+  Page header
+    Context / breadcrumb
+    {Foundation title}
+    Short definition
+    Optional compact system metadata
+  Section / {Reference group}
+    Section heading
+      {Group title}
+      Optional type badge such as Variables, Styles, Assets, or Guidance
+    Concise explanation
+    {Reference structure appropriate to this information}
+  Section / {Applied decision}
+    Specimen / diagram / comparison
+    Explanation
+  Do and don't, when the Foundation has misuse patterns worth showing
+  Accessibility scope or verification boundary, when relevant
+  Quiet footer / system context, when used elsewhere in the approved file
 ```
 
-The item recipe supplies specific subjects and examples. Reusing a header, table row, and text styles is appropriate; reusing the same body copy and generic specimen for unrelated Foundations is not.
+Do not add a section simply because another design system has it. Do not omit a required section simply because the external reference lacks it.
 
-## Exact construction
+## Semantic-variable table pattern
 
-| Object | Construction |
-| --- | --- |
-| Root | Unpublished regular FRAME; 1600px Fixed width, Hug height, vertical Auto Layout; zero padding/gap |
-| Placement | X/Y divisible by 4; at least 64px between top-level frames |
-| Header | Fill × Hug; 80px horizontal/64px vertical padding; 12px gap |
-| Article | Fill × Hug; 80px padding; 64px section gap; centered |
-| Prose | 800px Fixed × Hug; 16px gap; left aligned |
-| Reference table | Up to 1440px wide within the root; vertical Auto Layout; aligned column widths and repeated header on continuations |
-| Table cells | 16px padding; 8px internal gap; top aligned; wrapping text and Hug height; all cells grow to the tallest content in their row |
-| Reference text | Approved readable Text Styles; default 16px/24px body and labels; 12px/16px only for secondary metadata, never the sole usage explanation |
-| Applied example | Up to 1280px wide; 32px padding and 24px gap; bound geometry or connected assets at 100% scale |
-| Comparison | 1120px outer width; zero outer padding; 548px columns with 24px gap; each column has 24px padding |
-| Swatch/value annotation | 8px between name and value; 12px before use; labels remain readable independently of the demonstrated color |
-| Accessibility | 800px Fixed × Hug; 24px padding and 16px gap |
+When a Foundation contains semantic variables with multiple modes, the preferred reference structure is:
 
-Compute available width after padding and gaps. Do not use a 1280px reference inside a 1280px wrapper that also adds 64px padding. Expand roots by multiples of 4 for true-size specimens; the minimum root width is specimen width + specimen padding + article padding.
+`Name | Light mode | Dark mode | Usage`
 
-Split references by meaningful groups when they become tall. Use names such as `Documentation / Color / Text`, repeat column headings and mode labels, and add navigation from the main guide. Do not shrink text, clip rows, delete entries, or cap references at six specimens to fit a frame.
+Adapt the mode columns to the actual approved modes.
+
+Each row shows:
+
+- the semantic role name;
+- its resolved primitive source in each mode as a compact swatch pill;
+- one concise usage sentence.
+
+Use indentation and a subtle connector line only when a real parent/child relationship exists, for example:
+
+- `default` with `hover`, `pressed`, and `disabled` children;
+- a status family with `background`, `text`, `icon`, and `border` children;
+- another explicitly defined state family.
+
+Do not manufacture hierarchy for visual similarity.
+
+## Primitive-scale pattern
+
+When documenting a raw palette or comparable scale:
+
+- show the complete approved sequence;
+- use compact swatch cards or measured samples;
+- show the familiar step/name and resolved value;
+- identify an approved anchor/default when one exists;
+- keep the family description separate from per-value labels;
+- do not imply that primitives are component-facing permissions.
+
+## Page width and construction
+
+There is no single mandatory documentation-frame width.
+
+Use a 4px-aligned width appropriate to the information:
+
+- `1600px` is a strong default for prose-heavy or specimen-focused guides.
+- Wide references may use `2528px`, `2848px`, or another 4px-aligned width when token names, multiple mode columns, or complete ramps need more space.
+- Do not shrink text or crush columns to preserve a predetermined width.
+- Reposition neighboring top-level frames after a width change so no documentation frames overlap.
+
+All structural padding, gaps, row heights, measurements, and placement still follow the 4px construction rule except documented rendering details.
 
 ## Values and bindings
 
-- Read values and names from the implemented variables, Styles and assets. Populate labels and native descriptions from the same resolved record.
-- A visible hex label is insufficient without a swatch or applied color sample bound to that specific role. Bindings on unrelated documentation backgrounds do not prove specimen correctness.
+- Read values and names from the implemented variables, Styles and assets. Populate visible labels and native descriptions from the same resolved record.
+- A visible hex label is insufficient without a swatch or applied color sample bound to that specific role.
 - Set modes explicitly on Light and Dark sample containers. Derive labels under the same effective modes, including cross-collection aliases and alpha.
-- Show RGB hex and alpha separately for translucent values and name the compositing surface. Keep numeric labels synchronized after a value or mode changes.
+- Show RGB hex and alpha separately for translucent values and name the compositing surface when relevant.
 - Text samples use their actual Text Style. Spacing bars measure their token value; zero is labeled without inventing a visible bar.
-- Use connected assets without detaching. Documentation chrome uses approved Text Styles and semantic roles.
+- Use connected assets without detaching. Documentation chrome uses approved Text Styles and semantic roles where possible.
 - Never resolve placeholders from memory. Missing approved inputs remain explicit blockers for the affected item.
+
+## Reference adaptation
+
+If the user supplies a reference Figma file or screenshot, inspect it before building.
+
+The goal is to understand its information architecture and visual grammar, not to clone it. Reuse aligned patterns such as section hierarchy, table relationships, swatch treatment, spacing rhythm, and density. Preserve the current project's own typography, colors, token structure, language, and asset style.
+
+When an approved guide already exists in the target Figma file, its established documentation pattern outranks a generic external reference. New guides should extend that language rather than redesign it independently.
 
 ## Build sequence and acceptance
 
-1. Read the approved brief, item specification and dependencies. Compare the approved inventory with actual objects before documenting them.
-2. Record expected names, modes, values and required sections using [Documentation Acceptance](documentation-acceptance.md).
-3. Build or repair the underlying Foundation. Check naming, values, modes, aliases and native descriptions.
-4. Complete its full reference, applied examples and specific do-and-don't comparisons.
-5. Compare the expected set, implemented set and visibly documented set. Missing, duplicated, stale or unsupported entries fail.
-6. Read visible text and inspect bindings. Inspect screenshots of every reference group and application at readable scale, including the first and last rows.
-7. Fix failures before recording the Foundation and its guide as complete.
+1. Read the approved brief, item specification, [Documentation Visual Language](documentation-visual-language.md), and dependencies.
+2. If the user supplied a reference, inspect its design context and at least one readable screenshot before authoring the guide.
+3. Inspect existing approved documentation in the target Figma file and record the established chrome, hierarchy, row styling, pill styling, divider treatment, and spacing rhythm.
+4. Record expected names, modes, values and required sections using [Documentation Acceptance](documentation-acceptance.md).
+5. Build or repair the underlying Foundation. Check naming, values, modes, aliases and native descriptions.
+6. Build the complete reference using a structure derived from the current Foundation, not copied mechanically from the reference.
+7. Compare the expected set, implemented set and visibly documented set. Missing, duplicated, stale or unsupported entries fail.
+8. Inspect screenshots of every reference group and application at readable scale, including first and last rows.
+9. Fix structural randomness, clipping, weak hierarchy, incorrect relationships, or brand drift before accepting the guide.
 
-Documentation fails if any required entry, field, mode, section or visual example is missing. A polished overview, valid binding count, correct root name or attractive screenshot cannot substitute for complete content.
+Documentation fails if any required entry, field, mode, section or visual example is missing. It also fails when all data is technically present but the screenshot reads as an arbitrary wall of rows with no clear grouping or hierarchy.
 
 ## Accessibility status
 
