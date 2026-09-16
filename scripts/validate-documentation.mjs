@@ -122,18 +122,17 @@ export async function validateRepository(directory = root) {
     /select exactly three steps/i,
     /six representative type examples/i,
     /do not create a role inventory table/i,
-    /do not (?:create|put|show).*complete (?:implemented |token, variable, Style, or asset )?inventory/i,
     /complete (?:scale|Radius collection).*stays in Figma/i,
-    /do not reproduce (?:it|them) as (?:an inventory|a long) table/i,
     /✓ WCAG 2\.2 AA checked/,
     /irrelevant sections and unbuilt options are omitted/i,
-    /Anatomy diagrams.*unless the user explicitly requests/i
+    /Anatomy diagrams.*unless the user explicitly requests/i,
+    /copy .* literally/i
   ];
   for (const file of files) {
     const relative = path.relative(directory, file).replaceAll('\\', '/');
     const source = await readFile(file, 'utf8');
     contents.set(relative, source);
-    for (const rule of obsoleteRules) if (rule.test(source)) errors.push(`${relative}: obsolete omission or unscoped conformance rule ${rule}.`);
+    for (const rule of obsoleteRules) if (rule.test(source)) errors.push(`${relative}: obsolete omission, literal-copy, or unscoped conformance rule ${rule}.`);
     const prose = withoutFences(source);
     for (const link of prose.matchAll(/!?\[[^\]\n]*\]\(([^)\n]+)\)/g)) {
       const target = link[1].trim().replace(/^<|>$/g, '');
@@ -148,14 +147,34 @@ export async function validateRepository(directory = root) {
     }
   }
   const requirements = {
-    'docs/06-governance/foundation-documentation.md': ['## Coverage by Foundation', '## Values and bindings', 'documentation-acceptance.md'],
-    'docs/01-foundations/color.md': ['### Complete palette reference', '### Complete semantic role reference', '### Foreground/background pairings'],
+    'docs/06-governance/documentation-visual-language.md': [
+      '## Core rule',
+      '## Documentation grammar',
+      '## Choose the structure from the information',
+      '## Semantic-variable table pattern',
+      '## Screenshot QA'
+    ],
+    'docs/06-governance/foundation-documentation.md': [
+      'documentation-visual-language.md',
+      '## Structure is chosen by the information',
+      '## Semantic-variable table pattern',
+      '## Reference adaptation'
+    ],
+    'docs/01-foundations/color.md': [
+      '### Documentation / Colors',
+      '### Documentation / Color variables',
+      '#### Name column',
+      '#### Light and Dark mode columns',
+      '### Color documentation QA'
+    ],
     'docs/06-governance/optional-component-documentation.md': ['complete size/specification table', 'EVERY public Boolean', 'documentation-acceptance.md'],
     'docs/06-governance/documentation-acceptance.md': ['## Three independent inventories', '## Visual and semantic checks']
   };
   for (const [file, markers] of Object.entries(requirements)) {
     for (const marker of markers) if (!contents.get(file)?.includes(marker)) errors.push(`${file}: missing contract ${marker}.`);
   }
+  const agents = contents.get('AGENTS.md') ?? '';
+  if (!agents.includes('documentation-visual-language.md')) errors.push('AGENTS.md: must require the canonical documentation visual language.');
   const color = contents.get('docs/01-foundations/color.md') ?? '';
   const roles = [...color.matchAll(/^\| [^|]+ \| `([^`]+)` \| (.+) \|$/gm)].map(match => ({ name: match[1], usage: match[2] }));
   const roleNames = roles.map(role => role.name);
