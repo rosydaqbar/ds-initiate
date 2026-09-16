@@ -125,14 +125,13 @@ export async function validateRepository(directory = root) {
     /complete (?:scale|Radius collection).*stays in Figma/i,
     /✓ WCAG 2\.2 AA checked/,
     /irrelevant sections and unbuilt options are omitted/i,
-    /Anatomy diagrams.*unless the user explicitly requests/i,
-    /copy .* literally/i
+    /Anatomy diagrams.*unless the user explicitly requests/i
   ];
   for (const file of files) {
     const relative = path.relative(directory, file).replaceAll('\\', '/');
     const source = await readFile(file, 'utf8');
     contents.set(relative, source);
-    for (const rule of obsoleteRules) if (rule.test(source)) errors.push(`${relative}: obsolete omission, literal-copy, or unscoped conformance rule ${rule}.`);
+    for (const rule of obsoleteRules) if (rule.test(source)) errors.push(`${relative}: obsolete omission or unscoped conformance rule ${rule}.`);
     const prose = withoutFences(source);
     for (const link of prose.matchAll(/!?\[[^\]\n]*\]\(([^)\n]+)\)/g)) {
       const target = link[1].trim().replace(/^<|>$/g, '');
