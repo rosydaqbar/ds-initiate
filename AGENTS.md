@@ -28,10 +28,11 @@ Read these files before completing any specification:
 2. `docs/README.md`
 3. `docs/00-discovery/brand-style-questionnaire.md`
 4. `docs/06-governance/figma-construction-standard.md`
-5. `docs/06-governance/component-specification-format.md` for components
-6. `docs/06-governance/foundation-documentation.md` for Foundations
-7. `docs/06-governance/optional-component-documentation.md` for Atoms, Molecules, and Organisms
-8. The target item file and every dependency linked from it
+5. `docs/06-governance/documentation-visual-language.md` for all designer-facing Figma documentation
+6. `docs/06-governance/component-specification-format.md` for components
+7. `docs/06-governance/foundation-documentation.md` for Foundations
+8. `docs/06-governance/optional-component-documentation.md` for Atoms, Molecules, and Organisms
+9. The target item file and every dependency linked from it
 
 Use familiar component and Figma terms. Do not invent category names or add commentary about how the rules were developed.
 
@@ -43,8 +44,9 @@ When information conflicts, use this order:
 2. The approved Discovery brief or approved answers in the current task
 3. Existing production values or assets explicitly supplied by the user
 4. Existing confirmed Figma objects when the user has asked for Figma inspection
-5. Shared governance files in this repository
-6. The target item specification
+5. Existing approved designer-facing documentation patterns in the target Figma file
+6. Shared governance files in this repository
+7. The target item specification
 
 Do not silently choose between two approved inputs that disagree. State the exact conflict and ask the user which value wins.
 
@@ -97,6 +99,8 @@ Before editing, inspect the target and its dependencies for:
 - Foundation documentation that is absent or treated as optional
 - Foundation documentation described only as a list of topics instead of exact visible Figma content
 - A specimen without a required visible name, resolved value, definition, or usage sentence
+- A documentation layout that ignores the established visual grammar in the target file
+- An external reference copied literally without checking whether its structure matches the current system
 - Broken local links or inconsistent names
 
 Markdown links, Figma layer annotations such as `[FRAME]` or `[COMPONENT]`, and completed example values are not gaps. Do not replace them merely because they use brackets.
@@ -171,45 +175,35 @@ Do not leave generic rows such as “when present” when the target component's
 
 ### 5. Complete the documentation recipe
 
-Foundation documentation is mandatory and is completed with the Foundation. Treat the item file's `Mandatory Figma documentation` section as an executable construction contract, not a topic checklist. Build every specified frame, layer, specimen, label, value, definition, usage sentence, mode comparison, and do-and-don't instruction.
+Foundation documentation is mandatory and is completed with the Foundation. Treat the item file's `Mandatory Figma documentation` section as an executable construction contract, not a topic checklist.
 
-**Documentation is written information supported by specimens; it is not a specimen gallery.** A color box, type sample, spacing bar, radius tile, border tile, shadow, icon, logo, image, layout frame, or motion example without its required visible explanation does not count as documentation.
+Before generating documentation, read `docs/06-governance/documentation-visual-language.md`. If the user supplied a Figma reference or screenshot, inspect its nodes/design context and at least one readable screenshot before deciding how to structure the guide. Extract the information pattern; do not copy another system literally.
 
-Each Foundation guide must visibly contain:
+When the target Figma file already contains an approved guide, inspect it first and reuse its documentation chrome, typography hierarchy, row styling, pill styling, dividers, and section rhythm where appropriate. That established pattern outranks a generic external example.
 
-- The Foundation name and its one-sentence definition.
-- Plain-language overview and usage principles.
-- Familiar names for every documented choice.
-- Actual resolved designer-facing values: color hex; spacing, size, radius, and border pixels; typography family, weight, size, and line height; elevation name and distinguishing effect summary; layout dimensions; motion duration and easing; or the equivalent asset specification.
-- A complete sentence explaining when each role, group, or treatment is used.
-- Supported mode values side by side when modes affect designer decisions.
-- Applied examples that demonstrate a decision rather than merely display a sample.
-- Component- or Foundation-specific do-and-don't examples with written instructions.
-- `✓ WCAG 2.2 AA checked` only after the required checks pass, or the approved stricter target.
+Choose the body structure from the information:
 
-Do not create a complete implemented inventory or a long Figma table for Foundations. Keep exhaustive lists in Markdown and Figma's native variables, Styles, or Assets panels. Build each guide as a `1600px` editorial frame with a full-width header, centered `800px` reading column, and wider annotated example blocks only when needed. Organize sections around decisions and usage; do not arrange the whole guide as a dashboard of equal cards. Use no more than six specimens in one example block unless a small, meaningful permutation is explicitly required. Every selected specimen still needs its visible name, resolved value, meaning, and usage.
+- semantic variables with mode comparisons → hierarchical reference tables;
+- primitive color ramps → horizontal swatch families;
+- dimensions → measured rows or diagrams;
+- typography, icons, elevation, imagery, motion → specimen rows;
+- accessibility and content rules → prose, comparisons, and applied examples.
 
-Do not store required copy only in a layer name, Figma description, annotation, prototype note, variable name, or this repository. Create it as visible text in the guide. If the item specification provides exact copy, reproduce that copy; do not summarize or replace it with placeholder text.
+Foundation guides must visibly contain the approved names, values, mode behavior, individual usage, and appropriate bound/measured specimens. Documentation is written information supported by specimens; bare boxes or samples do not count.
+
+Do not force one frame width across every guide. `1600px` is a useful prose/specimen default, while wide references may use `2528px`, `2848px`, or another 4px-aligned width when the information needs it. Never shrink readable text or compress columns merely to preserve a predetermined width. Reposition neighboring top-level frames after resizing so documentation never overlaps.
+
+Semantic-variable tables should normally use `Name | Light mode | Dark mode | Usage` when those modes exist. Show resolved primitive sources as compact swatch pills. Use indentation and subtle connector lines only for real parent/child relationships such as default → hover/pressed/disabled or status → background/text/icon/border. Do not invent hierarchy for decoration.
+
+Do not store required copy only in a layer name, Figma description, annotation, prototype note, variable name, or this repository. Create it as visible text in the guide. If the item specification provides exact copy, reproduce that copy unless the latest approved direction changes it.
 
 Instruction placeholders such as `#RRGGBB`, `{value}`, `{opacity}`, `{Foundation}`, and `{Component}` must never appear literally in Figma. Resolve them from approved inputs and the finished Figma object; if the value is unavailable, stop instead of publishing placeholder documentation.
-
-The instruction to hide internal implementation data applies only to IDs, alias chains, scopes, code syntax, counts, raw calculations, logs, and audit evidence. It never authorizes removing designer-facing names, resolved values, definitions, specifications, or usage guidance.
 
 Documentation for an Atom, Molecule, or Organism is optional. Finish internal component QA first, then ask:
 
 > The {Component} component is complete. Should I build its optional designer documentation from {filename}.md?
 
-If approved, the component file must tell the Figma builder exactly which connected instances to use for:
-
-- Recommended example
-- Purpose, when to use, and when not to use
-- Actual styles, sizes, states, and editable properties
-- Component-specific do-and-don't examples
-- Concise accessibility status
-
-Build approved component documentation with the same editorial rhythm: full-width header, readable explanatory copy, then focused connected-instance rows. Do not recreate the component-set cross-product. Show each public style and size once, show states in the most representative style, and add another row only when behavior changes materially. Every instance needs a visible label and a sentence explaining why a designer would choose it.
-
-Do not place internal object inventories, long inventory tables, implementation paths, binding tables, variant calculations, raw contrast ratios, metadata, grid audits, or validation logs in designer-facing Figma documentation. These remain in Markdown or internal build records. A compact set of decision-focused examples with familiar names, resolved values, and usage is documentation and must remain visible.
+If approved, use the same visual language but derive the body from the component's actual API rather than copying a Foundation table pattern.
 
 ### 6. Propagate shared decisions
 
@@ -224,7 +218,7 @@ After changing a shared name or rule, update every affected file in the same tas
 
 Do not leave both the old and new term active.
 
-### 7. Validate the Markdown
+### 7. Validate the Markdown and Figma result
 
 Before reporting completion:
 
@@ -234,11 +228,13 @@ Before reporting completion:
 - Confirm structural dimensions use 4px increments except documented rendering details.
 - Confirm components use semantic variables and approved Styles.
 - Confirm component documentation is optional and Foundation documentation is mandatory.
-- Confirm Foundation documentation recipes define the exact visible copy, Figma layer structure, construction measurements, names, resolved values, usage, mode behavior, do-and-don't guidance, and concise accessibility status.
+- Confirm each Foundation guide uses the information structure appropriate to its content instead of mechanically reusing one template.
+- Confirm semantic token references preserve real hierarchy, mode resolution, searchable names, and row-specific usage.
 - Reject any documentation recipe that can be satisfied by unlabeled boxes, samples, or connected instances.
-- Reject any Foundation guide that reproduces the complete implementation inventory or presents it as a long Figma table.
-- Reject any Foundation or component guide laid out only as a specimen dashboard without readable headings, explanations, and annotated decisions.
-- During screenshot review, read the guide as a designer: confirm its written explanation is visible, legible, complete, and attached to the correct specimen.
+- Reject any guide that copies an external system's brand, token names, proprietary copy, or irrelevant sections.
+- Reject any guide that is technically complete but visually reads as an arbitrary wall of rows with weak grouping or hierarchy.
+- During screenshot review, inspect the guide at readable scale and confirm section hierarchy, row grouping, wrapping, clipping, column alignment, label/specimen association, and brand consistency.
+- Confirm top-level documentation frames do not overlap after width changes.
 - Confirm local Markdown links resolve.
 - Search for unresolved placeholders and obsolete names with `rg`.
 - Review the final diff and preserve unrelated user changes.
@@ -253,12 +249,13 @@ When the user explicitly asks to implement the specifications in Figma:
 2. Inspect the target file before creating or editing objects.
 3. Complete Discovery and obtain approval before visual mutations.
 4. Build Foundations before dependent components.
-5. Mutate Figma sequentially, one validated unit at a time.
-6. Reuse exact returned IDs; never guess IDs.
-7. Validate structure and appearance internally after each unit.
-8. Validate Foundation documentation for visible written content as well as visual appearance. Bare specimens fail even when their bindings are correct.
-9. Keep internal validation details out of designer-facing frames without removing designer-facing values or specifications.
-10. Do not automatically create optional component documentation.
+5. For designer-facing documentation, inspect any supplied reference and the current approved guide pattern before authoring.
+6. Mutate Figma sequentially, one validated unit at a time.
+7. Reuse exact returned IDs; never guess IDs.
+8. Validate structure and appearance internally after each unit.
+9. Screenshot-review Foundation documentation for visible written content, hierarchy, grouping, alignment, and relationship clarity as well as raw completeness.
+10. Keep internal validation details out of designer-facing frames without removing designer-facing values or specifications.
+11. Do not automatically create optional component documentation.
 
 Specification completion does not authorize Figma mutation. Figma inspection does not authorize Figma mutation.
 
