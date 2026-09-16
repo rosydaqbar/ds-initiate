@@ -1,6 +1,6 @@
 # Figma Construction Standard
 
-This is the mandatory build contract for every item in this repository. An item specification is complete only when another executor can build it without inventing architecture, measurements, or project-sensitive values.
+This is the mandatory build contract the framework follows for every generated item. An item specification is complete only when another executor can build it without inventing architecture, measurements, or project-sensitive values.
 
 Read [Project Data Boundary](project-data-boundary.md) before applying this standard.
 
@@ -15,7 +15,7 @@ Foundation documentation is not optional. Component documentation does not defin
 
 Do not substitute an example project's values for missing current-project input.
 
-The current project owns color values, typeface, radius character, density, effects, modes, assets, content voice, and component scope. The repository owns their construction and documentation rules after those values are approved.
+The current project supplies color values, typeface, radius character, density, effects, modes, assets, content voice, and component scope. The framework defines how approved values are constructed and documented.
 
 If a required project-sensitive value is unresolved, stop and ask the smallest specific question.
 
@@ -148,7 +148,7 @@ When approved:
 - use the project's actual component instances and values;
 - use connected instances at 100% scale;
 - document every public axis/property without reproducing the full Cartesian product by default;
-- keep private helpers, variant math, node IDs, and raw binding dumps internal;
+- keep private helpers, variant math, node IDs, and raw binding dumps out of designer-facing documentation;
 - do not redesign the documentation shell for each component.
 
 See [Optional Component Documentation](optional-component-documentation.md).
@@ -175,7 +175,7 @@ See [Optional Component Documentation](optional-component-documentation.md).
 - Published assets have required naming/description/ownership metadata.
 - Component completion does not depend on optional documentation.
 - Mandatory Foundation guides match the canonical documentation geometry and assigned pattern.
-- No example-project brand value appears as an unapproved current-project default.
+- No example-project brand value appears as an unapproved current-project value.
 
 ## Documentation completeness gate
 
@@ -190,4 +190,4 @@ Reject a guide when:
 - the wrong canonical documentation pattern is used;
 - canonical frame width, shell, body rhythm, table geometry, or canvas placement differs;
 - screenshot review shows clipping, weak grouping, overlap, or brand leakage;
-- an example project's identity has become a reusable default.
+- an example project's identity has been used as unapproved current-project input.
