@@ -1,8 +1,8 @@
 # Design System Build Specifications
 
-This repository uses Atomic Design for composition/build order and a deterministic documentation construction contract for designer-facing Figma output.
+This framework uses Atomic Design for composition/build order and a deterministic documentation construction contract for designer-facing Figma output.
 
-The framework is brand-agnostic. Read [Project Data Boundary](06-governance/project-data-boundary.md) before generating or maintaining project-sensitive values.
+The framework is brand-agnostic. Read [Project Data Boundary](06-governance/project-data-boundary.md) before generating project-sensitive values.
 
 ## Atomic Design and Figma organization
 
@@ -40,7 +40,7 @@ Atomic level and library section remain specification metadata; do not add them 
 - [Documentation Construction Contract](06-governance/documentation-visual-language.md)
 - [Executable component specification format](06-governance/component-specification-format.md)
 
-Every structural choice that can be specified exactly must be represented as an exact measurement, fixed ordering rule, calculation, decision table, or blocking question rather than free-form visual taste.
+Every structural choice that can be specified exactly should resolve through an exact measurement, fixed ordering rule, calculation, decision table, or blocking question rather than free-form visual taste.
 
 ## Figma documentation requirements
 
@@ -49,12 +49,12 @@ Every structural choice that can be specified exactly must be represented as an 
 | Foundations | Mandatory in the same build | Underlying Foundation and canonical designer guide complete together |
 | Atoms, Molecules, Organisms | Optional after component QA and explicit approval | Production component can complete without a guide |
 
-Foundation guides do not choose their layout ad hoc. [Documentation Construction Contract](06-governance/documentation-visual-language.md) fixes page order, root widths, shell geometry, documentation typography scale, pattern mapping, table/specimen/measured layouts, canvas placement, and screenshot QA.
+Foundation guides use the fixed structure in [Documentation Construction Contract](06-governance/documentation-visual-language.md), including page order, root widths, shell geometry, documentation typography scale, pattern mapping, table/specimen/measured layouts, canvas placement, and screenshot QA.
 
-The current project supplies brand-sensitive values through approved Discovery. The reusable repository supplies the construction grammar.
+The current project supplies brand-sensitive values through approved Discovery. The framework supplies the construction grammar.
 
 Use [Mandatory Foundation Documentation](06-governance/foundation-documentation.md) and [Documentation Acceptance](06-governance/documentation-acceptance.md) for Foundation coverage and validation.
 
 Use [Optional Component Documentation](06-governance/optional-component-documentation.md) only after the named component passes QA and the user approves that guide.
 
-Do not treat external references or example projects as brand defaults.
+Do not treat external references or example projects as project input unless the user explicitly approves the relevant value.
