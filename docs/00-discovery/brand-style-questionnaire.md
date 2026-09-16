@@ -2,7 +2,7 @@
 
 Ask these ten questions before creating visual Foundations.
 
-Discovery supplies **project data**. The reusable repository supplies **construction rules**. Never convert one project's answers into repository defaults; see [Project Data Boundary](../06-governance/project-data-boundary.md).
+Discovery supplies **project input**. The framework supplies **construction rules**. See [Project Data Boundary](../06-governance/project-data-boundary.md).
 
 Record exact values when they exist. Use `Not applicable` only when the field genuinely does not apply. Do not infer unresolved brand decisions from an example project.
 
@@ -63,7 +63,7 @@ Do not substitute a font from an example project.
 
 Record exactly three desired traits and three traits to avoid, plus one sentence describing the intended impression.
 
-Suggested vocabulary may be used to help the user answer, but the selected traits are project data and are not reusable defaults.
+Suggested vocabulary may be used to help the user answer, but the selected traits apply only to the current project.
 
 Desired examples: `Modern` · `Trustworthy` · `Friendly` · `Premium` · `Bold` · `Calm` · `Playful` · `Technical` · `Minimal` · `Editorial`
 
@@ -81,7 +81,7 @@ Record:
 - default control height;
 - any approved exception to the 4px structural rule.
 
-Suggested answer values may be presented, but none are project defaults until approved.
+Suggested answer values may be presented, but none become current-project values until approved.
 
 ## 7. How should surfaces separate from one another?
 
@@ -119,7 +119,7 @@ Record:
 - minimum text size;
 - product voice/content rules.
 
-Use `WCAG 2.2 AA` only as the repository default when the user does not require another target.
+Use `WCAG 2.2 AA` only when no different target has been approved for the project.
 
 ## 10. Which building blocks belong in the first release?
 
@@ -147,7 +147,7 @@ At minimum record:
 - icon/imagery/motion treatment;
 - accessibility/language/content requirements;
 - first-release component list;
-- existing production tokens/assets that override repository defaults;
+- existing production tokens/assets that must be preserved;
 - explicit exclusions.
 
 Use exact values rather than paraphrases whenever possible.
@@ -171,7 +171,7 @@ For selected Foundations, record the exact approved inventory or resolution stat
 
 Mark explicit exclusions with reason.
 
-The framework may provide a canonical architecture, but current-project production values or explicitly approved departures outrank it.
+Current-project production values or explicitly approved departures override generic framework defaults.
 
 ## Required output
 
