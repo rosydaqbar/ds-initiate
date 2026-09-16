@@ -15,19 +15,19 @@ Create approved tokens, modes, Text Styles, Effect Styles, reusable assets, and 
 For every Foundation:
 
 1. Resolve the underlying project values from approved Discovery/production sources.
-2. Build/validate the Foundation implementation.
+2. Build and validate the Foundation implementation.
 3. Build its mandatory guide using the exact Foundation → pattern mapping and geometry in [Documentation Construction Contract](documentation-visual-language.md).
 4. Reconcile approved, implemented, and documented inventories under [Documentation Acceptance](documentation-acceptance.md).
 5. Screenshot-QA the canonical shell, body pattern, first/last rows, canvas placement, and project-data isolation.
 6. Fix all failures before beginning dependent component work.
 
-Do not choose documentation width, shell, row anatomy, or body pattern during execution; those are repository decisions.
+Documentation width, shell, row anatomy, and body pattern are framework-defined and should not be reinterpreted during execution.
 
 ## Phase 2 — Atoms
 
 Build and validate the smallest reusable controls and visual elements.
 
-Use approved project tokens/Styles only. Do not borrow visual values from the example used to derive repository documentation grammar.
+Use approved project tokens/Styles only. Do not borrow visual values from an example project.
 
 After an Atom passes component QA, ask whether to build its optional designer guide. If approved, use the fixed component-guide shell and section order in [Optional Component Documentation](optional-component-documentation.md).
 
