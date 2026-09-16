@@ -4,6 +4,8 @@ This file defines the deterministic construction grammar for designer-facing Fig
 
 Read [Project Data Boundary](project-data-boundary.md) first. This contract fixes layout and presentation behavior. It does not fix any project's brand name, palette, typeface, token values, component inventory, or product content.
 
+Canonical numeric geometry is also stored in [documentation-layout-contract.json](documentation-layout-contract.json). Executors must read both files. The JSON file is authoritative for numeric geometry; this Markdown file is authoritative for semantics, behavior, and explanation. If the two conflict, stop and repair the repository contract before generating Figma output.
+
 ## Core rule
 
 For the same repository revision and the same approved project inputs, independent runs must produce the same documentation structure and geometry.
@@ -24,7 +26,7 @@ Designer-documentation construction follows this order:
 
 1. User's latest explicit instruction.
 2. Approved project Discovery and supplied production values.
-3. This documentation construction contract.
+3. This documentation construction contract and `documentation-layout-contract.json`.
 4. Item-specific documentation recipe.
 5. Existing Figma objects that are confirmed to be the current approved implementation.
 6. External reference files.
