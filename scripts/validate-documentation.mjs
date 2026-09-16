@@ -216,10 +216,9 @@ export async function validateRepository(directory = root) {
   const files = await markdownFiles(directory);
   const contents = new Map();
 
+  // These patterns represent stale discretionary rules. Explicitly quoted examples of
+  // forbidden language live in the governance files, so those phrases are not scanned here.
   const obsoleteRules = [
-    /choose what looks best/i,
-    /use an appropriate width/i,
-    /adapt freely/i,
     /root width is content-driven/i,
     /recommended root width/i,
     /reuse .* where appropriate/i,
