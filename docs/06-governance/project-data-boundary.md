@@ -1,6 +1,6 @@
 # Project Data Boundary
 
-This repository is a reusable design-system generation framework. It standardizes **how** a design system is resolved, constructed, documented, and validated. It does not define the identity of the project being generated.
+This repository is a reusable design-system generation framework. It standardizes **how** a design system is resolved, constructed, documented, and validated. The repository owns the generation method, not the identity or visual values of the project being generated.
 
 ## Non-negotiable boundary
 
