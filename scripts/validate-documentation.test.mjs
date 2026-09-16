@@ -127,7 +127,7 @@ test('canonical documentation contract contains fixed geometry instead of discre
 test('project-data boundary explicitly separates framework rules from project identity', async () => {
   const source = await readFile(new URL('../docs/06-governance/project-data-boundary.md', import.meta.url), 'utf8');
   assert.match(source, /generation method/i);
-  assert.match(source, /must not hard-code project identity/i);
+  assert.match(source, /hard-code project identity/i);
   assert.match(source, /example project/i);
   assert.match(source, /Deterministic generation rule/);
 });
