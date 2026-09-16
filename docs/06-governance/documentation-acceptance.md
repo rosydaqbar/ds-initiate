@@ -1,114 +1,215 @@
 # Documentation Acceptance
 
-Documentation is complete when the approved scope, implemented objects, visible reference, and approved documentation visual language agree. This gate applies to mandatory Foundation guides and to component guides after their separate approval.
+Documentation is complete when four things agree:
 
-Read [Documentation Visual Language](documentation-visual-language.md) before judging visual structure. Completeness does not require every Foundation to use the same layout.
+1. approved project scope;
+2. implemented Figma objects;
+3. visible designer reference;
+4. canonical repository construction contract.
+
+This gate applies to mandatory Foundation guides and to component guides after their separate approval.
+
+Read [Project Data Boundary](project-data-boundary.md) and [Documentation Construction Contract](documentation-visual-language.md) before judging completion.
 
 ## Three independent inventories
 
-1. **Approved:** derive the expected names, modes, values, public options and required sections from the approved brief and canonical specification before building. Record exclusions with their approved reason. Do not generate this set solely from whatever exists in Figma.
-2. **Implemented:** inspect the actual variables, Styles, assets and component properties. Resolve aliases and modes; read native descriptions and supported options. Missing or extra objects require correction or an explicit scope decision.
-3. **Documented:** inspect visible entries, text labels, specimens and mode containers. Record the actual name, resolved value, individual usage and corresponding specimen for each entry.
+1. **Approved** — derive expected names, modes, values, public options, and required sections from the approved Discovery brief and owning specification before building.
+2. **Implemented** — inspect actual variables, Styles, assets, component properties, modes, and descriptions.
+3. **Documented** — inspect visible entries, labels, specimens, measured diagrams, and mode containers.
 
-Compare identities, not only totals. Equal counts can hide one omitted token and one duplicated token. Different roles with equal colors still require separate entries.
+Compare identities, not totals. Equal counts can still hide one omitted item and one duplicate.
 
-## Required sections and individual fields
+## Required visible coverage
 
-The owning item file defines the required visible sections. Do not add sections merely because another design system contains them.
+The owning item file defines the content inventory. The Documentation Construction Contract defines how that inventory is laid out.
 
-At minimum:
+Minimum coverage:
 
-- Color: complete primitive/source reference and complete semantic-role reference, grouped according to the actual token model. Mode values, role hierarchy, source pills/swatches, and row-specific usage must be visible where applicable.
-- Typography: every approved family and Text Style, full metrics, real samples, hierarchy, wrapping and scripts.
-- Spacing/Sizing: the complete scale and all shared control/icon/target dimensions, measured examples and zero behavior.
-- Radius/Border: every role/width, actual values, public usage, focus and validation distinctions.
-- Elevation/Motion/Layout: every role and its full effect/timing/layout specification, context, supported modes and applicable behavior.
-- Assets/Content/Accessibility: all approved reusable assets, treatments and rules, with their individual requirements and examples.
-- Component guides: public anatomy, complete dimensions, every public axis value/property, default, constraints, states, appearance, behavior and usage.
+- Colors — every approved primitive/source value.
+- Color variables — every approved semantic role and supported mode resolution.
+- Typography — every approved family/weight capability and every implemented Text Style.
+- Spacing/Sizing — complete approved scales and shared target/control/icon dimensions.
+- Radius/Borders — every approved role/width and treatment.
+- Elevation/Motion/Layout — every approved role and complete specification.
+- Assets/Content/Accessibility — all approved reusable assets/treatments/rules.
+- Component guides — public anatomy, dimensions, every public axis/property/default/constraint/state/behavior.
 
-A required application, comparison, do-and-don't, pairing, or prototype section is mandatory only when the owning item specification or approved brief requires it. Do not manufacture generic sections to satisfy a template.
+A summary or native panel does not replace required visible reference coverage.
 
-## Structural checks
+## Canonical structural checks
 
-- Confirm the guide follows the established documentation language already approved in the target Figma file.
-- If an external reference was supplied, confirm it was used for information architecture and visual grammar rather than copied literally.
-- Confirm the body structure matches the information: semantic tables for semantic lookup, swatch families for palettes, measured diagrams for dimensions, specimen rows for visual styles/assets, and prose/comparisons for behavioral guidance.
-- Confirm real parent/child relationships are visible when they materially improve lookup. Reject invented hierarchy.
-- Confirm sections are separated more strongly than individual rows.
-- Confirm documentation chrome remains quieter than the system content being documented.
-- Confirm root width is content-driven and 4px aligned. Wide references may exceed the prose default when necessary.
-- Confirm neighboring top-level frames do not overlap after resizing.
+Foundation guides must satisfy all of these:
+
+- top-level page order matches the canonical order;
+- each guide uses its assigned root width;
+- top-level guide Y position is `0`;
+- horizontal gap between adjacent top-level guide frames is `200px`;
+- header uses the canonical `476px` shell;
+- body uses `80px` horizontal/top padding, `96px` bottom padding, and `112px` major-section gap;
+- section introduction width matches the canonical pattern;
+- documentation typography uses the fixed scale and current project's approved primary interface typeface;
+- Foundation → pattern mapping matches the fixed contract;
+- footer uses the canonical construction;
+- continuation frames keep the owning guide width and `200px` canvas gap.
+
+Do not accept a guide merely because it looks similar to a reference.
+
+## Pattern-specific structural checks
+
+### P1 — Palette families
+
+Verify:
+
+- root width `2848px`;
+- body width `2688px`;
+- family label/reference alignment follows the canonical row geometry;
+- normal swatches are `160×156px`;
+- an approved anchor card, when one exists, is `224×156px`;
+- swatch radius `12px`;
+- preview height `80px`;
+- horizontal normal-swatch gap `32px`;
+- ordering matches approved source sequence;
+- no anchor/default is invented.
+
+### P2 — Semantic variable table
+
+For a two-mode system verify:
+
+- root width `2528px`;
+- body width `2368px`;
+- table columns exactly `820 | 360 | 360 | 828`;
+- table header height `56px`;
+- default row height `88px` before content-driven wrapping;
+- `1px` dividers;
+- name-pill and mode-pill anatomy match the construction contract;
+- mode swatches are `28×28px`;
+- child connector area is `48×48px` and appears only for explicit semantic relationships.
+
+For one mode verify the canonical `820 | 480 | 1068` columns.
+
+For more than two modes verify the required continuation-frame rule rather than compressed extra columns.
+
+### P3 — Specimen rows
+
+Verify:
+
+- correct canonical root width;
+- specimen row minimum `120px`;
+- `32px` vertical row padding;
+- `24px` specimen/annotation gap;
+- fixed annotation width for the assigned root width;
+- actual connected Style/asset/component specimen at `100%` scale.
+
+### P4 — Measured diagrams
+
+Verify:
+
+- row minimum `144px`;
+- `32px` vertical padding;
+- `360px` label/specification column;
+- `32px` gap;
+- true-size measured specimen;
+- no convenience scaling.
+
+### P5 — Guidance and comparisons
+
+Verify:
+
+- root width `1600px`;
+- centered `800px` reading column;
+- comparison outer width `1120px`;
+- comparison columns `548px + 24px + 548px`;
+- callout/comparison geometry matches the construction contract.
 
 ## Visual and semantic checks
 
-- Verify a color specimen is actually filled, stroked or rendered using the named role. A text-only hex label is insufficient.
-- Verify the actual Text Style is applied to its sample; a label naming a font is insufficient.
-- Verify bars, target bounds, radii, borders and layouts measure their recorded values at actual size.
-- Verify every mode sample has the intended effective mode, and its displayed source/hex/alpha matches that resolution.
-- Read the usage for every entry. It must explain that particular choice, state or pairing, not repeat generic advice across unrelated items.
-- For semantic-variable tables, verify source pills resolve to the displayed primitive and that child connectors match actual semantic relationships.
-- For primitive ramps, verify sequence, anchor/default indicators, values, and alpha/compositing treatment.
-- Inspect screenshots of every reference group and continuation at a readable scale, including first and last rows. Check hierarchy, overflow, wrapping, cropping, contrast, column alignment, connector clarity, and association of labels with samples.
-- Reject a guide that technically contains all records but visually reads as an arbitrary wall of rows.
-- Check total width after padding and gaps. Use a wider 4px-aligned root, additional groups, or continuation frames instead of shrinking readable content.
-- Limit accessibility statements to evidenced checks. Name remaining implementation work.
+- Color specimens must actually render the named value/role.
+- Text samples must use the named Text Style.
+- Spacing/size/radius/border/layout samples must measure the recorded value.
+- Mode samples must resolve under the intended effective mode.
+- Alias/source labels must match actual resolved values.
+- Usage copy must be specific to each entry.
+- Semantic child connectors must match explicit relationships.
+- Connected assets/components must remain connected.
+- First and last rows of every reference group must be inspected in screenshots.
+- Whole-guide screenshots must show clear section hierarchy and no overlap.
+- Text, labels, pills, focus rings, menus, and effects must not clip.
 
-## Reference-specific checks
+## Project-data isolation checks
 
-When a user supplied a reference Figma file or screenshot, record internally:
+A reusable framework run fails if it uses project-sensitive values without current-project approval.
 
-- which node or screenshot was inspected;
-- which information patterns were adopted;
-- which reference patterns were intentionally omitted because they do not align with the current system.
+Confirm:
 
-Do not reproduce the reference's brand, token names, proprietary copy, component inventory, or exact dimensions unless those values were independently approved for the current project.
+- brand/product names come from the current project;
+- concrete colors/palettes come from the current project;
+- typefaces/weights come from the current project;
+- assets/copy/component inventory come from the current project;
+- external references were not treated as brand defaults;
+- example-project values did not leak into another project.
+
+Repository-maintenance changes must also pass the [Project Data Boundary](project-data-boundary.md) pre-commit audit.
 
 ## Completion record
 
-Keep an internal record with the approved inventory source, actual file/node IDs, entry reconciliation, missing/stale fields, screenshot review references and remaining decisions. This record is not designer-facing content.
+Keep an internal record containing:
 
-Use `Complete` only when the underlying item, complete reference, required visible sections, and structural screenshot review pass. Use `Incomplete` for missing content or failed review. Record a blocked input separately; do not replace it with fabricated values or silently reduce the scope.
+- approved inventory source;
+- actual file/node IDs;
+- implemented/documented reconciliation;
+- canonical pattern and expected geometry;
+- missing/stale fields;
+- screenshot review references;
+- remaining user decisions.
+
+This record is not designer-facing content.
+
+Use `Complete` only when underlying implementation, visible reference, canonical geometry, and screenshot review pass.
+
+Use `Incomplete` for missing content or structural/visual failure. Record blocked project input separately rather than fabricating a value.
 
 ## Repository validation
 
-From the repository root, run:
+Run from repository root:
 
 ```sh
 node scripts/validate-documentation.mjs
 node --test scripts/validate-documentation.test.mjs
 ```
 
-The first command checks local Markdown file links outside fenced examples, required Foundation sections, canonical documentation-visual-language contracts and obsolete omission rules. It does not inspect Figma or prove a built guide is correct.
+Static validation checks repository contracts. It does not authenticate Figma screenshot quality.
 
 ## Optional exported coverage evidence
 
-During an authorized build, export independently inspected data and run:
+During an authorized build:
 
 ```sh
 node scripts/validate-documentation.mjs --coverage path/to/coverage.json
 ```
 
-Use one record per guide or reference group whose specimens have inspectable variable/Style bindings or connected assets. The following JSON illustrates the format with a synthetic fixture; it is not approved brand data or completed QA evidence:
+Use one record per guide/reference group with inspectable bindings or connected assets.
+
+Synthetic fixture example:
 
 ```json
 {
-  "guide": "Synthetic color reference",
-  "approvedSource": "Approved brief and Color contract",
+  "guide": "Synthetic semantic reference",
+  "approvedSource": "Synthetic approved fixture",
   "approved": [
-    {"name": "color/text/primary", "values": {"Light": "#111111", "Dark": "#EEEEEE"}}
+    {"name": "color/text/primary", "values": {"Mode A": "#111111", "Mode B": "#EEEEEE"}}
   ],
   "implemented": [
-    {"name": "color/text/primary", "nodeId": "fixture-variable", "description": "Main readable text on normal content surfaces.", "values": {"Light": "#111111", "Dark": "#EEEEEE"}}
+    {"name": "color/text/primary", "nodeId": "fixture-variable", "description": "Main readable text.", "values": {"Mode A": "#111111", "Mode B": "#EEEEEE"}}
   ],
   "documented": [
     {
       "name": "color/text/primary",
       "rowNodeId": "fixture-row",
-      "usage": "Use for main body text and headings on the normal content surface.",
-      "values": {"Light": "#111111", "Dark": "#EEEEEE"},
+      "usage": "Use for the highest-emphasis readable text on the normal content surface.",
+      "values": {"Mode A": "#111111", "Mode B": "#EEEEEE"},
       "samples": {
-        "Light": {"nodeId": "fixture-light", "bindsTo": "color/text/primary", "value": "#111111"},
-        "Dark": {"nodeId": "fixture-dark", "bindsTo": "color/text/primary", "value": "#EEEEEE"}
+        "Mode A": {"nodeId": "fixture-a", "bindsTo": "color/text/primary", "value": "#111111"},
+        "Mode B": {"nodeId": "fixture-b", "bindsTo": "color/text/primary", "value": "#EEEEEE"}
       }
     }
   ],
@@ -119,8 +220,6 @@ Use one record per guide or reference group whose specimens have inspectable var
 }
 ```
 
-For a single-value token, Style or connected asset use `Value` in place of Light/Dark. Values may be JSON objects holding complete metrics, effect layers or asset constraints. Keep values equally structured in all three inventories. Include units in strings or object fields. For aliases, values are the resolved specifications, not alias IDs. In real exports use the returned object/node identities and the actual bound or connected source name for each specimen.
+Synthetic fixture values are test data only and are not project defaults.
 
-For writing rules, accessibility behavior or other unbindable guidance, keep the same three-inventory and section-review requirements in the completion record, with actual diagram/prototype identities and inspected measurements or behavior. Review these manually; do not fabricate native bindings, objects or descriptions to force them into this optional JSON format. Passing the bindable-reference check does not waive the remaining rule and structural checks.
-
-The coverage validator rejects missing/extra/duplicate names, missing modes, stale values, empty descriptions/usage, missing or reused specimens, wrong bound names, missing sections and absent screenshot review markers. It validates the supplied evidence's consistency; it cannot authenticate its origin, judge screenshot quality or substitute for reading the actual guide. Never hand-author a passing evidence record to avoid inspection. Do not commit project-specific evidence to this reusable base.
+The coverage validator checks identity/value consistency. It does not replace structural/screenshot review or project-data isolation review.
