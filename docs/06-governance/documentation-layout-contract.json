@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "scope": "designer-facing Figma documentation construction only",
+  "projectDataBoundary": "All brand/product values, colors, fonts, assets, content, modes, and component scope come from the current project's approved inputs. This file contains no project identity defaults.",
+  "foundationCanvas": {
+    "topY": 0,
+    "horizontalGap": 200,
+    "order": [
+      "Design Tokens",
+      "Colors",
+      "Color variables",
+      "Typography",
+      "4px Grid",
+      "Spacing",
+      "Grid and Layout",
+      "Radius",
+      "Borders",
+      "Elevation",
+      "Iconography",
+      "Illustration and Imagery",
+      "Motion",
+      "Accessibility",
+      "Content"
+    ]
+  },
+  "foundationGuides": {
+    "Design Tokens": { "width": 1600, "pattern": "P5" },
+    "Colors": { "width": 2848, "pattern": "P1" },
+    "Color variables": { "width": 2528, "pattern": "P2" },
+    "Typography": { "width": 1600, "pattern": "P3" },
+    "4px Grid": { "width": 1600, "pattern": "P4" },
+    "Spacing": { "width": 1600, "pattern": "P4" },
+    "Grid and Layout": { "width": 1664, "pattern": "P4" },
+    "Radius": { "width": 1600, "pattern": "P4" },
+    "Borders": { "width": 1600, "pattern": "P4" },
+    "Elevation": { "width": 1600, "pattern": "P3" },
+    "Iconography": { "width": 1600, "pattern": "P3" },
+    "Illustration and Imagery": { "width": 1664, "pattern": "P3" },
+    "Motion": { "width": 1600, "pattern": "P3" },
+    "Accessibility": { "width": 1600, "pattern": "P5" },
+    "Content": { "width": 1600, "pattern": "P5" }
+  },
+  "shell": {
+    "root": {
+      "layout": "VERTICAL",
+      "padding": 0,
+      "gap": 0,
+      "height": "HUG"
+    },
+    "header": {
+      "height": 476,
+      "outerInset": 32,
+      "cardHeight": 412,
+      "cardRadius": 20,
+      "cardPadding": { "top": 48, "right": 48, "bottom": 64, "left": 48 },
+      "cardGap": 112,
+      "contextRowHeight": 36,
+      "heroRowHeight": 152,
+      "heroMetadataWidth": 440,
+      "heroColumnsGap": 64,
+      "contextItemGap": 16,
+      "dividerThickness": 1
+    },
+    "body": {
+      "padding": { "top": 80, "right": 80, "bottom": 96, "left": 80 },
+      "majorSectionGap": 112,
+      "sectionIntroToReferenceGap": 56,
+      "sectionIntroGap": 12,
+      "wideIntroWidth": 900,
+      "standardIntroWidth": 800
+    },
+    "footer": {
+      "minHeight": 120,
+      "padding": { "top": 32, "right": 80, "bottom": 48, "left": 80 },
+      "dividerThickness": 1
+    }
+  },
+  "documentationTypography": {
+    "fontFamilySource": "project.primaryInterfaceTypeface",
+    "weightResolution": "nearest approved numeric weight; on an equal-distance tie choose the lighter weight",
+    "roles": {
+      "heroTitle": { "size": 60, "lineHeight": 72, "targetWeight": 600, "fallbackSize": 52, "fallbackLineHeight": 64 },
+      "sectionTitle": { "size": 32, "lineHeight": 40, "targetWeight": 600 },
+      "groupTitle": { "size": 24, "lineHeight": 32, "targetWeight": 600 },
+      "familyTitle": { "size": 18, "lineHeight": 28, "targetWeight": 600 },
+      "heroDescription": { "size": 20, "lineHeight": 30, "targetWeight": 400 },
+      "sectionDescription": { "size": 18, "lineHeight": 28, "targetWeight": 400 },
+      "bodyUsage": { "size": 16, "lineHeight": 24, "targetWeight": 400 },
+      "rowValueEmphasis": { "size": 16, "lineHeight": 24, "targetWeight": 600 },
+      "tableHeaderMetadata": { "size": 14, "lineHeight": 20, "targetWeight": 500 }
+    }
+  },
+  "patterns": {
+    "P1": {
+      "name": "Palette families",
+      "rootWidth": 2848,
+      "bodyWidth": 2688,
+      "familyLabelColumn": 544,
+      "swatchAreaRootX": 624,
+      "familyRowStepY": 220,
+      "familyDescriptionGap": 8,
+      "normalSwatch": {
+        "width": 160,
+        "height": 156,
+        "radius": 12,
+        "border": 1,
+        "previewWidth": 160,
+        "previewHeight": 80,
+        "labelInsetX": 12,
+        "nameY": 92,
+        "valueY": 120
+      },
+      "anchorSwatch": {
+        "width": 224,
+        "height": 156,
+        "markerSize": 10,
+        "markerInsetTopRight": 8,
+        "onlyWhenProjectDefinesAnchor": true
+      },
+      "normalSwatchGap": 32
+    },
+    "P2": {
+      "name": "Semantic variable table",
+      "rootWidth": 2528,
+      "bodyWidth": 2368,
+      "twoModeColumns": { "name": 820, "mode1": 360, "mode2": 360, "usage": 828 },
+      "oneModeColumns": { "name": 820, "value": 480, "usage": 1068 },
+      "headerHeight": 56,
+      "defaultRowHeight": 88,
+      "dividerThickness": 1,
+      "namePill": { "maxHeight": 40, "radius": 8, "paddingY": 8, "paddingX": 12 },
+      "modePill": { "maxHeight": 48, "radius": 12, "paddingTop": 8, "paddingRight": 12, "paddingBottom": 8, "paddingLeft": 8, "gap": 8, "swatch": 28 },
+      "childConnector": { "area": 48, "verticalX": 12, "verticalWidth": 1, "verticalHeight": 36, "horizontalX": 12, "horizontalY": 24, "horizontalWidth": 24, "horizontalHeight": 1, "gapToNamePill": 12 },
+      "moreThanTwoModes": "continuation frame per additional mode pair; same 2528 root width"
+    },
+    "P3": {
+      "name": "Specimen rows",
+      "rowMinHeight": 120,
+      "rowPaddingY": 32,
+      "specimenAnnotationGap": 24,
+      "annotationWidthByRoot": { "1600": 440, "1664": 480 },
+      "dividerThickness": 1,
+      "specimenScale": 1
+    },
+    "P4": {
+      "name": "Measured diagrams",
+      "rowMinHeight": 144,
+      "rowPaddingY": 32,
+      "labelSpecificationColumn": 360,
+      "gap": 32,
+      "dividerThickness": 1,
+      "specimenScale": 1
+    },
+    "P5": {
+      "name": "Guidance and comparisons",
+      "rootWidth": 1600,
+      "readingColumn": 800,
+      "guidanceGap": 16,
+      "callout": { "padding": 24, "radius": 12 },
+      "comparison": { "outerWidth": 1120, "columnWidth": 548, "gap": 24, "columnPadding": 24, "columnGap": 16 }
+    }
+  },
+  "componentGuide": {
+    "rootWidth": 1600,
+    "canvasHorizontalGap": 200,
+    "bodyWidth": 1440,
+    "sectionOrder": [
+      "Overview",
+      "Primary design decision",
+      "Anatomy and dimensions",
+      "Public properties",
+      "Appearance modes",
+      "States and options",
+      "Responsive behavior",
+      "Do and don't",
+      "Accessibility"
+    ],
+    "anatomyDimensionsTable": { "width": 1120, "columns": [280, 280, 240, 320], "headerHeight": 56, "defaultRowHeight": 72 },
+    "publicPropertiesTable": { "width": 1120, "columns": [280, 160, 240, 440], "headerHeight": 56, "defaultRowHeight": 72 },
+    "modeComparison": { "outerWidth": 1120, "columnWidth": 548, "gap": 24 },
+    "accessibilityBlock": { "width": 800, "padding": 24, "gap": 16, "radius": 12 },
+    "responsiveContinuationWidth": 1664
+  }
+}
