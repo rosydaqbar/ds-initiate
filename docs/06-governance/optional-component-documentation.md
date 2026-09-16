@@ -4,6 +4,8 @@ This standard defines the optional designer-facing Figma guide for a finished At
 
 Foundations are excluded from this opt-in rule because their guides are mandatory.
 
+Read [Documentation Visual Language](documentation-visual-language.md) before authoring a component guide. Reuse the documentation chrome already approved in the target Figma file, but choose the body structure from the component's actual public API rather than copying a Foundation table pattern.
+
 ## Component completion boundary
 
 A component is complete when its Figma objects, variants, properties, variables, interactions, publishing information, and internal QA are finished. A documentation frame is not required for component completion.
@@ -25,7 +27,7 @@ Build a readable usage guide supported by connected component instances. The gui
 - When to use it and when another component is a better choice.
 - How its visual hierarchy or styles differ.
 - Every supported size, state, public property and option, with its default and usage.
-- How to use it correctly and what to avoid.
+- How to use it correctly and what to avoid when those comparisons add real value.
 - The concise accessibility status and any remaining designer responsibility.
 
 Do not build a specimen dashboard, property dump, or full variant matrix. Focused instance rows explain the public permutations without reproducing the component set.
@@ -38,6 +40,7 @@ Build the guide from the finished Figma component and its Markdown specification
 - Read the actual public styles, sizes, states, Text properties, Boolean properties, and instance-swap properties before creating examples.
 - Omit irrelevant sections and repetitive combinations.
 - If the finished component conflicts with its specification, resolve the component defect before documenting it.
+- Inspect any existing approved component guide in the target file and reuse its established section rhythm, labels, pill treatment, dividers, and typography hierarchy where appropriate.
 
 ## Keep implementation data internal
 
@@ -56,39 +59,31 @@ Do not place these in the visible guide:
 Use an editorial sequence of headings, short explanations, and connected-instance examples. Do not use a dashboard of equal cards.
 
 ```text
-Documentation / {Component} [FRAME, vertical Auto Layout, 1600 Fixed × Hug]
-  Header [FRAME, vertical Auto Layout, Fill × Hug]
-    {Atomic level} [TEXT]
-    {Component name} [TEXT]
-    {One-sentence purpose} [TEXT]
-  Article [FRAME, vertical Auto Layout, Fill × Hug]
-    Section / Overview [FRAME, vertical Auto Layout, Fill × Hug]
-      Copy [FRAME, vertical Auto Layout, 800 Fixed × Hug]
-        {What it is} [TEXT]
-        {When to use} [TEXT]
-        {When not to use} [TEXT]
-      Recommended example [FRAME, vertical Auto Layout, up to 1120 Fixed × Hug]
-        {Connected instance} [INSTANCE]
-        {Why this is the recommended default} [TEXT]
-    Section / {Primary designer decision} [FRAME, vertical Auto Layout, Fill × Hug]
-      Copy [FRAME, vertical Auto Layout, 800 Fixed × Hug]
-      Instance row [FRAME, horizontal wrap Auto Layout, up to 1120 Fixed × Hug]
-        {Connected instance and visible annotation} [FRAME]
-    Section / Anatomy and dimensions [FRAME; annotated connected instance and complete size reference]
-    Section / Public properties [FRAME; property, type, default, options and usage]
-    Section / Appearance modes [FRAME; connected mode comparisons]
-    Section / States and options [FRAME, vertical Auto Layout, Fill × Hug]
-      {Focused connected-instance rows} [FRAME]
-    Section / Do and don't [FRAME, vertical Auto Layout, Fill × Hug]
-      Comparison [FRAME, horizontal wrap Auto Layout, up to 1120 Fixed × Hug]
-        Do [FRAME]
-        Don't [FRAME]
-    Section / Accessibility [FRAME, vertical Auto Layout, 800 Fixed × Hug]
-      {Remaining designer responsibility} [TEXT]
-      {Actual design checks and pending implementation checks} [TEXT]
+Documentation / {Component} [FRAME, vertical Auto Layout, width chosen from content × Hug]
+  Page header
+    {Atomic level / context}
+    {Component name}
+    {One-sentence purpose}
+    Optional compact system metadata
+  Section / Overview
+    What it is
+    When to use
+    When not to use
+    Recommended connected instance
+  Section / {Primary designer decision}
+    Focused connected-instance row(s)
+    Explanation
+  Section / Anatomy and dimensions
+  Section / Public properties
+  Section / Appearance modes, when the component materially changes by mode
+  Section / States and options
+  Section / Do and don't, only when a real misuse pattern needs comparison
+  Section / Accessibility
 ```
 
 Rename the primary decision section for the component, such as `Hierarchy`, `Selection behavior`, `Validation`, `Placement`, or `Responsive behavior`.
+
+Do not create a section simply because another design system uses it. The component API and approved specification determine the body.
 
 ## Exact construction
 
@@ -96,22 +91,18 @@ All structural values below are multiples of 4.
 
 | Object | Construction |
 | --- | --- |
-| Guide root | Regular unpublished `FRAME`; `1600px` fixed width; Hug height; vertical Auto Layout; `0px` padding; `0px` gap; semantic canvas fill |
-| Placement | Existing component page; X and Y divisible by 4; at least `64px` from production component sets |
-| Header | Fill × Hug; vertical Auto Layout; `80px` horizontal and `64px` vertical padding; `12px` gap; purpose maximum width `800px` |
-| Article | Fill × Hug; vertical Auto Layout; `80px` horizontal and vertical padding; `64px` section gap; center alignment |
-| Section | Fill × Hug; vertical Auto Layout; `32px` gap; center alignment |
-| Reading column | `800px` fixed width; Hug height; vertical Auto Layout; `16px` gap; aligned left |
-| Example block | `800px` default width; up to `1120px` when real instances need it; Hug height; vertical Auto Layout; `32px` padding; `24px` gap; `12px` radius; semantic subtle surface fill |
-| Instance row | Horizontal wrap Auto Layout; Fill × Hug; `24px` row and column gap; instances remain at 100% scale |
-| Instance annotation | Hug height; `8px` gap between label and value; `12px` before the usage sentence |
-| Comparison | `1120px` maximum width; horizontal wrap Auto Layout; `24px` gap |
-| Do or don't block | `548px` fixed width when paired; Hug height; vertical Auto Layout; `24px` padding; `16px` gap; semantic surface fill and subtle inside border |
-| Accessibility block | `800px` fixed width; Hug height; vertical Auto Layout; `16px` gap; `24px` padding; `12px` radius; semantic subtle surface fill |
+| Guide root | Regular unpublished `FRAME`; `1600px` is the default width for ordinary component guides; expand by 4px increments when an actual-size Organism or reference row needs more room; Hug height; vertical Auto Layout; semantic canvas fill |
+| Placement | Existing component page; X and Y divisible by 4; at least `64px` from production component sets and no overlap with neighboring documentation frames |
+| Page header | Match the approved documentation chrome in the target file; use the same hierarchy, metadata treatment, dividers, and quiet background language where appropriate |
+| Section | Fill × Hug; vertical Auto Layout; enough vertical separation to distinguish sections more strongly than individual rows |
+| Reading copy | Keep a readable measure; `800px` is a strong default, not a mandatory width when the existing file uses another approved measure |
+| Example block | Use the width needed by real connected instances at 100% scale; never scale an instance merely to fit documentation |
+| Instance row | Horizontal wrap Auto Layout; Fill × Hug; 4px-aligned gaps; instances remain at 100% scale |
+| Instance annotation | Clear label/value relationship plus one concise sentence explaining why a designer would choose it |
+| Comparison | Use side-by-side comparison only when the decision benefits from direct contrast; wrap when required rather than compressing content |
+| Accessibility block | Use the established documentation surface and spacing language in the target file |
 
-Expand the guide only when a real Organism or responsive specimen cannot fit at actual size. Never scale a component instance to make it fit.
-
-Calculate usable width after padding and gaps. An 1120px example block with 32px side padding has 1056px of content width; a paired 548px comparison needs an unpadded 1120px wrapper. Wrap examples or expand the guide by multiples of 4 when necessary. Keep every required entry visible and readable.
+Calculate usable width after padding and gaps. Expand the guide by multiples of 4 when necessary. Keep every required entry visible and readable.
 
 ## Permutation guidance
 
@@ -134,7 +125,7 @@ Every displayed instance needs a visible label and a sentence explaining why a d
 
 ## Do-and-don't guidance
 
-Use the component-specific rules in its item file. Each comparison demonstrates one decision and contains one specific sentence beneath both examples. Focus on hierarchy, action choice, content, placement, grouping, density, state selection, and responsive behavior.
+Use the component-specific rules in its item file. Create a comparison only when it demonstrates a real designer decision. Each side needs one specific explanation.
 
 Never manufacture an invalid component variant. The incorrect example changes the surrounding composition, content, or selection of an existing but inappropriate public permutation.
 
@@ -153,6 +144,7 @@ After building the approved guide, verify internally:
 - No private option is shown. Required public options missing from the implementation fail the component contract and cannot be waived by hiding them from the guide.
 - Text, focus rings, shadows, menus, and overlays do not clip.
 - The frame follows the 4px structural rule.
-- The final screenshot is legible and free of overflow.
+- The guide extends the approved documentation visual language already present in the target file.
+- The final screenshot is legible, free of overflow, and structurally clear rather than a random collection of specimens.
 
 Use [Documentation Acceptance](documentation-acceptance.md) to reconcile approved, implemented and documented public choices. Record raw review evidence in the build ledger; show scoped outcomes and usage restrictions where they help the designer.
