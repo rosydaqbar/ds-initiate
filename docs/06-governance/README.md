@@ -1,6 +1,8 @@
 # Governance and Build Process
 
-Read governance in this order:
+These documents define how the framework generates and validates a design system for a project. They do not describe repository upkeep or contributor workflow.
+
+Read them in this order:
 
 1. [Project data boundary](project-data-boundary.md)
 2. [Build roadmap](build-roadmap.md)
@@ -14,4 +16,4 @@ Read governance in this order:
 10. [Naming and publishing](naming-and-publishing.md)
 11. [Change management](change-management.md)
 
-The reusable repository owns deterministic construction and validation rules. Project identity and visual values come from approved Discovery or explicitly supplied production inputs; example-project values are never reusable defaults.
+The framework defines deterministic construction and validation rules. Project identity and visual values come from approved Discovery or explicitly supplied production inputs.
