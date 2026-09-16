@@ -2,7 +2,7 @@
 
 Foundations define the shared visual language used by every generated project's components.
 
-Project-sensitive values come from approved Discovery. The reusable repository defines their construction/documentation rules. Read [Project Data Boundary](../06-governance/project-data-boundary.md).
+Project-sensitive values come from approved Discovery. The framework defines how those values are constructed and documented. Read [Project Data Boundary](../06-governance/project-data-boundary.md).
 
 Figma documentation is mandatory for every Foundation item in requested scope. Build it alongside the underlying values, Styles, assets, or rules. The Foundation is complete only when both implementation and guide pass QA.
 
@@ -33,4 +33,4 @@ All guides use the canonical header/footer, body rhythm, typography scale, and c
 
 Foundation values are populated only from the approved current-project brief, approved proposals, or supplied production sources. Do not borrow another project's palette, typeface, radius, assets, copy, or semantic mapping.
 
-The 4px construction grid is mandatory for structural layout. Internal IDs and raw QA evidence stay out of designer-facing documentation.
+The 4px construction grid is mandatory for structural layout. Execution IDs and raw QA evidence stay out of designer-facing documentation.
