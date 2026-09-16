@@ -13,7 +13,7 @@ The construction contract is normative. Do not improvise a different shell, widt
 
 ## Documentation outcome
 
-A complete guide lets a designer find a specific approved choice, read its resolved specification, understand its purpose, and see the correct bound/measured specimen without opening this repository.
+A complete guide lets a designer find a specific approved choice, read its resolved specification, understand its purpose, and see the correct bound/measured specimen without opening these specification files.
 
 Every implemented color, token, Text Style, Effect Style, shared size, and reusable asset treatment in approved scope requires a visible reference entry. Every approved behavioral rule requires visible guidance.
 
@@ -41,7 +41,7 @@ Required designer-facing information:
 - concrete usage and misuse guidance;
 - pair-specific contrast results only when actually tested and useful for a designer decision.
 
-Keep internal:
+Keep execution evidence out of the designer-facing guide:
 
 - node IDs and variable IDs;
 - alias traversal logs;
@@ -79,7 +79,7 @@ This mapping is fixed. Do not choose another body pattern for variety.
 
 All Foundation guides use the exact root width, header shell, body padding, section rhythm, footer, canvas order, and `200px` horizontal frame spacing defined in [Documentation Construction Contract](documentation-visual-language.md).
 
-Do not restate alternative geometry inside an item file. If an item recipe conflicts with the construction contract, the construction contract wins unless the user explicitly approves a repository-level change.
+Do not restate alternative geometry inside an item file. If an item recipe conflicts with the construction contract, stop and report the exact conflict rather than choosing a different geometry silently.
 
 When a guide exceeds a reasonable canvas height, create a continuation frame using the same canonical width and shell. Do not compress the guide, shrink text, change its assigned root width, or omit approved entries.
 
@@ -123,7 +123,7 @@ Use `P5 — Guidance and comparisons`. Do not convert these into a dashboard of 
 
 If the user supplies a reference, inspect it to understand the information problem, then select the already-defined canonical pattern. Do not copy its arbitrary frame width, card style, font, token names, copy, or palette.
 
-A reference does not authorize new repository geometry. If the current canonical patterns genuinely cannot represent the approved information, stop and request approval to extend the reusable contract.
+If the current canonical patterns cannot represent the approved information, stop and report the unsupported requirement instead of inventing a new documentation geometry.
 
 ## Build sequence
 
@@ -148,8 +148,8 @@ A Foundation guide is incomplete when any of these occur:
 - usage text is generic or duplicated across distinct entries;
 - the wrong canonical pattern is used;
 - root width, header shell, body rhythm, table anatomy, or canvas placement differs from the construction contract;
-- another project's brand name, palette, font, copy, or token mapping appears as a default;
-- a reference is copied literally instead of being represented through the repository contract;
+- another project's brand name, palette, font, copy, or token mapping appears as current-project input without approval;
+- a reference is copied literally instead of being represented through the framework contract;
 - text clips, rows overlap, mode labels are wrong, or hierarchy is structurally ambiguous;
 - screenshot QA was not actually performed.
 
