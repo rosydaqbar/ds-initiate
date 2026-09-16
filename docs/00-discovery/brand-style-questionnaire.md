@@ -1,71 +1,182 @@
 # Brand Style Questionnaire
 
-Ask these ten questions before creating visual Foundations. Record exact values when they exist; use `Not applicable` when a field does not apply. Do not infer missing brand decisions.
+Ask these ten questions before creating visual Foundations.
+
+Discovery supplies **project data**. The reusable repository supplies **construction rules**. Never convert one project's answers into repository defaults; see [Project Data Boundary](../06-governance/project-data-boundary.md).
+
+Record exact values when they exist. Use `Not applicable` only when the field genuinely does not apply. Do not infer unresolved brand decisions from an example project.
 
 ## 1. What brand and product is this system for?
 
-Provide the official brand name, product name, one-sentence product description, primary audience, main platforms, and three most important user tasks.
+Record:
+
+- official brand name;
+- product name;
+- one-sentence product description;
+- primary audience;
+- main platforms;
+- three most important user tasks.
 
 ## 2. Which approved brand assets already exist?
 
-Attach or link the logo files, brand guidelines, color specifications, licensed fonts, icon set, imagery or illustration library, existing Figma library, and production design-token files. Name the decision owner when approved inputs conflict.
+Attach or link:
+
+- logos/marks;
+- brand guidelines;
+- production color specifications;
+- licensed fonts and approved weights;
+- icon set;
+- imagery/illustration library;
+- existing Figma library;
+- production design-token files.
+
+Name the decision owner when approved inputs conflict.
 
 ## 3. What exact color direction should the system use?
 
-Provide the primary, secondary, and accent colors as values; choose a cool, balanced, or warm neutral direction; confirm the default Light and Dark modes, or explicitly record an approved departure from that default; and list any prohibited colors. State whether missing ramps, supporting and status colors should be supplied or proposed for approval. Approve the complete family/step and semantic-role inventory before implementation; a core brand hex alone does not resolve those values.
+Record:
+
+- approved primary, secondary, and accent values when they exist;
+- neutral direction: cool, balanced, warm, or supplied production neutrals;
+- approved appearance modes;
+- prohibited colors;
+- existing production palette/token contract that must be preserved;
+- whether missing palette ramps/supporting/status values may be proposed for approval.
+
+A core brand hex is not a complete palette. If required ramp values or semantic mappings are not supplied, mark them `Requires proposal` and resolve them explicitly before Figma mutation. Never borrow another project's palette.
 
 ## 4. What typography should define the interface?
 
-Name the interface, display, and monospace typefaces; list the licensed weights; choose compact, standard, or spacious text density; choose sentence case, title case, or another casing rule; and identify any existing type treatment that must be preserved.
+Record:
+
+- interface typeface;
+- display typeface if different;
+- monospace typeface when required;
+- approved/licensed numeric weights;
+- compact, standard, or spacious text density;
+- casing rule;
+- existing production type treatments to preserve.
+
+Do not substitute a font from an example project.
 
 ## 5. What should the interface feel like?
 
-Choose exactly three desired traits and three traits to avoid, then add one sentence describing the intended impression.
+Record exactly three desired traits and three traits to avoid, plus one sentence describing the intended impression.
 
-Desired traits: `Modern` · `Trustworthy` · `Friendly` · `Premium` · `Bold` · `Calm` · `Playful` · `Technical` · `Minimal` · `Editorial`
+Suggested vocabulary may be used to help the user answer, but the selected traits are project data and are not reusable defaults.
 
-Traits to avoid: `Corporate` · `Childish` · `Luxury` · `Loud` · `Cold` · `Dense` · `Decorative` · `Generic` · `Futuristic` · `Casual`
+Desired examples: `Modern` · `Trustworthy` · `Friendly` · `Premium` · `Bold` · `Calm` · `Playful` · `Technical` · `Minimal` · `Editorial`
+
+Avoid examples: `Corporate` · `Childish` · `Luxury` · `Loud` · `Cold` · `Dense` · `Decorative` · `Generic` · `Futuristic` · `Casual`
 
 ## 6. What shape and density should controls and surfaces use?
 
-Choose the default control radius, surface radius, button shape, input shape, interface density, and default control height. All structural values use 4px increments; identify any requested exception for review.
+Record:
 
-Suggested choices:
+- default control radius;
+- default surface radius;
+- button shape;
+- input shape;
+- interface density;
+- default control height;
+- any approved exception to the 4px structural rule.
 
-- Radius: `0` · `4` · `8` · `12` · `16` · `24px`
-- Control height: `32` · `36` · `40` · `44` · `48px`
-- Density: `Compact` · `Standard` · `Spacious`
+Suggested answer values may be presented, but none are project defaults until approved.
 
 ## 7. How should surfaces separate from one another?
 
-Choose the main surface treatment, border contrast, shadow character, card treatment, and overlay treatment. List any visual treatments that must be avoided.
+Record:
 
-Suggested choices:
+- main surface treatment;
+- border contrast;
+- shadow character;
+- card treatment;
+- overlay treatment;
+- visual treatments to avoid.
 
-- Surface: `Border-led` · `Flat tonal` · `Soft shadow` · `Layered shadow`
-- Border: `Subtle` · `Medium` · `Strong`
-- Overlay: `Solid` · `Dimmed` · `Dimmed with background blur`
+Do not infer these from another project's documentation chrome.
 
-## 8. What icon, imagery, and motion styles belong to the brand?
+## 8. What icon, imagery, and motion styles belong to the project?
 
-Choose outline, filled, or two-tone icons; thin, regular, or bold strokes; sharp or rounded icon corners; the intended photography or illustration subject and treatment; and minimal, standard, or expressive motion. Attach approved assets when available.
+Record:
+
+- icon construction: outline, filled, two-tone, or supplied set;
+- stroke character when applicable;
+- corner character;
+- approved imagery/illustration subject and treatment;
+- motion character;
+- attached approved assets.
 
 ## 9. What accessibility, language, and content rules are required?
 
-State the accessibility target, keyboard and reduced-motion requirements, supported languages, right-to-left requirement, minimum text size, and product voice.
+Record:
 
-Use `WCAG 2.2 AA` unless a different target is approved.
+- accessibility target;
+- keyboard requirement;
+- reduced-motion requirement;
+- supported languages;
+- RTL requirement;
+- minimum text size;
+- product voice/content rules.
+
+Use `WCAG 2.2 AA` only as the repository default when the user does not require another target.
 
 ## 10. Which building blocks belong in the first release?
 
-Choose no more than fifteen components and put them in build-priority order. Confirm whether the scope stops at Foundations, Atoms, Molecules, and Organisms. Do not add Templates, Pages, product screens, or product-surface categories.
+Record no more than fifteen public components in build-priority order.
 
-Suggested component list: `Avatar` · `Badge` · `Button` · `Button group` · `Checkbox` · `Dropdown` · `Input` · `Progress` · `Radio group` · `Select` · `Slider` · `Tag` · `Toggle` · `Tooltip` · `Tabs` · `Alert` · `Modal` · `Navigation` · `Pagination` · `Table`
+Confirm whether scope stops at:
+
+`Foundations → Atoms → Molecules → Organisms`
+
+Do not add Templates, Pages, product screens, or product-surface categories.
+
+## Deterministic project resolution record
+
+Before asking for final Discovery approval, produce one normalized project-resolution record containing every project-sensitive value that downstream generation may use.
+
+At minimum record:
+
+- brand/product identity;
+- approved color anchors and supplied palette values;
+- palette values still requiring explicit proposal/approval;
+- approved appearance modes;
+- primary/display/mono typefaces and available numeric weights;
+- shape/density values;
+- surface/elevation treatment;
+- icon/imagery/motion treatment;
+- accessibility/language/content requirements;
+- first-release component list;
+- existing production tokens/assets that override repository defaults;
+- explicit exclusions.
+
+Use exact values rather than paraphrases whenever possible.
+
+If a downstream visual value is still unresolved, label it `BLOCKED` or `REQUIRES APPROVAL`. Do not treat a broad adjective as permission to invent an exact implementation value after Discovery approval.
 
 ## Foundation scope record
 
-For the selected Foundations, record all approved palette steps, semantic roles, Text Styles, sizes, radii, borders, effects, motion roles, layouts and required assets. Mark exclusions with their approved reason. Compact density, minimal visual style or flat surfaces do not authorize sampled documentation. Every implemented choice still needs its full reference entry.
+For selected Foundations, record the exact approved inventory or resolution status of:
+
+- palette families and steps;
+- semantic roles/modes;
+- Text Styles/type scale inputs;
+- spacing/sizing scales;
+- radii;
+- borders;
+- effects/elevation;
+- motion roles;
+- layouts/breakpoints;
+- required reusable assets.
+
+Mark explicit exclusions with reason.
+
+The framework may provide a canonical architecture, but current-project production values or explicitly approved departures outrank it.
 
 ## Required output
 
-Turn the approved answers into the [Discovery Brief](discovery-brief-format.md). Summarize the brand direction and first-release building blocks, list unresolved decisions, and wait for approval before creating Foundations.
+Turn the answers into the [Discovery Brief](discovery-brief-format.md), including the deterministic project-resolution record.
+
+Summarize unresolved decisions and wait for approval before creating project-sensitive Foundations.
+
+Discovery approval authorizes only values recorded as approved. It does not authorize an executor to fill later gaps from an example project or personal taste.
