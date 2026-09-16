@@ -1,16 +1,18 @@
 # Design System Build Specifications
 
-This documentation uses Atomic Design for both composition and organization.
+This repository uses Atomic Design for composition/build order and a deterministic documentation construction contract for designer-facing Figma output.
 
-## How the two structures work together
+The framework is brand-agnostic. Read [Project Data Boundary](06-governance/project-data-boundary.md) before generating or maintaining project-sensitive values.
 
-| Atomic Design level | What it means | Figma library section |
+## Atomic Design and Figma organization
+
+| Atomic Design level | Meaning | Figma library section |
 | --- | --- | --- |
-| Foundations | Shared visual rules and design tokens | Foundations and Shared Assets |
+| Foundations | Shared visual rules, tokens, and reusable assets | Foundations and Shared Assets |
 | Atoms | Smallest reusable UI components | Base Components |
 | Molecules | Small combinations of atoms with one clear purpose | Base Components |
-| Organisms | Larger reusable combinations of atoms and molecules | Components |
-| Patterns | Guidance for recurring tasks that use several components | Patterns and Utility |
+| Organisms | Larger reusable combinations | Components |
+| Patterns | Requested guidance for recurring tasks | Patterns and Utility |
 
 Atomic Design determines build order. Product-surface labels are not library levels.
 
@@ -26,29 +28,33 @@ Atomic Design determines build order. Product-surface labels are not library lev
 
 ## Naming rule
 
-Use the component's familiar name: `Button`, `Checkbox`, `Modal`, or `Data table`. Atomic level and library section are metadata inside its specification; they are not added to the component name.
+Use familiar component names such as `Button`, `Checkbox`, `Modal`, or `Data table`.
 
-Avoid conceptual category names in the Assets panel. Designers should search for the component they need, not understand the methodology first.
+Atomic level and library section remain specification metadata; do not add them to the component name.
 
 ## Mandatory construction rules
 
+- [Project Data Boundary](06-governance/project-data-boundary.md)
 - [4px construction grid](01-foundations/4px-grid.md)
 - [Figma construction standard](06-governance/figma-construction-standard.md)
+- [Documentation Construction Contract](06-governance/documentation-visual-language.md)
 - [Executable component specification format](06-governance/component-specification-format.md)
 
-Every item file states the exact Figma building block to create.
+Every structural choice that can be specified exactly must be represented as an exact measurement, fixed ordering rule, calculation, decision table, or blocking question rather than free-form visual taste.
 
 ## Figma documentation requirements
 
-| Item level | Documentation timing | Completion rule |
+| Item level | Timing | Completion rule |
 | --- | --- | --- |
-| Foundations | Mandatory in the same build; no separate opt-in question | Values, assets, or rules and their designer guide are completed together |
-| Atoms, Molecules, Organisms | Optional after internal component QA; ask the user first | The component can be complete without designer documentation |
+| Foundations | Mandatory in the same build | Underlying Foundation and canonical designer guide complete together |
+| Atoms, Molecules, Organisms | Optional after component QA and explicit approval | Production component can complete without a guide |
 
-Read [Documentation Visual Language](06-governance/documentation-visual-language.md) before generating designer-facing Figma documentation. It defines the shared documentation grammar and how to adapt external Figma references without copying their brand, token model, typography, or exact layout literally.
+Foundation guides do not choose their layout ad hoc. [Documentation Construction Contract](06-governance/documentation-visual-language.md) fixes page order, root widths, shell geometry, documentation typography scale, pattern mapping, table/specimen/measured layouts, canvas placement, and screenshot QA.
 
-Use [Mandatory Foundation Documentation](06-governance/foundation-documentation.md) for Foundation guides and [Optional Component Documentation](06-governance/optional-component-documentation.md) for component landing frames. Both are adaptive to the actual built result.
+The current project supplies brand-sensitive values through approved Discovery. The reusable repository supplies the construction grammar.
 
-Designer-facing Figma frames should feel like one coherent publication while choosing the information structure that best matches the content. Semantic variables may use hierarchical mode tables; primitive palettes may use swatch families; dimensions may use measured diagrams; typography, icons, elevation, imagery, and motion may use specimen rows. Do not force one template onto every Foundation.
+Use [Mandatory Foundation Documentation](06-governance/foundation-documentation.md) and [Documentation Acceptance](06-governance/documentation-acceptance.md) for Foundation coverage and validation.
 
-Every displayed choice must remain traceable to its actual project value, name, mode, specimen, and usage. Native panels supplement these references. Only internal IDs, raw API/alias dumps, and QA evidence stay outside designer-facing guides. Use [Documentation Acceptance](06-governance/documentation-acceptance.md) to verify coverage and screenshot quality.
+Use [Optional Component Documentation](06-governance/optional-component-documentation.md) only after the named component passes QA and the user approves that guide.
+
+Do not treat external references or example projects as brand defaults.
