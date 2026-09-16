@@ -5,7 +5,7 @@ Documentation is complete when four things agree:
 1. approved project scope;
 2. implemented Figma objects;
 3. visible designer reference;
-4. canonical repository construction contract.
+4. canonical framework construction contract.
 
 This gate applies to mandatory Foundation guides and to component guides after their separate approval.
 
@@ -137,7 +137,7 @@ Verify:
 
 ## Project-data isolation checks
 
-A reusable framework run fails if it uses project-sensitive values without current-project approval.
+A framework run fails if it uses project-sensitive values without current-project approval.
 
 Confirm:
 
@@ -148,11 +148,9 @@ Confirm:
 - external references were not treated as brand defaults;
 - example-project values did not leak into another project.
 
-Repository-maintenance changes must also pass the [Project Data Boundary](project-data-boundary.md) pre-commit audit.
-
 ## Completion record
 
-Keep an internal record containing:
+Keep an execution record containing:
 
 - approved inventory source;
 - actual file/node IDs;
@@ -167,17 +165,6 @@ This record is not designer-facing content.
 Use `Complete` only when underlying implementation, visible reference, canonical geometry, and screenshot review pass.
 
 Use `Incomplete` for missing content or structural/visual failure. Record blocked project input separately rather than fabricating a value.
-
-## Repository validation
-
-Run from repository root:
-
-```sh
-node scripts/validate-documentation.mjs
-node --test scripts/validate-documentation.test.mjs
-```
-
-Static validation checks repository contracts. It does not authenticate Figma screenshot quality.
 
 ## Optional exported coverage evidence
 
