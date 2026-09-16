@@ -107,7 +107,7 @@ test('required sections cannot reuse the same specimen container', () => {
   assert.match(validateCoverage(data).join('\n'), /reused section/);
 });
 
-test('repository references and deterministic documentation policies pass the static gate', async () => {
+test('framework references and deterministic documentation policies pass the static gate', async () => {
   const result = await validateRepository();
   assert.deepEqual(result.errors, []);
   assert.ok(result.fileCount > 0);
@@ -124,12 +124,26 @@ test('canonical documentation contract contains fixed geometry instead of discre
   assert.doesNotMatch(source, /recommended root width/i);
 });
 
-test('project-data boundary explicitly separates framework rules from project identity', async () => {
+test('project-data boundary speaks only about framework rules and current-project input', async () => {
   const source = await readFile(new URL('../docs/06-governance/project-data-boundary.md', import.meta.url), 'utf8');
-  assert.match(source, /generation method/i);
-  assert.match(source, /hard-code project identity/i);
-  assert.match(source, /example project/i);
-  assert.match(source, /Deterministic generation rule/);
+  assert.match(source, /## Framework rules/);
+  assert.match(source, /## Project input/);
+  assert.match(source, /## Source priority/);
+  assert.match(source, /## Deterministic generation/);
+  assert.doesNotMatch(source, /pre-commit/i);
+  assert.doesNotMatch(source, /maintainer/i);
+});
+
+test('repository-upkeep governance is isolated outside consumer-facing docs', async () => {
+  const internal = await readFile(new URL('../.github/maintainer/repository-governance.md', import.meta.url), 'utf8');
+  const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
+  const agents = await readFile(new URL('../AGENTS.md', import.meta.url), 'utf8');
+  assert.match(internal, /repository upkeep/i);
+  assert.match(internal, /Consumer-facing documentation rule/);
+  assert.doesNotMatch(readme, /maintainer/i);
+  assert.doesNotMatch(readme, /pre-commit/i);
+  assert.doesNotMatch(agents, /repository maintenance/i);
+  assert.doesNotMatch(agents, /review final diff/i);
 });
 
 test('nested fence examples are excluded while real Markdown links remain', () => {
