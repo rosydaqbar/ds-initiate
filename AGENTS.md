@@ -1,22 +1,12 @@
-# Design System Specification Orchestrator
+# Design System Executor
 
 ## Role
 
-Act as the repository orchestrator. Turn approved project input and Markdown specifications into deterministic, build-ready Figma instructions while preserving the Atomic Design structure and mandatory 4px construction rule.
+Use this framework to turn approved project input and the Markdown specifications into deterministic, build-ready Figma output while preserving the Atomic Design structure and mandatory 4px construction rule.
 
-This repository is reusable infrastructure. It owns the **generation method**, not the generated project's brand.
+The framework defines the generation method. The current project defines its brand and product-specific values.
 
-The default task in this repository is specification work. Do not modify Figma unless the user explicitly requests a Figma build or update.
-
-## Non-negotiable project boundary
-
-Read [Project Data Boundary](docs/06-governance/project-data-boundary.md) before any generation or repository maintenance task.
-
-Never promote an example project's values into reusable defaults. The repository must not lock a project name, brand hex, palette, typeface, logo, imagery style, product copy, component inventory, or target Figma identity merely because one example produced a successful result.
-
-Reusable rules may lock construction grammar such as page order, frame geometry, documentation patterns, Auto Layout behavior, 4px measurements, component-property strategy, variant limits, QA sequence, and acceptance criteria.
-
-Project-sensitive values come only from approved Discovery, explicitly supplied production assets/values, or a proposal the user explicitly approves before Figma mutation.
+Do not modify Figma unless the user explicitly requests a Figma build or update.
 
 ## Scope
 
@@ -30,23 +20,23 @@ Supported build order:
 
 Patterns may be documented only when requested. Do not introduce Templates or Pages as Atomic Design levels, product screens, or product-surface categories.
 
-## Read before editing
+## Read before generation
 
-Read these files before completing any specification:
+Read these files before completing a build or specification:
 
 1. `README.md`
 2. `docs/README.md`
 3. `docs/00-discovery/brand-style-questionnaire.md`
 4. `docs/06-governance/project-data-boundary.md`
 5. `docs/06-governance/figma-construction-standard.md`
-6. `docs/06-governance/documentation-visual-language.md` for designer-facing Figma documentation
-7. `docs/06-governance/documentation-layout-contract.json` for canonical numeric documentation geometry
-8. `docs/06-governance/component-specification-format.md` for components
-9. `docs/06-governance/foundation-documentation.md` for Foundations
-10. `docs/06-governance/optional-component-documentation.md` for approved component guides
-11. The target item file and every dependency linked from it
+6. `docs/06-governance/documentation-visual-language.md`
+7. `docs/06-governance/documentation-layout-contract.json`
+8. `docs/06-governance/component-specification-format.md`
+9. `docs/06-governance/foundation-documentation.md`
+10. `docs/06-governance/optional-component-documentation.md`
+11. The target item specification and every dependency linked from it
 
-The JSON layout contract is the machine-readable authority for numeric documentation geometry. The Markdown construction contract explains semantics and behavior. If their numeric values conflict, stop and fix the repository contract before generating Figma output.
+The JSON layout contract is the numeric source of truth for documentation geometry. The Markdown construction contract explains semantics and behavior. If they conflict, stop and report the exact conflict instead of choosing one silently.
 
 ## Authority order
 
@@ -54,150 +44,100 @@ When information conflicts, use this order:
 
 1. User's latest explicit instruction.
 2. Approved Discovery brief or approved answers for the current project.
-3. Existing production values/assets explicitly supplied by the user.
-4. Reusable governance contracts in this repository.
+3. Existing production values/assets explicitly supplied for the current project.
+4. Framework construction contracts.
 5. Existing confirmed Figma implementation for the current project.
 6. Target item specification.
 7. External references and example projects.
 
-External references never override the current project's brand data.
+External references never override the current project's approved brand data.
 
 Do not silently choose between two approved inputs that disagree. State the exact conflict and ask which value wins.
 
+## Project input boundary
+
+Follow [Project Data Boundary](docs/06-governance/project-data-boundary.md).
+
+Do not infer or import these from another project:
+
+- brand or product identity;
+- audience or business rules;
+- concrete colors or palette values;
+- typeface family or licensed weights;
+- logos, icon artwork, photography, illustrations, or brand assets;
+- appearance-mode requirement;
+- control/surface radius character, density, shadow character, or motion character;
+- languages or RTL support;
+- first-release component scope;
+- product-specific copy or behavior;
+- Figma node IDs, variable IDs, or file IDs.
+
+If required project input is missing, ask the smallest specific question needed to continue.
+
 ## Determinism requirement
 
-For the same repository revision and the same approved project inputs, independent runs must make the same framework decisions.
+For the same framework revision and the same approved project input, independent runs should make the same structural decisions.
 
-Do not leave a construction decision as free-form taste when it can be expressed as:
+Resolve a construction decision through an exact measurement, object/layer recipe, fixed ordering rule, decision table, calculation, or blocking question. Do not replace a defined structural rule with free-form visual taste.
 
-- an exact measurement;
-- an exact object/layer recipe;
-- a deterministic decision table;
-- a fixed ordering rule;
-- a calculation;
-- or a blocking question.
+## Discovery
 
-Avoid normative phrases such as `choose what looks best`, `use an appropriate width`, `similar to`, `when useful`, `adapt freely`, or `use judgment` when they control structure, layout, or implementation.
+Use the ten-question Discovery file when the visual direction is not approved.
 
-## What the orchestrator may resolve automatically
+Record exact project values when supplied. Mark unresolved implementation values `REQUIRES APPROVAL` or `BLOCKED` rather than filling gaps from an example project.
 
-Resolve without asking when the answer follows directly from approved input and repository rules:
+Wait for approval before creating project-sensitive Foundations.
 
-- Atomic level and dependency order.
-- One component versus component set.
-- Public component sets versus private helper components.
-- Variant calculation and 30-variant limit.
-- Auto Layout direction, sizing, padding, gap, alignment, and layer order when specified by the contract.
-- 4px-aligned structural measurements.
-- Text, Boolean, and instance-swap component-property strategy.
-- Semantic-variable and Style binding strategy.
-- Interaction-state and responsive construction defined by the item spec.
-- Documentation page order, root width, shell geometry, pattern selection, table anatomy, row geometry, and canvas placement from the Documentation Construction Contract and `documentation-layout-contract.json`.
-- Internal QA procedure.
-- Cross-links, naming consistency, and Markdown formatting.
-
-## What the orchestrator must not guess
-
-Do not infer or import from an example project:
-
-- Brand or product identity.
-- Audience or business rules.
-- Brand colors, palette values, neutral values, or prohibited colors.
-- Typeface family or licensed weights.
-- Logos, icon artwork, photography, illustrations, or brand assets.
-- Appearance-mode requirement when the current project has not approved it.
-- Control/surface radius character, density, shadow character, or motion character when unresolved.
-- Accessibility target stricter or different from the approved default.
-- Languages or RTL support.
-- First-release component scope.
-- Product-specific copy or behavior.
-- Figma node IDs, variable IDs, file IDs, or completed QA evidence.
-
-If a required project-sensitive input is missing, ask the smallest specific question required to continue.
-
-## Gap audit
-
-Before editing, inspect the target and dependencies for:
-
-- `TODO`, `TBD`, unresolved placeholders, empty table cells, or placeholder copy;
-- missing exact deliverable type;
-- missing or incorrect variant calculations;
-- variants incorrectly used for editable text, icon choice, or visibility;
-- missing layer types, resizing rules, measurements, or Auto Layout behavior;
-- structural values outside the 4px rule;
-- generic or hard-coded component colors;
-- text/icons sharing the wrong semantic role;
-- missing interaction, responsive, or accessibility requirements;
-- Foundation documentation that is absent or treated as optional;
-- optional component documentation that does not match the finished API;
-- documentation whose structure conflicts with the canonical Documentation Construction Contract;
-- an example project's brand values acting as defaults;
-- broken local links or inconsistent names.
-
-## Completion workflow
-
-### 1. Confirm target and scope
-
-Identify exact requested files and Atomic levels. For whole-system work, follow dependency order and finish one level before the next.
-
-### 2. Resolve Discovery
-
-Use the ten-question Discovery file when the visual direction is not approved. Record exact project-sensitive values when supplied.
-
-If a brand-sensitive implementation value remains unresolved, do not substitute a value from another project. Ask or present a proposal for explicit approval.
-
-### 3. Complete Foundations
+## Foundations
 
 Do not build components against missing Foundation roles.
 
-Create only approved Foundation collections and values. Components bind to semantic roles, not directly to primitive raw values.
+Create only approved Foundation collections and values. Components bind to semantic roles rather than directly to raw primitives unless the approved project architecture explicitly defines otherwise.
 
-Every completed Foundation specification defines:
+Every completed Foundation includes:
 
 - required approved input;
-- exact Figma values/styles/assets/rules to create;
+- exact Figma values, Styles, assets, or rules;
 - names, modes, types, scopes, and aliases where applicable;
 - 4px construction behavior;
-- internal QA;
-- mandatory designer-facing documentation content.
+- QA;
+- mandatory designer-facing documentation.
 
-### 4. Build mandatory Foundation documentation
+## Foundation documentation
 
-Read [Documentation Construction Contract](docs/06-governance/documentation-visual-language.md) and `docs/06-governance/documentation-layout-contract.json`.
+Read `docs/06-governance/documentation-visual-language.md` and `docs/06-governance/documentation-layout-contract.json`.
 
-The contracts deterministically define:
+Use their exact rules for:
 
 - Foundation page order;
-- top-level canvas placement;
-- exact root widths;
-- exact shared header/footer geometry;
+- canvas placement;
+- root widths;
+- shared header/footer geometry;
 - documentation typography scale;
-- exact pattern assigned to each Foundation;
-- semantic table columns and row anatomy;
-- palette swatch dimensions;
+- Foundation → pattern mapping;
+- semantic-table anatomy;
+- palette-swatch dimensions;
 - measured/specimen/guidance layouts;
 - screenshot QA.
 
-Do not replace these with another reference's arbitrary geometry.
+Populate the fixed construction with the current project's approved values. Do not copy another project's brand identity or arbitrary reference geometry.
 
-Populate the fixed construction with the current project's approved values and semantic roles. Project-specific visual data remains dynamic; layout grammar is fixed.
+## Components
 
-### 5. Complete components in dependency order
-
-Use Atoms before Molecules and Molecules before Organisms.
+Build Atoms before Molecules and Molecules before Organisms.
 
 For each component:
 
-- one component when there is no public visual axis;
-- one component set when the full visual Cartesian product is `≤30`;
-- multiple public sets split by primary visual style when `>30`;
-- private nested components for repeated internal responsibilities;
-- Text properties for editable copy;
-- Boolean properties for optional visibility;
-- instance-swap properties for replaceable icons or approved nested content;
-- never variants for arbitrary copy, icon choice, or simple visibility.
+- use one component when there is no public visual axis;
+- use one component set when the public Cartesian product is `≤30` variants;
+- split public sets by primary visual style when the product is `>30`;
+- use private nested components for repeated independent internal responsibilities;
+- use Text properties for editable copy;
+- use Boolean properties for optional visibility;
+- use instance-swap properties for replaceable icons or approved nested content;
+- do not create variants for arbitrary copy, icon choice, or simple visibility.
 
-Every component spec contains:
+Every component specification contains:
 
 1. Purpose, Atomic level, library placement, and Figma location.
 2. Exact public/private objects.
@@ -209,58 +149,48 @@ Every component spec contains:
 8. Prototype behavior.
 9. Responsive behavior when relevant.
 10. Internal 4px, content, interaction, and accessibility QA.
-11. Optional designer-documentation recipe derived from the actual API.
+11. Optional designer-documentation recipe derived from the actual public API.
 
-### 6. Optional component documentation
+## Optional component documentation
 
 Component guides are optional after component QA. Ask before building each named component guide.
 
-If approved, follow [Optional Component Documentation](docs/06-governance/optional-component-documentation.md) and the canonical documentation shell. Do not invent a new documentation visual language for components.
+If approved, follow `docs/06-governance/optional-component-documentation.md` and the canonical documentation shell.
 
-### 7. Propagate shared changes
+## Figma execution
 
-After changing a shared rule, update every affected index, governance file, item recipe, machine-readable contract, validation script, and executor example in the same task. Do not leave old and new contracts active simultaneously.
+When the user explicitly authorizes a Figma build or update:
 
-### 8. Validate
-
-Before reporting completion:
-
-- confirm requested files contain required sections;
-- recalculate variant totals;
-- confirm public sets are `≤30` variants;
-- confirm structural dimensions follow 4px rules;
-- confirm components use semantic variables and approved Styles;
-- confirm Foundation documentation is mandatory and component documentation optional;
-- confirm each guide uses its assigned canonical pattern and width;
-- confirm top-level Foundation guides use fixed page order, `Y=0`, and `200px` horizontal gaps;
-- confirm semantic variable tables use required column widths and row anatomy;
-- confirm the JSON layout contract passes repository validation;
-- confirm screenshots show correct hierarchy, alignment, wrapping, and relationship cues;
-- confirm no example-project brand, color, font, target Figma identity, or product copy became a reusable default;
-- confirm local Markdown links resolve;
-- run repository validation scripts;
-- review final diff and preserve unrelated user changes.
-
-Never claim a Figma component, variable, accessibility check, screenshot review, or metadata check is complete unless it was actually performed.
-
-## Figma execution boundary
-
-When explicitly authorized to implement in Figma:
-
-1. Read applicable Figma skills before tool use.
-2. Inspect the target file before mutation.
-3. Complete and approve Discovery before project-sensitive visual mutation.
-4. Build Foundations before dependent components.
-5. Build documentation from the repository's canonical Markdown + JSON construction contracts, not from free-form interpretation of the example reference.
-6. Mutate sequentially, one validated unit at a time.
-7. Reuse exact returned IDs; never guess IDs.
-8. Validate structure and appearance after each unit.
-9. Screenshot-review mandatory Foundation documentation.
-10. Keep internal logs out of designer-facing frames.
-11. Do not automatically create optional component documentation.
+1. Inspect the target file first.
+2. Complete and approve Discovery before project-sensitive visual mutation.
+3. Build Foundations before dependent components.
+4. Build documentation from the canonical framework contracts.
+5. Mutate sequentially, one validated unit at a time.
+6. Reuse exact returned IDs; never guess IDs.
+7. Validate structure and appearance after each unit.
+8. Screenshot-review mandatory Foundation documentation.
+9. Keep implementation logs out of designer-facing frames.
+10. Do not automatically create optional component documentation.
 
 Specification completion does not authorize Figma mutation. Figma inspection does not authorize Figma mutation.
 
+## Output QA
+
+Before reporting a generated item complete:
+
+- confirm approved, implemented, and documented values agree;
+- recalculate variant totals;
+- confirm every public set contains `≤30` variants;
+- confirm structural dimensions follow the 4px rule;
+- confirm components use approved semantic variables and Styles;
+- confirm Foundation documentation uses the assigned canonical pattern and width;
+- confirm top-level Foundation guides use canonical order, `Y=0`, and `200px` horizontal gaps;
+- confirm semantic variable tables use the required columns and row anatomy;
+- confirm screenshots show correct hierarchy, alignment, wrapping, and relationship cues;
+- confirm no example-project identity has been used as current-project input.
+
+Never claim a Figma component, variable, accessibility check, screenshot review, or metadata check is complete unless it was actually performed.
+
 ## Reporting
 
-Report what changed, what was validated, any unresolved user decision, and the next dependency-safe step. Do not add private working notes to repository documents.
+Report completed scope, validation actually performed, unresolved user decisions, and the next dependency-safe step.
