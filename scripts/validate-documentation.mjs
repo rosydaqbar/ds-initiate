@@ -69,7 +69,6 @@ export function validateCoverage(data) {
 
     const built = implemented.get(name);
     const shown = documented.get(name);
-
     if (built && (!nonempty(built.description) || !nonempty(built.nodeId))) errors.push(`implemented: ${name} needs identity and description.`);
     if (shown && (!nonempty(shown.usage) || !nonempty(shown.rowNodeId))) errors.push(`documented: ${name} needs visible row identity and individual usage.`);
 
@@ -127,6 +126,91 @@ async function markdownFiles(directory) {
   return files.flat();
 }
 
+function expectEqual(errors, actual, expected, label) {
+  if (canonical(actual) !== canonical(expected)) errors.push(`layout contract: ${label} differs from canonical value.`);
+}
+
+export function validateLayoutContract(contract) {
+  const errors = [];
+  if (!record(contract)) return ['layout contract must be a JSON object.'];
+
+  expectEqual(errors, contract.version, 1, 'version');
+  expectEqual(errors, contract.foundationCanvas?.topY, 0, 'foundationCanvas.topY');
+  expectEqual(errors, contract.foundationCanvas?.horizontalGap, 200, 'foundationCanvas.horizontalGap');
+  expectEqual(errors, contract.foundationCanvas?.order, [
+    'Design Tokens', 'Colors', 'Color variables', 'Typography', '4px Grid', 'Spacing', 'Grid and Layout', 'Radius', 'Borders', 'Elevation', 'Iconography', 'Illustration and Imagery', 'Motion', 'Accessibility', 'Content'
+  ], 'foundationCanvas.order');
+
+  const guideWidths = Object.fromEntries(Object.entries(contract.foundationGuides ?? {}).map(([name, value]) => [name, value.width]));
+  expectEqual(errors, guideWidths, {
+    'Design Tokens': 1600,
+    'Colors': 2848,
+    'Color variables': 2528,
+    'Typography': 1600,
+    '4px Grid': 1600,
+    'Spacing': 1600,
+    'Grid and Layout': 1664,
+    'Radius': 1600,
+    'Borders': 1600,
+    'Elevation': 1600,
+    'Iconography': 1600,
+    'Illustration and Imagery': 1664,
+    'Motion': 1600,
+    'Accessibility': 1600,
+    'Content': 1600
+  }, 'foundation guide widths');
+
+  expectEqual(errors, contract.foundationGuides?.Colors?.pattern, 'P1', 'Colors pattern');
+  expectEqual(errors, contract.foundationGuides?.['Color variables']?.pattern, 'P2', 'Color variables pattern');
+  expectEqual(errors, contract.foundationGuides?.Typography?.pattern, 'P3', 'Typography pattern');
+  expectEqual(errors, contract.foundationGuides?.Spacing?.pattern, 'P4', 'Spacing pattern');
+  expectEqual(errors, contract.foundationGuides?.Accessibility?.pattern, 'P5', 'Accessibility pattern');
+
+  expectEqual(errors, contract.shell?.header?.height, 476, 'header height');
+  expectEqual(errors, contract.shell?.header?.outerInset, 32, 'header outer inset');
+  expectEqual(errors, contract.shell?.header?.cardHeight, 412, 'header card height');
+  expectEqual(errors, contract.shell?.header?.cardRadius, 20, 'header card radius');
+  expectEqual(errors, contract.shell?.header?.cardGap, 112, 'header card gap');
+  expectEqual(errors, contract.shell?.header?.contextRowHeight, 36, 'context row height');
+  expectEqual(errors, contract.shell?.header?.heroRowHeight, 152, 'hero row height');
+  expectEqual(errors, contract.shell?.header?.heroMetadataWidth, 440, 'hero metadata width');
+  expectEqual(errors, contract.shell?.body?.padding, { top: 80, right: 80, bottom: 96, left: 80 }, 'body padding');
+  expectEqual(errors, contract.shell?.body?.majorSectionGap, 112, 'major section gap');
+  expectEqual(errors, contract.shell?.body?.sectionIntroToReferenceGap, 56, 'intro/reference gap');
+  expectEqual(errors, contract.shell?.body?.wideIntroWidth, 900, 'wide intro width');
+  expectEqual(errors, contract.shell?.body?.standardIntroWidth, 800, 'standard intro width');
+
+  expectEqual(errors, contract.patterns?.P1?.rootWidth, 2848, 'P1 root width');
+  expectEqual(errors, contract.patterns?.P1?.normalSwatch?.width, 160, 'P1 normal swatch width');
+  expectEqual(errors, contract.patterns?.P1?.normalSwatch?.height, 156, 'P1 normal swatch height');
+  expectEqual(errors, contract.patterns?.P1?.anchorSwatch?.width, 224, 'P1 anchor swatch width');
+  expectEqual(errors, contract.patterns?.P1?.normalSwatchGap, 32, 'P1 swatch gap');
+
+  expectEqual(errors, contract.patterns?.P2?.rootWidth, 2528, 'P2 root width');
+  expectEqual(errors, contract.patterns?.P2?.twoModeColumns, { name: 820, mode1: 360, mode2: 360, usage: 828 }, 'P2 two-mode columns');
+  expectEqual(errors, contract.patterns?.P2?.oneModeColumns, { name: 820, value: 480, usage: 1068 }, 'P2 one-mode columns');
+  expectEqual(errors, contract.patterns?.P2?.headerHeight, 56, 'P2 header height');
+  expectEqual(errors, contract.patterns?.P2?.defaultRowHeight, 88, 'P2 default row height');
+  expectEqual(errors, contract.patterns?.P2?.modePill?.swatch, 28, 'P2 mode swatch');
+  expectEqual(errors, contract.patterns?.P2?.childConnector?.area, 48, 'P2 child connector area');
+
+  expectEqual(errors, contract.patterns?.P3?.rowMinHeight, 120, 'P3 row minimum');
+  expectEqual(errors, contract.patterns?.P4?.rowMinHeight, 144, 'P4 row minimum');
+  expectEqual(errors, contract.patterns?.P5?.readingColumn, 800, 'P5 reading column');
+  expectEqual(errors, contract.patterns?.P5?.comparison, { outerWidth: 1120, columnWidth: 548, gap: 24, columnPadding: 24, columnGap: 16 }, 'P5 comparison');
+
+  expectEqual(errors, contract.componentGuide?.rootWidth, 1600, 'component guide root width');
+  expectEqual(errors, contract.componentGuide?.anatomyDimensionsTable?.columns, [280, 280, 240, 320], 'component anatomy table columns');
+  expectEqual(errors, contract.componentGuide?.publicPropertiesTable?.columns, [280, 160, 240, 440], 'component property table columns');
+
+  const serialized = JSON.stringify(contract);
+  for (const forbidden of ['GokGok', '#0066FF', 'Geist', 'f3mBCrYbPWMqophBUjmdsF']) {
+    if (serialized.toLowerCase().includes(forbidden.toLowerCase())) errors.push(`layout contract contains example-project leakage: ${forbidden}.`);
+  }
+
+  return errors;
+}
+
 export async function validateRepository(directory = root) {
   const errors = [];
   const files = await markdownFiles(directory);
@@ -149,11 +233,6 @@ export async function validateRepository(directory = root) {
     { pattern: /f3mBCrYbPWMqophBUjmdsF/i, label: 'example target Figma identity' }
   ];
 
-  const leakageExempt = new Set([
-    'scripts/validate-documentation.mjs',
-    'scripts/validate-documentation.test.mjs'
-  ]);
-
   for (const file of files) {
     const relative = path.relative(directory, file).replaceAll('\\', '/');
     const source = await readFile(file, 'utf8');
@@ -163,10 +242,8 @@ export async function validateRepository(directory = root) {
       if (rule.test(source)) errors.push(`${relative}: nondeterministic or obsolete construction wording ${rule}.`);
     }
 
-    if (!leakageExempt.has(relative)) {
-      for (const leak of knownExampleLeakage) {
-        if (leak.pattern.test(source)) errors.push(`${relative}: reusable repository contains ${leak.label}.`);
-      }
+    for (const leak of knownExampleLeakage) {
+      if (leak.pattern.test(source)) errors.push(`${relative}: reusable repository contains ${leak.label}.`);
     }
 
     const prose = withoutFences(source);
@@ -186,11 +263,10 @@ export async function validateRepository(directory = root) {
 
   const requirements = {
     'docs/06-governance/project-data-boundary.md': [
-      '## Non-negotiable boundary',
-      '## Deterministic generation rule',
-      '## Pre-commit brand-agnostic audit'
+      '## Non-negotiable boundary', '## Deterministic generation rule', '## Pre-commit brand-agnostic audit'
     ],
     'docs/06-governance/documentation-visual-language.md': [
+      'documentation-layout-contract.json',
       '## Canonical page order and placement',
       '## Canonical frame-width decision table',
       '## Canonical documentation chrome',
@@ -203,38 +279,22 @@ export async function validateRepository(directory = root) {
       '## Screenshot QA'
     ],
     'docs/06-governance/foundation-documentation.md': [
-      'project-data-boundary.md',
-      'documentation-visual-language.md',
-      '## Canonical shell and canvas placement',
-      '## Reference-specific requirements',
-      '## Acceptance failures'
+      'project-data-boundary.md', 'documentation-visual-language.md', '## Canonical shell and canvas placement', '## Reference-specific requirements', '## Acceptance failures'
     ],
     'docs/06-governance/optional-component-documentation.md': [
-      '## Canonical component-guide shell',
-      '## Required section order',
-      '## Anatomy and dimensions',
-      '## Public properties',
-      '## Documentation QA'
+      '## Canonical component-guide shell', '## Required section order', '## Anatomy and dimensions', '## Public properties', '## Documentation QA'
     ],
     'docs/06-governance/documentation-acceptance.md': [
-      '## Canonical structural checks',
-      '## Pattern-specific structural checks',
-      '## Project-data isolation checks'
+      '## Canonical structural checks', '## Pattern-specific structural checks', '## Project-data isolation checks'
     ],
     'docs/00-discovery/brand-style-questionnaire.md': [
-      '## Deterministic project resolution record',
-      'Project Data Boundary'
+      '## Deterministic project resolution record', 'Project Data Boundary'
     ],
     'docs/00-discovery/discovery-brief-format.md': [
-      '## Deterministic project-resolution record',
-      'REQUIRES APPROVAL',
-      'BLOCKED'
+      '## Deterministic project-resolution record', 'REQUIRES APPROVAL', 'BLOCKED'
     ],
     'README.md': [
-      '## What the repository owns',
-      '## What each project owns',
-      '## Determinism goal',
-      'Project Data Boundary'
+      '## What the repository owns', '## What each project owns', '## Determinism goal', 'Project Data Boundary', 'documentation-layout-contract.json'
     ]
   };
 
@@ -245,19 +305,20 @@ export async function validateRepository(directory = root) {
   }
 
   const agents = contents.get('AGENTS.md') ?? '';
-  for (const marker of ['Project Data Boundary', 'Determinism requirement', 'documentation-visual-language.md']) {
+  for (const marker of ['Project Data Boundary', 'Determinism requirement', 'documentation-visual-language.md', 'documentation-layout-contract.json']) {
     if (!agents.includes(marker)) errors.push(`AGENTS.md: missing ${marker}.`);
   }
 
-  const contract = contents.get('docs/06-governance/documentation-visual-language.md') ?? '';
-  for (const exact of [
-    '`200px` horizontal guide gap',
-    'header is always `476px` high',
-    '`820px | 360px | 360px | 828px`',
-    '`160 × 156px`',
-    '`112px` gap between major sections'
-  ]) {
-    if (!contract.includes(exact)) errors.push(`Documentation contract: missing deterministic geometry ${exact}.`);
+  const contractMarkdown = contents.get('docs/06-governance/documentation-visual-language.md') ?? '';
+  for (const marker of ['`200px`', '`476px`', '`820px | 360px | 360px | 828px`', '`160 × 156px`', '`112px`']) {
+    if (!contractMarkdown.includes(marker)) errors.push(`Documentation contract: missing deterministic geometry marker ${marker}.`);
+  }
+
+  try {
+    const layoutContract = JSON.parse(await readFile(path.join(directory, 'docs/06-governance/documentation-layout-contract.json'), 'utf8'));
+    errors.push(...validateLayoutContract(layoutContract));
+  } catch (error) {
+    errors.push(`documentation-layout-contract.json: ${error.message}`);
   }
 
   const color = contents.get('docs/01-foundations/color.md') ?? '';
