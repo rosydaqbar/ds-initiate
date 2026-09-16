@@ -40,10 +40,13 @@ Read these files before completing any specification:
 4. `docs/06-governance/project-data-boundary.md`
 5. `docs/06-governance/figma-construction-standard.md`
 6. `docs/06-governance/documentation-visual-language.md` for designer-facing Figma documentation
-7. `docs/06-governance/component-specification-format.md` for components
-8. `docs/06-governance/foundation-documentation.md` for Foundations
-9. `docs/06-governance/optional-component-documentation.md` for approved component guides
-10. The target item file and every dependency linked from it
+7. `docs/06-governance/documentation-layout-contract.json` for canonical numeric documentation geometry
+8. `docs/06-governance/component-specification-format.md` for components
+9. `docs/06-governance/foundation-documentation.md` for Foundations
+10. `docs/06-governance/optional-component-documentation.md` for approved component guides
+11. The target item file and every dependency linked from it
+
+The JSON layout contract is the machine-readable authority for numeric documentation geometry. The Markdown construction contract explains semantics and behavior. If their numeric values conflict, stop and fix the repository contract before generating Figma output.
 
 ## Authority order
 
@@ -89,7 +92,7 @@ Resolve without asking when the answer follows directly from approved input and 
 - Text, Boolean, and instance-swap component-property strategy.
 - Semantic-variable and Style binding strategy.
 - Interaction-state and responsive construction defined by the item spec.
-- Documentation page order, root width, shell geometry, pattern selection, table anatomy, row geometry, and canvas placement from the Documentation Construction Contract.
+- Documentation page order, root width, shell geometry, pattern selection, table anatomy, row geometry, and canvas placement from the Documentation Construction Contract and `documentation-layout-contract.json`.
 - Internal QA procedure.
 - Cross-links, naming consistency, and Markdown formatting.
 
@@ -160,9 +163,9 @@ Every completed Foundation specification defines:
 
 ### 4. Build mandatory Foundation documentation
 
-Read [Documentation Construction Contract](docs/06-governance/documentation-visual-language.md).
+Read [Documentation Construction Contract](docs/06-governance/documentation-visual-language.md) and `docs/06-governance/documentation-layout-contract.json`.
 
-The contract deterministically defines:
+The contracts deterministically define:
 
 - Foundation page order;
 - top-level canvas placement;
@@ -216,7 +219,7 @@ If approved, follow [Optional Component Documentation](docs/06-governance/option
 
 ### 7. Propagate shared changes
 
-After changing a shared rule, update every affected index, governance file, item recipe, validation script, and executor example in the same task. Do not leave old and new contracts active simultaneously.
+After changing a shared rule, update every affected index, governance file, item recipe, machine-readable contract, validation script, and executor example in the same task. Do not leave old and new contracts active simultaneously.
 
 ### 8. Validate
 
@@ -231,6 +234,7 @@ Before reporting completion:
 - confirm each guide uses its assigned canonical pattern and width;
 - confirm top-level Foundation guides use fixed page order, `Y=0`, and `200px` horizontal gaps;
 - confirm semantic variable tables use required column widths and row anatomy;
+- confirm the JSON layout contract passes repository validation;
 - confirm screenshots show correct hierarchy, alignment, wrapping, and relationship cues;
 - confirm no example-project brand, color, font, target Figma identity, or product copy became a reusable default;
 - confirm local Markdown links resolve;
@@ -247,7 +251,7 @@ When explicitly authorized to implement in Figma:
 2. Inspect the target file before mutation.
 3. Complete and approve Discovery before project-sensitive visual mutation.
 4. Build Foundations before dependent components.
-5. Build documentation from the repository's canonical construction contract, not from free-form interpretation of the example reference.
+5. Build documentation from the repository's canonical Markdown + JSON construction contracts, not from free-form interpretation of the example reference.
 6. Mutate sequentially, one validated unit at a time.
 7. Reuse exact returned IDs; never guess IDs.
 8. Validate structure and appearance after each unit.
