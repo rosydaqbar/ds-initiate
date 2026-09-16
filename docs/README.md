@@ -45,6 +45,10 @@ Every item file states the exact Figma building block to create.
 | Foundations | Mandatory in the same build; no separate opt-in question | Values, assets, or rules and their designer guide are completed together |
 | Atoms, Molecules, Organisms | Optional after internal component QA; ask the user first | The component can be complete without designer documentation |
 
+Read [Documentation Visual Language](06-governance/documentation-visual-language.md) before generating designer-facing Figma documentation. It defines the shared documentation grammar and how to adapt external Figma references without copying their brand, token model, typography, or exact layout literally.
+
 Use [Mandatory Foundation Documentation](06-governance/foundation-documentation.md) for Foundation guides and [Optional Component Documentation](06-governance/optional-component-documentation.md) for component landing frames. Both are adaptive to the actual built result.
 
-Designer-facing Figma frames use a readable editorial structure with purpose, usage, focused annotated examples, actual permutations when relevant, do-and-don't guidance, and a concise accessibility status. Every displayed specimen includes its familiar name, resolved designer-facing value, and explanation. Complete grouped references show every approved name, value, mode, purpose and bound specimen. Native panels supplement these references. Only internal IDs, raw API/alias dumps and QA evidence stay outside designer-facing guides. Use [Documentation Acceptance](06-governance/documentation-acceptance.md) to verify coverage.
+Designer-facing Figma frames should feel like one coherent publication while choosing the information structure that best matches the content. Semantic variables may use hierarchical mode tables; primitive palettes may use swatch families; dimensions may use measured diagrams; typography, icons, elevation, imagery, and motion may use specimen rows. Do not force one template onto every Foundation.
+
+Every displayed choice must remain traceable to its actual project value, name, mode, specimen, and usage. Native panels supplement these references. Only internal IDs, raw API/alias dumps, and QA evidence stay outside designer-facing guides. Use [Documentation Acceptance](06-governance/documentation-acceptance.md) to verify coverage and screenshot quality.
