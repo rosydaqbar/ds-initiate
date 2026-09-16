@@ -117,123 +117,149 @@ The full approved Light/Dark contract remains required unless the downstream use
 
 **Build status:** Required in the same Foundation build; do not ask a separate documentation question.
 
-Build `Documentation / Color` and any linked reference continuations using [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md). A complete palette and complete semantic role reference are required.
+Read [Documentation Visual Language](../06-governance/documentation-visual-language.md) and [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md) before building the guides.
 
-### Required visible structure and copy
+Color documentation is intentionally split into two complementary reference frames:
+
+1. `Documentation / Colors` for primitive/source colors.
+2. `Documentation / Color variables` for semantic roles and Light/Dark resolution.
+
+Do not force primitive colors and semantic variables into one visual structure.
+
+### Documentation / Colors
+
+This is the source-palette reference. Use a wide horizontal family layout similar to the approved current design, while keeping the project's own typography, colors, token names, and brand character.
+
+Recommended root width: `2848px` or another 4px-aligned width when the complete approved ramp requires it.
+
+Visible structure:
 
 ```text
-Documentation / Color
-  Header
-    Color
-    Color establishes hierarchy, identifies actions, and communicates state.
-  Overview
-  Contents
-  Palette
-    Base and alpha colors
+Documentation / Colors
+  Page header
+    Foundations → Colors
+    Colors
+    Short explanation of the source palette
+    Optional compact system metadata
+  Source palette
+    Base
     Brand
     Secondary, when approved
     Neutral
     Every approved feedback/source family
-  Semantic color reference
-    Backgrounds
-    Brand actions
-    Destructive actions
-    Text
-    Icons
-    Links
-    Borders and focus
-    Information, Success, Warning, Error
-  Appearance modes
-  Interaction states and selection
-  Foreground/background pairings
-  Feedback and overlays
-  Do and don't
-  Accessibility and remaining checks
+  Quiet footer / system context
 ```
 
-Overview copy: `Choose a semantic color by the purpose and state of the element. The palette provides source values; the role reference explains how those values are used in each appearance.`
+For each family:
 
-### Complete palette reference
+- show the family name and one concise sentence describing its role;
+- lay the approved steps horizontally in ascending order, wrapping only when required by the available width;
+- show a compact swatch card for every approved value;
+- show the familiar step/name and resolved uppercase hex or alpha;
+- show the approved anchor/default indicator when one exists;
+- keep white/transparent values legible with appropriate inside boundaries or compositing treatment;
+- show contrast text only when it represents an explicit tested pairing and is useful to designers.
 
-Show EVERY approved family and EVERY approved shade, plus base and alpha colors. A three-shade overview cannot replace the full ramp.
+Primitive documentation must not imply that components may bind directly to raw colors.
 
-Give each family a visible heading and an original sentence explaining its role in the approved identity. Give each shade:
+### Documentation / Color variables
 
-1. Familiar family and step, plus exact variable name.
-2. Bound swatch showing the actual color.
-3. Uppercase resolved `#RRGGBB`, plus opacity when not opaque.
-4. A concise explanation of its approved use or an explicit reserved/no-current-semantic-use label.
-5. Links or names of semantic roles that use it where helpful. Do not imply direct primitive use in components.
+This is the semantic-role reference. Use the approved hierarchical documentation pattern rather than a generic inventory table.
 
-Use a `1440px` reference width. A family header spans the row; shade cells are `240px` wide with `16px` padding and a `208×72px` bound preview. Five cells plus four `16px` gaps require `1264px`; wrap additional shades in ascending order. There is no cap on total shades or rows.
+Recommended root width: `2528px` or another 4px-aligned width that keeps all four columns readable.
 
-Put labels on a readable neutral background. An optional text sample inside a swatch must identify its foreground and pairing; the swatch is not certified by an unlabeled AA/AAA badge. Transparent swatches use a checkerboard or named compositing surface and visible alpha. White has a subtle inside boundary so it remains perceptible.
+Visible structure:
 
-### Complete semantic role reference
+```text
+Documentation / Color variables
+  Page header
+    Foundations → Color variables
+    Color variables
+    Short explanation of semantic roles and modes
+    Optional compact system metadata
+  Section / Background color
+  Section / Text color
+  Section / Icon color
+  Section / Border color
+  Section / Feedback color
+  Quiet footer / system context
+```
 
-Create a row for EVERY implemented semantic role and verify it covers EVERY approved role. Use the exact contract table above plus approved additions. Split by property and purpose, and repeat headings for continuation frames.
+Each semantic section uses:
 
-| Column | Width | Required visible content |
-| --- | ---: | --- |
-| Token | 304px | Familiar name plus exact searchable slash-separated token |
-| Purpose and usage | 448px | Specific use, applicable state, relevant pairing and misuse restriction |
-| Light | 344px | Bound sample, resolved source name, hex and alpha under explicit Light mode |
-| Dark | 344px | Bound sample, resolved source name, hex and alpha under explicit Dark mode |
+```text
+Section heading
+  {Section title}
+  Variables [small badge]
+Description
+Table
+  Name
+  Light mode
+  Dark mode
+  Usage
+```
 
-Column widths sum to `1440px`; use `16px` cell padding, no inter-column gap, and Hug rows. Every mode cell has a `48×48px` swatch plus an applied preview when needed. Text and icon samples use their intended surface; borders surround a visible surface; overlays composite over a named background. Documentation text remains readable outside the sample.
+Adapt mode columns only if the approved system uses different modes.
 
-Show a primitive source name such as `Brand 600` as well as the resolved hex, never an alias ID in place of the value. Resolve the actual chain internally, including its mode behavior. Show both modes even when they have equal values. Do not merge distinct roles because their colors happen to match.
+#### Name column
 
-Every role has its own usage text; a paragraph for Text or Backgrounds alone is insufficient. Native variable descriptions mirror the purpose, state and constraints. They supplement the visible entry.
+Show the semantic token without the redundant `color/` prefix when the page context already establishes the collection, for example `text/primary` rather than `color/text/primary`.
 
-### Appearance modes and interaction states
+Use indentation and subtle connector lines only for real semantic relationships.
 
-Show the same neutral composition in Light and Dark with Canvas, Surface, primary/secondary text, an icon, default border, brand action and focus. Set each specimen's mode explicitly. Label the roles and values; do not create a product screen.
+Recommended hierarchy for the default contract:
 
-Create separate Brand and Destructive action state rows with Default, Hover, Pressed, Focus and Disabled. Each state has a named `176×48px` bound preview, foreground and background token/value labels and one sentence explaining its trigger. Focus adds the focus treatment to the current appearance; it does not replace selection.
+- `background/brand/default` → `hover`, `pressed`, `disabled`
+- `background/danger/default` → `hover`, `pressed`, `disabled`
+- `text/link/default` → `hover`, `pressed`, `visited`
+- each feedback `{status}/background` → `text`, `icon`, `border`
 
-Add Selected and Selected + Hover examples using the selection roles, with a visible mark or label. Show that selection persists after activation, while press is momentary. Show enabled and disabled content pairings independently.
+Flat roles such as `text/primary`, `icon/primary`, or `border/focus` remain flat unless the approved token model defines children.
 
-Use `224px` state cells, `24px` padding and `16px` gaps inside a `1280px` unpadded row; five cells and four gaps require `1184px`. Grow cells vertically for the labels.
+Do not invent hierarchy merely to match the visual reference.
 
-### Foreground/background pairings
+#### Light and Dark mode columns
 
-Provide a pair reference for every permitted text/icon/meaningful boundary combination used by the documented examples and components. Include the actual foreground and background token names, mode, state, resolved colors, alpha/compositing background, measured ratio, use class and result.
+Show the resolved primitive source as a compact pill containing:
 
-Distinguish normal text, large text and necessary non-text graphics. A result applies only to its named pair and use class. A palette shade does not pass or fail accessibility in isolation. Use [Accessibility](accessibility.md) for thresholds and evidence boundaries; compute the result before rounding its displayed ratio.
+- a bound color swatch;
+- the familiar source name, such as `neutral-900`, `brand-500`, `red-600`, or `white`.
 
-Do not label disabled content as suitable for active information. Mark inactive controls as a scoped exception where applicable. If a pairing fails, repair the approved mapping or restrict its use visibly and record the unresolved decision.
+Light-mode pills use the normal documentation surface. Dark-mode pills may use a dark neutral container when it improves legibility and visually reinforces the mode comparison. This container is documentation chrome, not a new token.
 
-### Feedback and overlays
+Show both mode values even when they resolve to the same primitive.
 
-Show Information, Success, Warning and Error as complete bound treatments, each with background, text, icon and border names and values. Use specific, neutral messages and a visible symbol or label. Put mode comparisons alongside each treatment.
+Do not display alias IDs or raw API data.
 
-Use a `1440px` unpadded row with four `320px` examples and three `24px` gaps (`1352px` total); each example has `24px` internal padding. If the available width is smaller, wrap rather than compressing the content.
+#### Usage column
 
-Show an overlay over its named canvas with the actual alpha value and the elevated surface above it. Explain which content is dimmed and which stays active.
+Write one concise sentence for each role. Explain what the role is for, not what the color looks like. Add misuse restrictions only when they prevent a likely semantic mistake.
 
-### Do and don't
+Do not replace row-specific usage with one generic family paragraph.
 
-Create distinct visual comparisons with a caption under each side:
+#### Row styling
 
-- Choose a semantic surface role for a container / avoid a similar-looking raw swatch applied directly.
-- Keep one primary action and quieter supporting actions / avoid competing primary actions.
-- Combine error color with a correction message and cue / avoid a red boundary with no explanation.
-- Preserve selection while showing focus / avoid using focus color as the only selection indicator.
+- Use subtle horizontal dividers.
+- Keep rows compact and aligned.
+- Allow usage text to wrap instead of clipping or shrinking.
+- Avoid heavy cards around every cell.
+- Separate semantic sections with significantly more vertical space than individual rows.
+- Keep the table visually quiet enough that the token relationships remain the focus.
 
-Generic advice such as “apply the documented decision” is not a substitute for these examples.
+### Color documentation QA
 
-### Documentation QA
+Use [Documentation Acceptance](../06-governance/documentation-acceptance.md).
 
-Use [Documentation Acceptance](../06-governance/documentation-acceptance.md). Fail when:
+Fail when:
 
-- Any approved shade, base/alpha color or semantic role is missing from implementation or its visible reference.
-- A role lacks its exact name, individual usage, bound sample or resolved mode value.
-- Variable descriptions are empty or generic.
-- A label differs from its binding, mode or composited appearance.
-- A pairing claim has no named foreground/background or evidence.
-- State, feedback, overlay, mode or do-and-don't examples are absent or consist only of text boxes.
-- A complete reference is replaced by a summary or deferred to the variables panel.
-- Rows clip, text becomes too small, or unrelated generic guidance fills the guide.
+- any approved primitive or semantic role is missing;
+- a mode pill shows the wrong resolved source;
+- hierarchy is invented or a real state relationship is flattened in a way that harms comprehension;
+- child connector lines do not correspond to actual semantic relationships;
+- usage text is generic, duplicated, or clipped;
+- primitive and semantic pages drift into different documentation chrome without an approved reason;
+- the layout copies an external system's names, brand, typography, proprietary copy, or irrelevant sections;
+- top-level documentation frames overlap after width changes;
+- a screenshot looks structurally random even when the data is technically complete.
 
-Record missing content as incomplete and repair it before accepting the Foundation. Keep raw IDs and test logs internal while preserving all designer-facing specifications.
+Inspect readable screenshots of both `Documentation / Colors` and `Documentation / Color variables`, including the first and last semantic sections, before accepting the Foundation.
