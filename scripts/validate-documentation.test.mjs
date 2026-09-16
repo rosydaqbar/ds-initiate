@@ -1,16 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import { validateCoverage, validateRepository, withoutFences } from './validate-documentation.mjs';
 
 function evidence() {
   const names = ['color/text/primary', 'color/text/secondary'];
   return {
     guide: 'Synthetic test guide', approvedSource: 'Synthetic approved fixture',
-    approved: names.map(name => ({ name, values: { Light: '#111111', Dark: '#EEEEEE' } })),
-    implemented: names.map((name, i) => ({ name, nodeId: `var-${i}`, description: `Purpose for ${name}`, values: { Light: '#111111', Dark: '#EEEEEE' } })),
-    documented: names.map((name, i) => ({ name, rowNodeId: `row-${i}`, usage: `Individual use of ${name}`, values: { Light: '#111111', Dark: '#EEEEEE' }, samples: {
-      Light: { nodeId: `sample-light-${i}`, bindsTo: name, value: '#111111' },
-      Dark: { nodeId: `sample-dark-${i}`, bindsTo: name, value: '#EEEEEE' }
+    approved: names.map(name => ({ name, values: { 'Mode A': '#111111', 'Mode B': '#EEEEEE' } })),
+    implemented: names.map((name, i) => ({ name, nodeId: `var-${i}`, description: `Purpose for ${name}`, values: { 'Mode A': '#111111', 'Mode B': '#EEEEEE' } })),
+    documented: names.map((name, i) => ({ name, rowNodeId: `row-${i}`, usage: `Individual use of ${name}`, values: { 'Mode A': '#111111', 'Mode B': '#EEEEEE' }, samples: {
+      'Mode A': { nodeId: `sample-a-${i}`, bindsTo: name, value: '#111111' },
+      'Mode B': { nodeId: `sample-b-${i}`, bindsTo: name, value: '#EEEEEE' }
     } })),
     requiredSections: ['Text roles', 'Applications'],
     sections: ['Text roles', 'Applications'].map(name => ({ name, nodeId: name, screenshotReviewed: true }))
@@ -37,9 +38,9 @@ test('an approved token absent from both build and documentation still fails', (
   assert.equal(validateCoverage(data).filter(x => /missing color\/text\/secondary/.test(x)).length, 2);
 });
 
-test('missing dark mode and stale value are rejected independently', () => {
-  const data = evidence(); delete data.implemented[0].values.Dark;
-  data.documented[1].values.Light = '#000000';
+test('missing mode and stale value are rejected independently', () => {
+  const data = evidence(); delete data.implemented[0].values['Mode B'];
+  data.documented[1].values['Mode A'] = '#000000';
   assert.equal(validateCoverage(data).filter(x => /values or modes differ/.test(x)).length, 2);
 });
 
@@ -51,13 +52,13 @@ test('empty descriptions, missing usage and text-only specimens fail', () => {
 });
 
 test('documentation chrome bound to a different role is not specimen evidence', () => {
-  const data = evidence(); data.documented[0].samples.Light.bindsTo = 'color/background/surface';
+  const data = evidence(); data.documented[0].samples['Mode A'].bindsTo = 'color/background/surface';
   assert.match(validateCoverage(data).join('\n'), /wrong name/);
 });
 
 test('a reused specimen or stale specimen value fails', () => {
-  const data = evidence(); data.documented[1].samples.Light.nodeId = data.documented[0].samples.Light.nodeId;
-  data.documented[0].samples.Dark.value = '#DDDDDD';
+  const data = evidence(); data.documented[1].samples['Mode A'].nodeId = data.documented[0].samples['Mode A'].nodeId;
+  data.documented[0].samples['Mode B'].value = '#DDDDDD';
   const result = validateCoverage(data).join('\n');
   assert.match(result, /reused specimen/); assert.match(result, /specimen value is stale/);
 });
@@ -77,10 +78,10 @@ test('malformed evidence returns useful errors without crashing', () => {
 test('matching empty or unresolved values cannot establish complete coverage', () => {
   for (const value of [null, '', {}, { hex: null }]) {
     const data = evidence();
-    data.approved[0].values.Light = value;
-    data.implemented[0].values.Light = value;
-    data.documented[0].values.Light = value;
-    data.documented[0].samples.Light.value = value;
+    data.approved[0].values['Mode A'] = value;
+    data.implemented[0].values['Mode A'] = value;
+    data.documented[0].values['Mode A'] = value;
+    data.documented[0].samples['Mode A'].value = value;
     assert.match(validateCoverage(data).join('\n'), /unresolved value/);
   }
 });
@@ -106,11 +107,29 @@ test('required sections cannot reuse the same specimen container', () => {
   assert.match(validateCoverage(data).join('\n'), /reused section/);
 });
 
-test('repository references and documentation policies pass the static gate', async () => {
+test('repository references and deterministic documentation policies pass the static gate', async () => {
   const result = await validateRepository();
   assert.deepEqual(result.errors, []);
   assert.ok(result.fileCount > 0);
   assert.ok(result.colorRoles > 0);
+});
+
+test('canonical documentation contract contains fixed geometry instead of discretionary sizing', async () => {
+  const source = await readFile(new URL('../docs/06-governance/documentation-visual-language.md', import.meta.url), 'utf8');
+  assert.match(source, /200px/);
+  assert.match(source, /476px/);
+  assert.match(source, /820px \| 360px \| 360px \| 828px/);
+  assert.match(source, /160 × 156px/);
+  assert.doesNotMatch(source, /choose what looks best/i);
+  assert.doesNotMatch(source, /recommended root width/i);
+});
+
+test('project-data boundary explicitly separates framework rules from project identity', async () => {
+  const source = await readFile(new URL('../docs/06-governance/project-data-boundary.md', import.meta.url), 'utf8');
+  assert.match(source, /generation method/i);
+  assert.match(source, /must not hard-code project identity/i);
+  assert.match(source, /example project/i);
+  assert.match(source, /Deterministic generation rule/);
 });
 
 test('nested fence examples are excluded while real Markdown links remain', () => {
