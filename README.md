@@ -6,9 +6,9 @@ It standardizes **how** a design system is discovered, specified, constructed, d
 
 Foundation documentation is mandatory in the same Figma build. Atom, Molecule, and Organism documentation is optional after component QA and explicit approval.
 
-## What the repository owns
+## What the framework defines
 
-The reusable framework owns:
+The framework provides:
 
 - Discovery workflow and approval gates.
 - Foundations → Atoms → Molecules → Organisms build order.
@@ -18,9 +18,9 @@ The reusable framework owns:
 - Component object-selection rules and `≤30` public-variant limit.
 - Auto Layout/property/binding construction rules.
 - Deterministic Foundation-documentation page order, frame widths, shell geometry, body-pattern mapping, table anatomy, canvas placement, and QA.
-- Release and validation procedure.
+- Release and output-validation procedure.
 
-## What each project owns
+## What comes from the current project
 
 Project-specific values come from approved Discovery or explicitly supplied production inputs:
 
@@ -34,15 +34,15 @@ Project-specific values come from approved Discovery or explicitly supplied prod
 - first-release component scope;
 - product-specific behavior and copy.
 
-An example project is never a reusable default. See [Project Data Boundary](docs/06-governance/project-data-boundary.md).
+An example project is never a source of project-specific values unless the user explicitly approves those values for the current project. See [Project Data Boundary](docs/06-governance/project-data-boundary.md).
 
 ## Determinism goal
 
-For the same repository revision and the same approved project input, independent runs must make the same framework decisions and produce the same documentation structure and construction geometry.
+For the same framework revision and the same approved project input, independent runs should make the same structural decisions and produce the same documentation geometry.
 
 Brand-sensitive output may differ only when project input differs.
 
-The canonical designer-documentation structure is defined in [Documentation Construction Contract](docs/06-governance/documentation-visual-language.md). Numeric geometry is mirrored in the machine-readable [documentation-layout-contract.json](docs/06-governance/documentation-layout-contract.json) so executors and validation scripts do not reinterpret measurements from prose.
+The canonical designer-documentation structure is defined in [Documentation Construction Contract](docs/06-governance/documentation-visual-language.md). Numeric geometry is mirrored in [documentation-layout-contract.json](docs/06-governance/documentation-layout-contract.json) so generation does not reinterpret measurements from prose.
 
 ## Documents
 
@@ -58,7 +58,7 @@ Start with:
 - [Mandatory Foundation Documentation](docs/06-governance/foundation-documentation.md)
 - [Documentation Acceptance](docs/06-governance/documentation-acceptance.md)
 
-Agents maintaining these specifications must follow [AGENTS.md](AGENTS.md).
+`AGENTS.md` defines how an executor should use these specifications during a project build.
 
 ## Before implementation
 
@@ -91,7 +91,7 @@ Build [component] as an [Atom, Molecule, or Organism] using [specification path]
 ```
 
 ```text
-Continue the existing build. Inspect the target Figma state first and resume from the first incomplete validated step. Use the repository's canonical documentation construction; do not reinterpret the layout from scratch.
+Continue the existing build. Inspect the target Figma state first and resume from the first incomplete validated step. Use the framework's canonical documentation construction; do not reinterpret the layout from scratch.
 ```
 
 ## Figma file boundary
@@ -107,22 +107,9 @@ Foundation documentation is built and validated immediately with its Foundation.
 A successful generated library:
 
 - reflects the current project's approved identity rather than an example project;
-- follows the repository's deterministic construction rules;
+- follows the framework's deterministic construction rules;
 - has complete mandatory Foundation documentation;
 - uses semantic variables and approved Styles rather than hard-coded component values;
 - contains bounded, reusable public component APIs;
 - preserves the 4px structural system;
 - passes the documented metadata, structural, screenshot, and coverage checks.
-
-## Validation
-
-Use [Documentation Acceptance](docs/06-governance/documentation-acceptance.md) to reconcile approved, implemented, and documented values.
-
-Run:
-
-```sh
-node scripts/validate-documentation.mjs
-node --test scripts/validate-documentation.test.mjs
-```
-
-Static validation checks repository contracts. Figma content and screenshot quality still require direct inspection during an authorized build.
