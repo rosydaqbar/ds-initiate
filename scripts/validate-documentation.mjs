@@ -69,6 +69,7 @@ export function validateCoverage(data) {
 
     const built = implemented.get(name);
     const shown = documented.get(name);
+
     if (built && (!nonempty(built.description) || !nonempty(built.nodeId))) errors.push(`implemented: ${name} needs identity and description.`);
     if (shown && (!nonempty(shown.usage) || !nonempty(shown.rowNodeId))) errors.push(`documented: ${name} needs visible row identity and individual usage.`);
 
@@ -216,8 +217,6 @@ export async function validateRepository(directory = root) {
   const files = await markdownFiles(directory);
   const contents = new Map();
 
-  // These patterns represent stale discretionary rules. Explicitly quoted examples of
-  // forbidden language live in the governance files, so those phrases are not scanned here.
   const obsoleteRules = [
     /root width is content-driven/i,
     /recommended root width/i,
@@ -232,6 +231,15 @@ export async function validateRepository(directory = root) {
     { pattern: /f3mBCrYbPWMqophBUjmdsF/i, label: 'example target Figma identity' }
   ];
 
+  const consumerUpkeepLanguage = [
+    /\bmaintainer(?:s)?\b/i,
+    /repository[- ]maintenance/i,
+    /pre-commit/i,
+    /review final diff/i,
+    /GitHub Actions/i,
+    /pull request/i
+  ];
+
   for (const file of files) {
     const relative = path.relative(directory, file).replaceAll('\\', '/');
     const source = await readFile(file, 'utf8');
@@ -242,7 +250,15 @@ export async function validateRepository(directory = root) {
     }
 
     for (const leak of knownExampleLeakage) {
-      if (leak.pattern.test(source)) errors.push(`${relative}: reusable repository contains ${leak.label}.`);
+      if (leak.pattern.test(source)) errors.push(`${relative}: reusable framework contains ${leak.label}.`);
+    }
+
+    const isConsumerFacing = relative === 'README.md' || relative === 'AGENTS.md' || relative === 'AGENTS.figma-executor-example.md' || relative.startsWith('docs/');
+    if (isConsumerFacing) {
+      for (const rule of consumerUpkeepLanguage) {
+        if (rule.test(source)) errors.push(`${relative}: consumer-facing documentation contains repository-upkeep language ${rule}.`);
+      }
+      if (/\.github\/maintainer\//i.test(source)) errors.push(`${relative}: consumer-facing documentation links to internal repository governance.`);
     }
 
     const prose = withoutFences(source);
@@ -262,7 +278,7 @@ export async function validateRepository(directory = root) {
 
   const requirements = {
     'docs/06-governance/project-data-boundary.md': [
-      '## Non-negotiable boundary', '## Deterministic generation rule', '## Pre-commit brand-agnostic audit'
+      '## Framework rules', '## Project input', '## Source priority', '## Example and reference projects', '## Deterministic generation'
     ],
     'docs/06-governance/documentation-visual-language.md': [
       'documentation-layout-contract.json',
@@ -293,7 +309,10 @@ export async function validateRepository(directory = root) {
       '## Deterministic project-resolution record', 'REQUIRES APPROVAL', 'BLOCKED'
     ],
     'README.md': [
-      '## What the repository owns', '## What each project owns', '## Determinism goal', 'Project Data Boundary', 'documentation-layout-contract.json'
+      '## What the framework defines', '## What comes from the current project', '## Determinism goal', 'Project Data Boundary', 'documentation-layout-contract.json'
+    ],
+    '.github/maintainer/repository-governance.md': [
+      '## Boundary', '## Example-project isolation', '## Contract synchronization', '## Consumer-facing documentation rule', '## Validation', '## Release check'
     ]
   };
 
