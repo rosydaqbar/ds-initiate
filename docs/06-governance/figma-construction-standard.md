@@ -4,8 +4,8 @@ This is the mandatory build contract for every item in this design system. An it
 
 ## Documentation requirement by level
 
-- **Foundations:** build and validate the documentation in the same workflow as the values, assets, or rules. Do not ask for a separate opt-in. Follow [Mandatory Foundation Documentation](foundation-documentation.md).
-- **Atoms, Molecules, and Organisms:** finish component QA, then ask before building the optional landing frame. Follow [Optional Component Documentation](optional-component-documentation.md).
+- **Foundations:** build and validate the documentation in the same workflow as the values, assets, or rules. Do not ask for a separate opt-in. Follow [Documentation Visual Language](documentation-visual-language.md) and [Mandatory Foundation Documentation](foundation-documentation.md).
+- **Atoms, Molecules, and Organisms:** finish component QA, then ask before building the optional landing frame. Follow [Documentation Visual Language](documentation-visual-language.md) and [Optional Component Documentation](optional-component-documentation.md).
 
 The component completion boundary below applies to Atoms, Molecules, and Organisms; it does not waive mandatory Foundation documentation.
 
@@ -34,7 +34,7 @@ Every Atom, Molecule, and Organism file must specify:
 8. A 4px and accessibility QA checklist.
 9. An item-specific optional documentation recipe that is used only after the finished component is validated and the user approves the separate documentation step.
 
-These implementation details remain in Markdown and internal QA. The optional Figma landing frame uses readable headings and explanations followed by annotated connected instances for designer-facing usage, actual component permutations, do-and-don't examples, and concise accessibility status.
+These implementation details remain in Markdown and internal QA. The optional Figma landing frame uses the approved documentation visual language and chooses its body from the actual component API rather than a fixed specimen template.
 
 ## 4px construction
 
@@ -94,8 +94,9 @@ Variant presentation is part of component construction. A separate landing frame
 - Do not create a landing frame, placeholder frame, or documentation-only helper during the default component build.
 - Ask the item-specific documentation question only after metadata and screenshot validation pass.
 - If approved, derive the frame from the finished Figma component and its item specification; do not rely on a static specimen template.
+- Reuse the documentation chrome already approved in the target file and select the body structure from the component's actual public API.
 - Show public names, dimensions, usage, anatomy, state behavior and relevant color pairings. Keep variant multiplication, private bindings, internal IDs and raw QA logs outside the guide.
-- Show purpose, usage, every public variant-axis value and property, dimension/specification rows, mode behavior, concrete do-and-don't examples and scoped accessibility status.
+- Show every public variant-axis value and property, dimension/specification rows, materially different mode behavior, relevant decision examples and scoped accessibility status.
 - Convert the item recipe into an editorial guide; do not render the Markdown recipe table or recreate the full component-set matrix in Figma.
 - Give every displayed instance a visible label and a sentence explaining when or why a designer chooses it.
 - Documentation approval for one item does not authorize documentation for another item.
@@ -125,3 +126,5 @@ Variant presentation is part of component construction. A separate landing frame
 ## Documentation completeness gate
 
 Follow [Documentation Acceptance](documentation-acceptance.md) for every guide. Do not accept a Foundation with an incomplete reference or an approved component guide missing public options. Verify actual specimen bindings, visible text, names and resolved values per entry. A native variable description, text box containing a hex value, or generic example does not replace the required visual reference.
+
+Also reject documentation that is technically complete but structurally unclear. Screenshot review must confirm hierarchy, grouping, alignment, legibility, real semantic relationships, brand consistency, and no overlap between top-level documentation frames.
