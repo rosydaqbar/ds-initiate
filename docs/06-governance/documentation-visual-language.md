@@ -1,16 +1,16 @@
 # Documentation Construction Contract
 
-This file defines the deterministic construction grammar for designer-facing Figma documentation generated from this repository.
+This contract defines the deterministic construction grammar for designer-facing Figma documentation generated with this framework.
 
-Read [Project Data Boundary](project-data-boundary.md) first. This contract fixes layout and presentation behavior. It does not fix any project's brand name, palette, typeface, token values, component inventory, or product content.
+Read [Project Data Boundary](project-data-boundary.md) first. This contract fixes layout and presentation behavior. It does not define any project's brand name, palette, typeface, token values, component inventory, or product content.
 
-Canonical numeric geometry is also stored in [documentation-layout-contract.json](documentation-layout-contract.json). Executors must read both files. The JSON file is authoritative for numeric geometry; this Markdown file is authoritative for semantics, behavior, and explanation. If the two conflict, stop and repair the repository contract before generating Figma output.
+Canonical numeric geometry is also stored in [documentation-layout-contract.json](documentation-layout-contract.json). The JSON file is the numeric source of truth; this Markdown file explains semantics and behavior. If they conflict, stop and report the exact conflict instead of choosing one silently.
 
 ## Core rule
 
-For the same repository revision and the same approved project inputs, independent runs must produce the same documentation structure and geometry.
+For the same framework revision and the same approved project input, independent runs should produce the same documentation structure and geometry.
 
-External references and example projects may be inspected to understand why a pattern works, but they do not override this contract and must never become a source of project-specific values.
+External references and example projects may help explain why a pattern works, but they do not override this contract and do not automatically provide project-specific values.
 
 When a user supplies a reference Figma file or screenshot:
 
@@ -18,20 +18,20 @@ When a user supplies a reference Figma file or screenshot:
 2. Identify which canonical pattern below matches the information being documented.
 3. Use that canonical pattern exactly.
 4. Populate it only with the current project's approved values, names, assets, and copy.
-5. Do not invent an additional layout pattern unless the existing patterns cannot represent the approved information. If a new pattern is truly required, stop and obtain approval before adding it to this repository.
+5. If the approved information cannot be represented by an existing pattern, stop and report the unsupported requirement rather than inventing new geometry.
 
 ## Authority
 
 Designer-documentation construction follows this order:
 
 1. User's latest explicit instruction.
-2. Approved project Discovery and supplied production values.
-3. This documentation construction contract and `documentation-layout-contract.json`.
+2. Approved Discovery and supplied production values for the current project.
+3. This construction contract and `documentation-layout-contract.json`.
 4. Item-specific documentation recipe.
-5. Existing Figma objects that are confirmed to be the current approved implementation.
+5. Existing Figma objects confirmed as the current approved implementation.
 6. External reference files.
 
-An existing example-project guide is not allowed to override this contract with its brand-specific values.
+An example-project guide does not override this contract with its brand-specific values.
 
 ## Canonical page order and placement
 
@@ -53,13 +53,13 @@ The `Foundations` page uses this left-to-right order when the items are in scope
 14. `Documentation / Accessibility`
 15. `Documentation / Content`
 
-All top-level documentation frames use `Y = 0`. Place the first in-scope frame at `X = 0`. Every following frame begins exactly `200px` after the previous frame's right edge. If an item is excluded, close the gap; do not reserve an empty slot.
+All top-level documentation frames use `Y = 0`. Place the first in-scope frame at `X = 0`. Every following frame begins exactly `200px` after the previous frame's right edge. If an item is excluded, close the gap.
 
 Do not arrange Foundation guides vertically, on a free-form grid, or at arbitrary canvas coordinates.
 
 ## Canonical frame-width decision table
 
-The root width is selected by Foundation name, not by taste or content-length estimation.
+The root width is selected by Foundation name.
 
 | Guide | Root width |
 | --- | ---: |
@@ -79,7 +79,7 @@ The root width is selected by Foundation name, not by taste or content-length es
 | Accessibility | `1600px` |
 | Content | `1600px` |
 
-Do not choose another width because a reference file used one. If an approved item cannot fit its assigned pattern at 100% scale, use a continuation frame with the same width and naming `Documentation / {Foundation} / {Group}` rather than changing the canonical width.
+Do not choose another width because a reference file used one. If an approved item cannot fit its assigned pattern at `100%` scale, use a continuation frame with the same width and naming `Documentation / {Foundation} / {Group}`.
 
 ## Canonical documentation chrome
 
@@ -107,13 +107,13 @@ Header [Fill width × 476]
     Hero row [root width - 160 × 152]
 ```
 
-Header card construction:
+Header card:
 
 - position: `32px` from every outer edge;
 - radius: `20px`;
 - padding: top `48px`, right `48px`, bottom `64px`, left `48px`;
 - vertical gap between Context row and Hero row: `112px`;
-- fill: project semantic subtle/background grouping surface;
+- fill: project semantic subtle/grouping surface;
 - no decorative shadow.
 
 Context row:
@@ -121,7 +121,7 @@ Context row:
 - height `36px`;
 - horizontal Auto Layout;
 - section label, arrow, guide name, flexible divider, compact system metadata;
-- `16px` gap between text items unless a flexible divider occupies the remaining width;
+- `16px` gap between text items unless the flexible divider occupies the remaining width;
 - divider: `1px` using the project's subtle border role.
 
 Hero row:
@@ -129,8 +129,10 @@ Hero row:
 - height `152px`;
 - horizontal Auto Layout;
 - left content = Fill;
-- right metadata column = `440px` only when mode/system metadata materially exists; otherwise keep the column but leave irrelevant fields out rather than changing layout;
+- right metadata column = `440px`;
 - gap between left and right = `64px`.
+
+Keep the right column even when a guide has little metadata; omit irrelevant fields instead of changing the layout.
 
 Hero title:
 
@@ -138,7 +140,8 @@ Hero title:
 - nearest approved weight to `600`;
 - `60px` size;
 - `72px` line height;
-- maximum two lines; if the Foundation name exceeds two lines, use the exact Foundation name but reduce only this title to `52/64`, never smaller.
+- maximum two lines;
+- if the Foundation name exceeds two lines, reduce only this title to `52/64`, never smaller.
 
 Hero description:
 
@@ -150,7 +153,7 @@ Hero description:
 - maximum two lines;
 - one concise Foundation definition, not project marketing copy.
 
-Metadata labels use `18px` / auto line height / nearest weight `600`. Metadata values use `16px` / `24px` / nearest weight `400`.
+Metadata labels use `18px` with nearest weight `600`. Metadata values use `16/24` with nearest weight `400`.
 
 ### Documentation body
 
@@ -159,7 +162,7 @@ Every guide body uses:
 - horizontal padding `80px`;
 - top padding `80px`;
 - bottom padding `96px`;
-- vertical gap between major sections `112px`;
+- `112px` vertical gap between major sections;
 - body content width = root width minus `160px`.
 
 A major section uses vertical Auto Layout with `56px` between the section introduction and its reference/specimen structure.
@@ -172,14 +175,13 @@ Section introduction:
 
 Section title row:
 
-- title `32px`, nearest weight `600`;
-- optional type badge immediately after title with `12px` gap;
-- badge radius `8px`, padding `4px 10px`, `14px` text at nearest weight `500`, surface fill and subtle border.
+- title `32/40`, nearest weight `600`;
+- optional type badge immediately after the title with `12px` gap;
+- badge radius `8px`, padding `4px 10px`, `14/20` text at nearest weight `500`.
 
 Section description:
 
-- `18px` size;
-- `28px` line height;
+- `18/28`;
 - nearest weight `400`;
 - maximum four lines.
 
@@ -187,18 +189,20 @@ Section description:
 
 Footer construction is fixed:
 
-- height `120px` minimum and Hug if the approved project name wraps;
+- minimum height `120px` and Hug if the approved project name wraps;
 - horizontal padding `80px`;
 - top padding `32px`;
 - bottom padding `48px`;
-- a `1px` subtle divider across the body content width;
+- `1px` subtle divider across the body content width;
 - project/system name on the left;
 - `Foundations → {Guide}` on the right;
-- use `16px` body text; do not add slogans, traits, URLs, or marketing copy unless explicitly approved for the project.
+- `16px` body text.
+
+Do not add slogans, traits, URLs, or marketing copy unless explicitly approved for the project.
 
 ## Documentation typography mapping
 
-The documentation system uses the project's approved primary interface typeface, but the documentation scale is fixed.
+The documentation system uses the project's approved primary interface typeface, while the documentation scale stays fixed.
 
 | Role | Size / line | Target weight |
 | --- | --- | ---: |
@@ -212,11 +216,11 @@ The documentation system uses the project's approved primary interface typeface,
 | Row name / value emphasis | `16 / 24` | `600` |
 | Table header / metadata | `14 / 20` | `500` |
 
-Map a target weight to the nearest approved weight numerically. On an equal-distance tie, choose the lighter weight. Do not substitute another font family. If the approved typeface cannot support a readable documentation scale, stop and ask rather than silently changing families.
+Map a target weight to the nearest approved numeric weight. On an equal-distance tie, choose the lighter weight. Do not substitute another font family. If the approved typeface cannot support a readable documentation scale, stop and ask.
 
 ## Canonical pattern selection
 
-Every Foundation maps to one of the following patterns. The mapping is fixed.
+Every Foundation maps to one pattern.
 
 | Foundation | Pattern |
 | --- | --- |
@@ -248,7 +252,7 @@ Body content width: `2688px`.
 Each palette family is one horizontal row:
 
 - family label column: `544px`;
-- swatch area begins at `X = 624px` relative to the root after the body left edge is accounted for;
+- swatch area begins at `X = 624px` relative to the root;
 - family rows are `220px` apart vertically;
 - family title `18/28`, target weight `600`;
 - family description `16/24`, target weight `400`, placed `8px` below the title.
@@ -264,11 +268,11 @@ Normal swatch card:
 - resolved value at `Y = 120px`, `16/24`, target weight `400`;
 - horizontal gap between normal swatches `32px`.
 
-When the approved palette defines one anchor/default step, that card is `224 × 156px` and contains a `10 × 10px` anchor marker at the top-right with an `8px` inset. If no anchor/default is approved, all cards remain `160px` wide. Do not invent an anchor.
+When the approved palette defines one anchor/default step, that card is `224 × 156px` and contains a `10 × 10px` anchor marker at the top-right with an `8px` inset. If no anchor/default is approved, all cards remain `160px` wide.
 
-Order values exactly by the approved source sequence. Do not reorder by luminance, usage, or aesthetics.
+Order values exactly by the approved source sequence. Do not invent an anchor or reorder by luminance, usage, or aesthetics.
 
-Contrast labels are omitted by default. Add them only when the project explicitly requires palette-pair contrast documentation. If added, compute them against a named foreground/background pair; never display an unexplained `AA` or `AAA` label.
+Contrast labels are omitted by default. Add them only when the project explicitly requires palette-pair contrast documentation and always identify the tested foreground/background pair.
 
 ## P2 — Semantic variable table
 
@@ -277,19 +281,19 @@ Use for semantic variables with appearance modes.
 Root width: `2528px`.
 Body content width: `2368px`.
 
-Every semantic family is its own major section. Use the actual approved semantic groups, in the order defined by the owning Foundation specification. Do not import group names from an example project.
+Every semantic family is its own major section. Use the approved semantic groups in the order defined by the owning Foundation specification.
 
 Table header:
 
 - height `56px`;
-- exact columns: `820px | 360px | 360px | 828px`;
-- labels: `Name | {Mode 1} | {Mode 2} | Usage` for a two-mode system;
+- exact columns for two modes: `820px | 360px | 360px | 828px`;
+- labels: `Name | {Mode 1} | {Mode 2} | Usage`;
 - `14/20`, target weight `500`;
 - bottom divider `1px` subtle border.
 
-If the approved system has one mode, use `820px | 480px | 1068px` with `Name | Value | Usage`.
+For one mode, use `820px | 480px | 1068px` with `Name | Value | Usage`.
 
-If the approved system has more than two modes, do not squeeze additional columns into this table. Create one continuation frame per additional mode pair using the same `2528px` root and the same first/usage column widths. Name it `Documentation / Color variables / {Mode group}`.
+For more than two modes, create one continuation frame per additional mode pair using the same `2528px` root and the same first/usage column widths. Do not squeeze additional columns into one table.
 
 Default data row:
 
@@ -302,7 +306,7 @@ Default data row:
 Name pill:
 
 - Hug width;
-- height `40px` maximum, normally `39px` from font metrics;
+- maximum height `40px`;
 - radius `8px`;
 - padding `8px 12px`;
 - surface fill;
@@ -312,42 +316,39 @@ Name pill:
 Mode token pill:
 
 - Hug width;
-- height `48px` maximum, normally `46px` from font metrics;
+- maximum height `48px`;
 - radius `12px`;
 - padding top/bottom `8px`, right `12px`, left `8px`;
 - internal gap `8px`;
 - swatch `28 × 28px`;
 - source label `16/24`, target weight `600`;
 - normal project documentation surface for Mode 1;
-- inverse/dark documentation surface for Mode 2 only when the approved mode is dark; otherwise use the normal documentation surface.
+- inverse/dark documentation surface for Mode 2 only when the approved mode is dark.
 
-Parent/child hierarchy is shown only when defined by the owning semantic contract.
+Parent/child hierarchy is shown only when explicitly defined by the owning semantic contract.
 
 Child row name cell:
 
-- connector area `48 × 48px` placed at the left of the name cell;
+- connector area `48 × 48px`;
 - vertical connector `1px × 36px` at `X = 12px`;
 - horizontal connector `24px × 1px` beginning at `X = 12px`, `Y = 24px`;
 - `12px` gap between connector area and child name pill.
 
-Do not create connectors from string similarity alone. Parent/child relationships must be explicitly defined in the Foundation specification.
+Do not create connectors from string similarity alone.
 
 ## P3 — Specimen rows
 
 Use for Typography, Elevation, Iconography, Illustration and Imagery, and Motion.
 
-Root width comes from the canonical width table.
-
 Each reference group uses:
 
-- section intro as defined above;
 - specimen list width = body content width;
 - each specimen row minimum height `120px`;
 - `32px` vertical padding;
-- `24px` horizontal gap between specimen and annotation;
+- `24px` gap between specimen and annotation;
 - `1px` subtle divider between rows.
 
-The annotation column is fixed `440px` on `1600px` guides and `480px` on `1664px` guides. The specimen occupies the remaining width. Annotation order is `Name → resolved specification → usage`.
+The annotation column is `440px` on `1600px` guides and `480px` on `1664px` guides. The specimen occupies the remaining width. Annotation order is `Name → resolved specification → usage`.
 
 Do not turn every specimen into a separate card. Use cards only when the asset itself requires a bounded surface to be legible.
 
@@ -356,8 +357,6 @@ Typography samples use the actual Text Style. Elevation samples use the actual E
 ## P4 — Measured diagrams
 
 Use for 4px Grid, Spacing, Grid and Layout, Radius, and Borders.
-
-Root width comes from the canonical width table.
 
 Each measured reference row uses:
 
@@ -370,7 +369,7 @@ Each measured reference row uses:
 
 Measurement labels use `14/20`, target weight `500`. Primary value labels use `16/24`, target weight `600`. Explanations use `16/24`, target weight `400`.
 
-Render dimensions at true size. Do not scale bars, target bounds, grid columns, corner radii, or stroke widths for convenience. If a true-size specimen cannot fit, use the assigned wider root or a continuation frame.
+Render dimensions at true size. Do not scale bars, target bounds, grid columns, corner radii, or stroke widths for convenience.
 
 ## P5 — Guidance and comparisons
 
@@ -399,9 +398,9 @@ Do not use equal-card dashboards for prose-heavy guidance.
 
 ## Project color binding for documentation chrome
 
-Documentation chrome must use the current project's semantic roles, never concrete example-project hex values.
+Documentation chrome uses the current project's semantic roles, never concrete values from another project.
 
-Use these role intentions and map them to the exact approved semantic tokens in the project:
+Map these intentions to the approved semantic tokens in the current project:
 
 - root canvas → canvas/base background;
 - header card and quiet callouts → subtle/grouping background;
@@ -410,23 +409,23 @@ Use these role intentions and map them to the exact approved semantic tokens in 
 - supporting text → secondary text;
 - dividers/strokes → subtle border;
 - inverse mode pill surface → inverse or dark-mode surface appropriate to the mode;
-- swatch itself → the exact documented variable or primitive.
+- swatch itself → exact documented variable or primitive.
 
-If the project's token names differ, bind by approved purpose, not by copying names from another project. If an equivalent role does not exist, resolve the missing Foundation role before documentation.
+If an equivalent semantic role does not exist, resolve the missing Foundation role before documentation.
 
 ## Copy rules
 
-Visible documentation copy is project-specific but its function is fixed.
+Visible documentation copy is project-specific, but its function is fixed.
 
 - Foundation definition: one sentence.
 - Section description: one or two sentences explaining the decision represented by that section.
 - Row usage: one concise sentence specific to that row.
 - No filler, marketing slogans, external-system wording, or generic repeated usage.
-- Do not mention an example project's brand in reusable repository instructions.
+- Do not mention another project's brand in current-project documentation.
 
 ## Canvas and continuation rules
 
-- All top-level coordinates and frame dimensions are whole-number multiples of `4px` except controlled rendering details already allowed by the 4px construction standard.
+- All top-level coordinates and frame dimensions are whole-number multiples of `4px` except controlled rendering details allowed by the 4px construction standard.
 - Continuation frames use the same root width as the owning guide.
 - Place a continuation immediately after the owning guide with the same `200px` canvas gap.
 - Continuation header uses the same chrome and title `{Foundation} / {Group}`.
@@ -434,7 +433,7 @@ Visible documentation copy is project-specific but its function is fixed.
 
 ## Reference adaptation rule
 
-A reference may help identify which canonical pattern to use, but once selected, the repository pattern controls the build.
+A reference may help identify which canonical pattern to use, but once selected, the framework pattern controls the build.
 
 Do not copy a reference's:
 
@@ -447,7 +446,7 @@ Do not copy a reference's:
 - logos, links, resources, or badges;
 - arbitrary frame width, column width, padding, or gap that conflicts with this contract.
 
-The reference answers why the pattern is understandable. This repository defines how the pattern is constructed.
+The reference explains the information problem. This contract defines how that information is constructed in the generated guide.
 
 ## Screenshot QA
 
@@ -457,7 +456,7 @@ Review at a scale where the whole section hierarchy is visible, then inspect the
 
 Fail the guide when any of these are true:
 
-- root width differs from the canonical width without an approved repository change;
+- root width differs from the canonical width;
 - header is not the canonical `476px` shell;
 - body padding or `112px` major-section rhythm differs;
 - pattern selection does not match the canonical mapping;
@@ -466,7 +465,7 @@ Fail the guide when any of these are true:
 - parent/child connectors do not represent an explicit semantic relationship;
 - text or pills clip;
 - top-level frames are not aligned at `Y = 0` with `200px` horizontal gaps;
-- project-specific brand values from an example have leaked into another project;
+- project-specific values from another project appear without current-project approval;
 - visual completion depends on an unapproved discretionary layout decision.
 
 A technically complete guide that violates the canonical construction contract is incomplete.
