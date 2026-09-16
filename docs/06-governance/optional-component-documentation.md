@@ -23,7 +23,7 @@ Approval applies only to that named component.
 
 The guide uses the current project's approved typography, semantic color roles, component instances, and copy. It must not inherit another example project's brand name, palette, font, asset treatment, or product language.
 
-The repository fixes documentation construction. The project supplies the component's visual identity.
+The framework defines documentation construction. The current project supplies the component's visual identity.
 
 ## Canonical component-guide shell
 
@@ -240,9 +240,9 @@ State:
 
 Do not claim production keyboard or screen-reader behavior from a Figma specimen.
 
-## Keep implementation data internal
+## Keep implementation data out of the visible guide
 
-Do not place these in the visible guide:
+Do not place these in the designer-facing guide:
 
 - variant-count calculations;
 - private helper matrix;
@@ -268,7 +268,7 @@ Build from the finished Figma component and its owning Markdown specification.
 
 A component guide fails when:
 
-- root width or canonical shell differs without approved repository change;
+- root width or canonical shell differs from the framework contract;
 - required section order changes;
 - displayed instances are detached or scaled;
 - a public axis/property/value is missing;
