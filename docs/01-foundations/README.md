@@ -2,7 +2,11 @@
 
 Foundations define the shared visual language used by every component.
 
-Figma documentation is mandatory for every Foundation item in the requested build. Build it immediately alongside the values, styles, assets, or rules, without a separate documentation question. The item is complete only when both the Foundation and its guide pass internal QA. Guides include complete grouped references for every approved value, role, Style and asset treatment, plus explained applied examples. Every reference entry includes its familiar and searchable names, resolved values, mode behavior, individual usage and bound specimen. Follow [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md) and the item-specific recipe below; Atom, Molecule, and Organism landing frames remain optional.
+Figma documentation is mandatory for every Foundation item in the requested build. Build it immediately alongside the values, styles, assets, or rules, without a separate documentation question. The item is complete only when both the Foundation and its guide pass internal QA.
+
+Before authoring a guide, read [Documentation Visual Language](../06-governance/documentation-visual-language.md) and [Mandatory Foundation Documentation](../06-governance/foundation-documentation.md). Use the established documentation grammar in the target Figma file when one already exists. External references are structural evidence only; adapt the information pattern to the actual Foundation instead of copying another system literally.
+
+Guides include complete grouped references for every approved value, role, Style and asset treatment, plus explained applied examples. Every reference entry includes its familiar/searchable name, resolved value, mode behavior when applicable, individual usage and a bound or measured specimen. The presentation structure should match the information: semantic variables can use hierarchical mode tables, primitive scales can use swatch families, dimensional systems can use measured diagrams, and visual assets can use specimen rows.
 
 | Foundation | Specification |
 | --- | --- |
