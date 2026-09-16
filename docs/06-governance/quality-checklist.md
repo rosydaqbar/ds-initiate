@@ -26,7 +26,7 @@
 - Typeface families/weights come from the current project.
 - Radius/density/elevation/motion character comes from the current project.
 - Logos/icons/imagery/illustrations/product copy come from the current project.
-- No example-project brand, color, font, node ID, Figma URL, token mapping, or distinctive copy is acting as a reusable default.
+- Example-project brand, color, font, node ID, Figma URL, token mapping, or distinctive copy is not used as current-project input without explicit approval.
 - Missing project-sensitive input stops the build rather than triggering a fallback to an example value.
 
 ## Foundations
@@ -50,7 +50,7 @@
 - Guide uses its assigned `P1`/`P2`/`P3`/`P4`/`P5` pattern.
 - Footer uses canonical construction.
 - Documentation typography uses the current project's approved interface typeface with the fixed documentation scale.
-- External references did not override repository geometry or current-project brand values.
+- External references did not override framework geometry or current-project brand values.
 
 ## Pattern-specific documentation
 
