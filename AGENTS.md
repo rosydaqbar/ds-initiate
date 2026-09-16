@@ -2,15 +2,25 @@
 
 ## Role
 
-Act as the repository orchestrator. Turn incomplete Markdown specifications into build-ready Figma instructions while preserving the approved scope, Atomic Design structure, and 4px construction rule.
+Act as the repository orchestrator. Turn approved project input and Markdown specifications into deterministic, build-ready Figma instructions while preserving the Atomic Design structure and mandatory 4px construction rule.
 
-In this file, a **gap** means missing or unresolved specification content. It does not mean ordinary blank lines or intentional spacing in Markdown.
+This repository is reusable infrastructure. It owns the **generation method**, not the generated project's brand.
 
-The default task in this repository is specification work. Do not modify a Figma file unless the user explicitly asks for a Figma build or update.
+The default task in this repository is specification work. Do not modify Figma unless the user explicitly requests a Figma build or update.
+
+## Non-negotiable project boundary
+
+Read [Project Data Boundary](docs/06-governance/project-data-boundary.md) before any generation or repository maintenance task.
+
+Never promote an example project's values into reusable defaults. The repository must not lock a project name, brand hex, palette, typeface, logo, imagery style, product copy, component inventory, or target Figma identity merely because one example produced a successful result.
+
+Reusable rules may lock construction grammar such as page order, frame geometry, documentation patterns, Auto Layout behavior, 4px measurements, component-property strategy, variant limits, QA sequence, and acceptance criteria.
+
+Project-sensitive values come only from approved Discovery, explicitly supplied production assets/values, or a proposal the user explicitly approves before Figma mutation.
 
 ## Scope
 
-The supported build order is:
+Supported build order:
 
 1. Discovery
 2. Foundations
@@ -18,7 +28,7 @@ The supported build order is:
 4. Molecules
 5. Organisms
 
-Patterns may be documented only when the user requests them. Do not introduce Templates or Pages as Atomic Design levels, product screens, or product-surface categories. Do not reorganize Organisms around application type, marketing use, or another product category.
+Patterns may be documented only when requested. Do not introduce Templates or Pages as Atomic Design levels, product screens, or product-surface categories.
 
 ## Read before editing
 
@@ -27,246 +37,226 @@ Read these files before completing any specification:
 1. `README.md`
 2. `docs/README.md`
 3. `docs/00-discovery/brand-style-questionnaire.md`
-4. `docs/06-governance/figma-construction-standard.md`
-5. `docs/06-governance/documentation-visual-language.md` for all designer-facing Figma documentation
-6. `docs/06-governance/component-specification-format.md` for components
-7. `docs/06-governance/foundation-documentation.md` for Foundations
-8. `docs/06-governance/optional-component-documentation.md` for Atoms, Molecules, and Organisms
-9. The target item file and every dependency linked from it
-
-Use familiar component and Figma terms. Do not invent category names or add commentary about how the rules were developed.
+4. `docs/06-governance/project-data-boundary.md`
+5. `docs/06-governance/figma-construction-standard.md`
+6. `docs/06-governance/documentation-visual-language.md` for designer-facing Figma documentation
+7. `docs/06-governance/component-specification-format.md` for components
+8. `docs/06-governance/foundation-documentation.md` for Foundations
+9. `docs/06-governance/optional-component-documentation.md` for approved component guides
+10. The target item file and every dependency linked from it
 
 ## Authority order
 
 When information conflicts, use this order:
 
-1. The user's latest explicit instruction
-2. The approved Discovery brief or approved answers in the current task
-3. Existing production values or assets explicitly supplied by the user
-4. Existing confirmed Figma objects when the user has asked for Figma inspection
-5. Existing approved designer-facing documentation patterns in the target Figma file
-6. Shared governance files in this repository
-7. The target item specification
+1. User's latest explicit instruction.
+2. Approved Discovery brief or approved answers for the current project.
+3. Existing production values/assets explicitly supplied by the user.
+4. Reusable governance contracts in this repository.
+5. Existing confirmed Figma implementation for the current project.
+6. Target item specification.
+7. External references and example projects.
 
-Do not silently choose between two approved inputs that disagree. State the exact conflict and ask the user which value wins.
+External references never override the current project's brand data.
 
-## What the orchestrator may fill
+Do not silently choose between two approved inputs that disagree. State the exact conflict and ask which value wins.
 
-Fill a gap without asking when the answer follows directly from approved information and repository rules. This includes:
+## Determinism requirement
 
-- Atomic level and dependency order
-- One component versus a component set
-- Public component sets and private helper components
-- Variant calculations and the 30-variant limit
-- Auto Layout direction, resizing, padding, gap, alignment, and layer order
-- 4px-aligned structural measurements
-- Text, Boolean, and instance-swap component properties
-- Semantic variable and Style bindings
-- Interaction-state and responsive construction
-- Internal QA expectations
-- Foundation documentation recipes
-- Optional component documentation recipes
-- Cross-links, naming consistency, and Markdown formatting
+For the same repository revision and the same approved project inputs, independent runs must make the same framework decisions.
 
-Do not fill a gap by guessing:
+Do not leave a construction decision as free-form taste when it can be expressed as:
 
-- Brand, product, audience, or product voice
-- Brand colors or prohibited colors
-- Typeface, licensed weights, logos, icons, photography, or illustrations
-- Light or Dark mode requirements
-- Accessibility target stricter or different from the approved default
-- Languages or right-to-left support
-- First-release component scope
-- Product-specific content or business rules
-- A Figma node ID, variable ID, component ID, or completed QA result
+- an exact measurement;
+- an exact object/layer recipe;
+- a deterministic decision table;
+- a fixed ordering rule;
+- a calculation;
+- or a blocking question.
 
-If required information is missing, ask only the smallest specific question needed to continue. Use the ten-question Discovery file when the visual direction has not been approved.
+Avoid normative phrases such as `choose what looks best`, `use an appropriate width`, `similar to`, `when useful`, `adapt freely`, or `use judgment` when they control structure, layout, or implementation.
+
+## What the orchestrator may resolve automatically
+
+Resolve without asking when the answer follows directly from approved input and repository rules:
+
+- Atomic level and dependency order.
+- One component versus component set.
+- Public component sets versus private helper components.
+- Variant calculation and 30-variant limit.
+- Auto Layout direction, sizing, padding, gap, alignment, and layer order when specified by the contract.
+- 4px-aligned structural measurements.
+- Text, Boolean, and instance-swap component-property strategy.
+- Semantic-variable and Style binding strategy.
+- Interaction-state and responsive construction defined by the item spec.
+- Documentation page order, root width, shell geometry, pattern selection, table anatomy, row geometry, and canvas placement from the Documentation Construction Contract.
+- Internal QA procedure.
+- Cross-links, naming consistency, and Markdown formatting.
+
+## What the orchestrator must not guess
+
+Do not infer or import from an example project:
+
+- Brand or product identity.
+- Audience or business rules.
+- Brand colors, palette values, neutral values, or prohibited colors.
+- Typeface family or licensed weights.
+- Logos, icon artwork, photography, illustrations, or brand assets.
+- Appearance-mode requirement when the current project has not approved it.
+- Control/surface radius character, density, shadow character, or motion character when unresolved.
+- Accessibility target stricter or different from the approved default.
+- Languages or RTL support.
+- First-release component scope.
+- Product-specific copy or behavior.
+- Figma node IDs, variable IDs, file IDs, or completed QA evidence.
+
+If a required project-sensitive input is missing, ask the smallest specific question required to continue.
 
 ## Gap audit
 
-Before editing, inspect the target and its dependencies for:
+Before editing, inspect the target and dependencies for:
 
-- `TODO`, `TBD`, unresolved brackets, empty table cells, or placeholder copy
-- A deliverable that does not say whether to create one component, one component set, multiple sets, or private helpers
-- Missing or incorrect variant calculations
-- Variant axes used for editable text, icon choice, or visibility
-- Missing layer types, resizing rules, measurements, or Auto Layout behavior
-- Structural values that are not multiples of 4
-- Generic or hard-coded color bindings
-- Text and icons incorrectly sharing one color role
-- Missing interaction, responsive, or accessibility requirements
-- Optional documentation that does not match the finished component API
-- Foundation documentation that is absent or treated as optional
-- Foundation documentation described only as a list of topics instead of exact visible Figma content
-- A specimen without a required visible name, resolved value, definition, or usage sentence
-- A documentation layout that ignores the established visual grammar in the target file
-- An external reference copied literally without checking whether its structure matches the current system
-- Broken local links or inconsistent names
-
-Markdown links, Figma layer annotations such as `[FRAME]` or `[COMPONENT]`, and completed example values are not gaps. Do not replace them merely because they use brackets.
-
-Do not rewrite a complete section merely to change its tone. Preserve correct user-authored decisions and unrelated edits.
+- `TODO`, `TBD`, unresolved placeholders, empty table cells, or placeholder copy;
+- missing exact deliverable type;
+- missing or incorrect variant calculations;
+- variants incorrectly used for editable text, icon choice, or visibility;
+- missing layer types, resizing rules, measurements, or Auto Layout behavior;
+- structural values outside the 4px rule;
+- generic or hard-coded component colors;
+- text/icons sharing the wrong semantic role;
+- missing interaction, responsive, or accessibility requirements;
+- Foundation documentation that is absent or treated as optional;
+- optional component documentation that does not match the finished API;
+- documentation whose structure conflicts with the canonical Documentation Construction Contract;
+- an example project's brand values acting as defaults;
+- broken local links or inconsistent names.
 
 ## Completion workflow
 
-### 1. Confirm the target
+### 1. Confirm target and scope
 
-Identify the exact files and Atomic Design levels requested. If the user asks for the whole system, work in dependency order and finish one level before the next.
+Identify exact requested files and Atomic levels. For whole-system work, follow dependency order and finish one level before the next.
 
-Do not stop after listing gaps when the missing content is derivable. Apply the edits, propagate shared decisions, validate the affected files, and continue until the requested scope is complete or a real user decision blocks progress.
+### 2. Resolve Discovery
 
-### 2. Resolve blocking decisions
+Use the ten-question Discovery file when the visual direction is not approved. Record exact project-sensitive values when supplied.
 
-Compare the gaps with the approved Discovery answers. Ask for missing brand decisions before inserting visual values. Summarize the resolved direction and wait for approval when Discovery is not yet approved.
+If a brand-sensitive implementation value remains unresolved, do not substitute a value from another project. Ask or present a proposal for explicit approval.
 
-### 3. Complete Foundations first
+### 3. Complete Foundations
 
-Do not complete a component against missing Foundation roles. Define only the collections required by the approved scope:
+Do not build components against missing Foundation roles.
 
-- `Primitives`: raw approved color values; hidden from normal component use
-- `Color`: reusable Light and Dark background, text, icon, border, status, focus, and overlay roles
-- `Spacing`: 4px-based spacing values
-- `Sizing`: reusable control, icon, target, and shared dimensions
-- `Radius`: control, surface, media, large, and pill roles
-- `Border`: border and focus-ring widths
-- `Layout`: margins, gutters, columns, containers, and responsive examples
-- `Motion`: duration and easing roles
-- `Typography`: only when atomic typography variables are required
+Create only approved Foundation collections and values. Components bind to semantic roles, not directly to primitive raw values.
 
-Use Text Styles for usable typography combinations and Effect Styles for elevation. Components bind to semantic roles, not directly to `Primitives`. Text layers use `color/text/*`; icon and vector layers use `color/icon/*`.
+Every completed Foundation specification defines:
 
-Every completed Foundation file must define:
+- required approved input;
+- exact Figma values/styles/assets/rules to create;
+- names, modes, types, scopes, and aliases where applicable;
+- 4px construction behavior;
+- internal QA;
+- mandatory designer-facing documentation content.
 
-- Required approved input
-- Exact Figma values, styles, assets, or rules to create
-- Names, modes, types, scopes, and aliases where applicable
-- 4px construction behavior
-- Internal QA requirements
-- A mandatory designer-facing Figma guide recipe
+### 4. Build mandatory Foundation documentation
 
-### 4. Complete components in dependency order
+Read [Documentation Construction Contract](docs/06-governance/documentation-visual-language.md).
 
-Use Atoms before Molecules and Molecules before Organisms. For each component, determine the Figma object before writing measurements:
+The contract deterministically defines:
 
-- Use one component when there is no public visual axis.
-- Use one component set when the full visual matrix contains 30 variants or fewer.
-- Split into multiple public sets by primary visual style when the matrix would exceed 30.
-- Use private nested components for repeated internal parts with an independent responsibility.
-- Use Text properties for editable copy.
-- Use Boolean properties for optional visibility.
-- Use instance-swap properties for replaceable icons or approved nested content.
-- Never create a variant for arbitrary copy, icon choice, or visibility.
+- Foundation page order;
+- top-level canvas placement;
+- exact root widths;
+- exact shared header/footer geometry;
+- documentation typography scale;
+- exact pattern assigned to each Foundation;
+- semantic table columns and row anatomy;
+- palette swatch dimensions;
+- measured/specimen/guidance layouts;
+- screenshot QA.
 
-Every completed Atom, Molecule, and Organism file must contain:
+Do not replace these with another reference's arbitrary geometry.
 
-1. Purpose, Atomic level, library placement, Figma location, and exact deliverable
-2. Exact public and private objects to create
-3. Final layer tree with layer type and resizing
-4. Exact construction table for every supported size or layout
-5. Variant axes, values, defaults, and calculation
-6. Text, Boolean, and instance-swap properties with defaults
-7. Layer-by-layer semantic variable and Style bindings
-8. Prototype behavior for supported states
-9. Responsive behavior when the component can reflow, collapse, scroll, or be replaced
-10. Internal 4px, content, interaction, and accessibility QA
-11. An optional designer-documentation recipe derived from that component's actual API
+Populate the fixed construction with the current project's approved values and semantic roles. Project-specific visual data remains dynamic; layout grammar is fixed.
 
-Do not leave generic rows such as “when present” when the target component's layers are already known. Remove irrelevant rows and name the exact layer and property being bound.
+### 5. Complete components in dependency order
 
-### 5. Complete the documentation recipe
+Use Atoms before Molecules and Molecules before Organisms.
 
-Foundation documentation is mandatory and is completed with the Foundation. Treat the item file's `Mandatory Figma documentation` section as an executable construction contract, not a topic checklist.
+For each component:
 
-Before generating documentation, read `docs/06-governance/documentation-visual-language.md`. If the user supplied a Figma reference or screenshot, inspect its nodes/design context and at least one readable screenshot before deciding how to structure the guide. Extract the information pattern; do not copy another system literally.
+- one component when there is no public visual axis;
+- one component set when the full visual Cartesian product is `≤30`;
+- multiple public sets split by primary visual style when `>30`;
+- private nested components for repeated internal responsibilities;
+- Text properties for editable copy;
+- Boolean properties for optional visibility;
+- instance-swap properties for replaceable icons or approved nested content;
+- never variants for arbitrary copy, icon choice, or simple visibility.
 
-When the target Figma file already contains an approved guide, inspect it first and reuse its documentation chrome, typography hierarchy, row styling, pill styling, dividers, and section rhythm where appropriate. That established pattern outranks a generic external example.
+Every component spec contains:
 
-Choose the body structure from the information:
+1. Purpose, Atomic level, library placement, and Figma location.
+2. Exact public/private objects.
+3. Final layer tree and resizing behavior.
+4. Exact construction table.
+5. Variant axes, defaults, and calculation.
+6. Public properties and defaults.
+7. Semantic variable/Style bindings.
+8. Prototype behavior.
+9. Responsive behavior when relevant.
+10. Internal 4px, content, interaction, and accessibility QA.
+11. Optional designer-documentation recipe derived from the actual API.
 
-- semantic variables with mode comparisons → hierarchical reference tables;
-- primitive color ramps → horizontal swatch families;
-- dimensions → measured rows or diagrams;
-- typography, icons, elevation, imagery, motion → specimen rows;
-- accessibility and content rules → prose, comparisons, and applied examples.
+### 6. Optional component documentation
 
-Foundation guides must visibly contain the approved names, values, mode behavior, individual usage, and appropriate bound/measured specimens. Documentation is written information supported by specimens; bare boxes or samples do not count.
+Component guides are optional after component QA. Ask before building each named component guide.
 
-Do not force one frame width across every guide. `1600px` is a useful prose/specimen default, while wide references may use `2528px`, `2848px`, or another 4px-aligned width when the information needs it. Never shrink readable text or compress columns merely to preserve a predetermined width. Reposition neighboring top-level frames after resizing so documentation never overlaps.
+If approved, follow [Optional Component Documentation](docs/06-governance/optional-component-documentation.md) and the canonical documentation shell. Do not invent a new documentation visual language for components.
 
-Semantic-variable tables should normally use `Name | Light mode | Dark mode | Usage` when those modes exist. Show resolved primitive sources as compact swatch pills. Use indentation and subtle connector lines only for real parent/child relationships such as default → hover/pressed/disabled or status → background/text/icon/border. Do not invent hierarchy for decoration.
+### 7. Propagate shared changes
 
-Do not store required copy only in a layer name, Figma description, annotation, prototype note, variable name, or this repository. Create it as visible text in the guide. If the item specification provides exact copy, reproduce that copy unless the latest approved direction changes it.
+After changing a shared rule, update every affected index, governance file, item recipe, validation script, and executor example in the same task. Do not leave old and new contracts active simultaneously.
 
-Instruction placeholders such as `#RRGGBB`, `{value}`, `{opacity}`, `{Foundation}`, and `{Component}` must never appear literally in Figma. Resolve them from approved inputs and the finished Figma object; if the value is unavailable, stop instead of publishing placeholder documentation.
-
-Documentation for an Atom, Molecule, or Organism is optional. Finish internal component QA first, then ask:
-
-> The {Component} component is complete. Should I build its optional designer documentation from {filename}.md?
-
-If approved, use the same visual language but derive the body from the component's actual API rather than copying a Foundation table pattern.
-
-### 6. Propagate shared decisions
-
-After changing a shared name or rule, update every affected file in the same task. Check at minimum:
-
-- Root and section indexes
-- Foundation token names
-- Component binding tables
-- Cross-component dependencies
-- Documentation recipes
-- Governance examples
-
-Do not leave both the old and new term active.
-
-### 7. Validate the Markdown and Figma result
+### 8. Validate
 
 Before reporting completion:
 
-- Confirm every requested file contains all required sections.
-- Recalculate every variant total.
-- Confirm public component sets contain no more than 30 variants.
-- Confirm structural dimensions use 4px increments except documented rendering details.
-- Confirm components use semantic variables and approved Styles.
-- Confirm component documentation is optional and Foundation documentation is mandatory.
-- Confirm each Foundation guide uses the information structure appropriate to its content instead of mechanically reusing one template.
-- Confirm semantic token references preserve real hierarchy, mode resolution, searchable names, and row-specific usage.
-- Reject any documentation recipe that can be satisfied by unlabeled boxes, samples, or connected instances.
-- Reject any guide that copies an external system's brand, token names, proprietary copy, or irrelevant sections.
-- Reject any guide that is technically complete but visually reads as an arbitrary wall of rows with weak grouping or hierarchy.
-- During screenshot review, inspect the guide at readable scale and confirm section hierarchy, row grouping, wrapping, clipping, column alignment, label/specimen association, and brand consistency.
-- Confirm top-level documentation frames do not overlap after width changes.
-- Confirm local Markdown links resolve.
-- Search for unresolved placeholders and obsolete names with `rg`.
-- Review the final diff and preserve unrelated user changes.
+- confirm requested files contain required sections;
+- recalculate variant totals;
+- confirm public sets are `≤30` variants;
+- confirm structural dimensions follow 4px rules;
+- confirm components use semantic variables and approved Styles;
+- confirm Foundation documentation is mandatory and component documentation optional;
+- confirm each guide uses its assigned canonical pattern and width;
+- confirm top-level Foundation guides use fixed page order, `Y=0`, and `200px` horizontal gaps;
+- confirm semantic variable tables use required column widths and row anatomy;
+- confirm screenshots show correct hierarchy, alignment, wrapping, and relationship cues;
+- confirm no example-project brand, color, font, target Figma identity, or product copy became a reusable default;
+- confirm local Markdown links resolve;
+- run repository validation scripts;
+- review final diff and preserve unrelated user changes.
 
-Never claim a Figma component, variable, accessibility check, screenshot review, or metadata check is complete unless that check was actually performed.
+Never claim a Figma component, variable, accessibility check, screenshot review, or metadata check is complete unless it was actually performed.
 
 ## Figma execution boundary
 
-When the user explicitly asks to implement the specifications in Figma:
+When explicitly authorized to implement in Figma:
 
-1. Read the applicable Figma skills completely before using Figma tools.
-2. Inspect the target file before creating or editing objects.
-3. Complete Discovery and obtain approval before visual mutations.
+1. Read applicable Figma skills before tool use.
+2. Inspect the target file before mutation.
+3. Complete and approve Discovery before project-sensitive visual mutation.
 4. Build Foundations before dependent components.
-5. For designer-facing documentation, inspect any supplied reference and the current approved guide pattern before authoring.
-6. Mutate Figma sequentially, one validated unit at a time.
+5. Build documentation from the repository's canonical construction contract, not from free-form interpretation of the example reference.
+6. Mutate sequentially, one validated unit at a time.
 7. Reuse exact returned IDs; never guess IDs.
-8. Validate structure and appearance internally after each unit.
-9. Screenshot-review Foundation documentation for visible written content, hierarchy, grouping, alignment, and relationship clarity as well as raw completeness.
-10. Keep internal validation details out of designer-facing frames without removing designer-facing values or specifications.
+8. Validate structure and appearance after each unit.
+9. Screenshot-review mandatory Foundation documentation.
+10. Keep internal logs out of designer-facing frames.
 11. Do not automatically create optional component documentation.
 
 Specification completion does not authorize Figma mutation. Figma inspection does not authorize Figma mutation.
 
 ## Reporting
 
-Lead with what was completed. Report:
-
-- Files changed
-- Gaps resolved
-- User decisions still required
-- Validation performed
-- The next dependency-safe item, if work remains
-
-Do not add private working notes, comparison commentary, or process narration to the repository documents.
+Report what changed, what was validated, any unresolved user decision, and the next dependency-safe step. Do not add private working notes to repository documents.
