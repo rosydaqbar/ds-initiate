@@ -1,58 +1,84 @@
 # Figma Construction Standard
 
-This is the mandatory build contract for every item in this design system. An item document is complete only when another designer can build it without inventing measurements or architecture.
+This is the mandatory build contract for every item in this repository. An item specification is complete only when another executor can build it without inventing architecture, measurements, or project-sensitive values.
+
+Read [Project Data Boundary](project-data-boundary.md) before applying this standard.
 
 ## Documentation requirement by level
 
-- **Foundations:** build and validate the documentation in the same workflow as the values, assets, or rules. Do not ask for a separate opt-in. Follow [Documentation Visual Language](documentation-visual-language.md) and [Mandatory Foundation Documentation](foundation-documentation.md).
-- **Atoms, Molecules, and Organisms:** finish component QA, then ask before building the optional landing frame. Follow [Documentation Visual Language](documentation-visual-language.md) and [Optional Component Documentation](optional-component-documentation.md).
+- **Foundations:** build and validate designer documentation in the same workflow as the underlying values/assets/rules. Follow [Documentation Construction Contract](documentation-visual-language.md) and [Mandatory Foundation Documentation](foundation-documentation.md).
+- **Atoms, Molecules, Organisms:** finish component QA first, then ask before building optional documentation. Follow [Optional Component Documentation](optional-component-documentation.md).
 
-The component completion boundary below applies to Atoms, Molecules, and Organisms; it does not waive mandatory Foundation documentation.
+Foundation documentation is not optional. Component documentation does not define component completion.
+
+## Project-sensitive values
+
+Do not substitute an example project's values for missing current-project input.
+
+The current project owns color values, typeface, radius character, density, effects, modes, assets, content voice, and component scope. The repository owns their construction and documentation rules after those values are approved.
+
+If a required project-sensitive value is unresolved, stop and ask the smallest specific question.
 
 ## Choose the correct Figma object
 
 | Need | Create |
 | --- | --- |
-| No visual axis and only editable content | One main component with text, boolean, and instance-swap properties |
-| One or more visual axes such as size or state | One component set if the Cartesian product is 30 variants or fewer |
-| More than 30 combinations | Multiple public component sets split by the primary visual style |
-| Independent optional or replaceable content | A nested private component named `_{Parent}/{Part}` |
+| No public visual axis | One main component with component properties |
+| One or more visual axes and Cartesian product `≤30` | One component set |
+| Cartesian product `>30` | Multiple public sets split by primary visual style |
+| Independent repeated internal responsibility | Private nested component `_{Parent}/{Part}` |
 
-Never encode editable text, icon choice, icon visibility, or arbitrary content as variants. Use Figma component properties.
+Never encode arbitrary copy, icon choice, or simple visibility as a variant. Use Text, Boolean, and instance-swap properties.
 
-## Required item-document sections
+## Required component-specification sections
 
-Every Atom, Molecule, and Organism file must specify:
+Every Atom, Molecule, and Organism specification defines:
 
-1. The page and exact public/private objects to create.
-2. The component-set split and variant count calculation.
-3. A layer tree using final Figma layer names.
-4. Exact size, padding, gap, alignment, radius, and resizing behavior.
-5. Variant axes, property names, types, defaults, and preferred values.
-6. Semantic variable and Style bindings for every visual property.
-7. Prototype reactions where interaction states are represented.
-8. A 4px and accessibility QA checklist.
-9. An item-specific optional documentation recipe that is used only after the finished component is validated and the user approves the separate documentation step.
+1. Figma page and exact public/private objects.
+2. Component-set split and variant-count calculation.
+3. Final layer tree with exact names and resizing behavior.
+4. Exact dimensions, padding, gap, alignment, radius, and sizing behavior.
+5. Variant axes, values, defaults, and ordering.
+6. Public Text/Boolean/instance-swap properties and defaults.
+7. Semantic variable and Style bindings for every visual property.
+8. Prototype reactions for represented interaction states.
+9. Responsive behavior when applicable.
+10. Internal 4px/content/interaction/accessibility QA.
+11. Optional component-documentation recipe derived from the final public API.
 
-These implementation details remain in Markdown and internal QA. The optional Figma landing frame uses the approved documentation visual language and chooses its body from the actual component API rather than a fixed specimen template.
+Do not leave structural choices to executor taste.
 
 ## 4px construction
 
-Follow [the 4px construction grid](../01-foundations/4px-grid.md). Structural values must be divisible by 4. The controlled exceptions are `1px` or `2px` inside borders and `1px` dividers, approved icon strokes, vector-path optical adjustment, shadow details, and the pill-rendering radius.
+Follow [4px construction grid](../01-foundations/4px-grid.md).
+
+Structural X, Y, width, height, padding, gap, finite corner radius, and layout measurements use whole-number multiples of `4px`.
+
+Controlled rendering exceptions:
+
+- `1px` and `2px` borders;
+- `1px` dividers;
+- approved icon/vector strokes;
+- vector optical adjustment;
+- shadow/effect details;
+- pill radius when represented as effectively infinite rounding.
 
 ## Auto Layout rules
 
-- Production frames use Auto Layout unless the element is a vector or a documented overlay.
-- Default component width is `Hug contents`; use `Fill container` only inside a parent designed to stretch.
-- Fixed control heights come from `size/control/*` variables.
-- Text layers use `Hug contents` and remain visible in the Layers panel.
-- Decorative layers are not used to create padding.
-- Use `Min width` or `Min height` rather than invisible spacer rectangles.
-- Use absolute positioning only for overlays, centered loading indicators, unread badges, or similarly layered content documented in the item file.
+- Production frames use Auto Layout unless they are vectors or explicitly layered overlays.
+- Default component width = Hug contents.
+- Use Fill container only when the parent contract requires stretching.
+- Fixed control heights bind to approved sizing variables.
+- Text layers use Hug height and remain visible in Layers.
+- Do not use decorative spacer rectangles to create padding.
+- Use Min width/height when minimum geometry is required.
+- Absolute positioning is limited to explicitly layered content such as overlays, loading indicators, unread badges, or documented optical elements.
 
 ## Component properties
 
-Use sentence-case display names:
+Use sentence-case public property names.
+
+Canonical property roles:
 
 - `Label` — `TEXT`
 - `Show leading icon` — `BOOLEAN`
@@ -60,71 +86,108 @@ Use sentence-case display names:
 - `Show trailing icon` — `BOOLEAN`
 - `Trailing icon` — `INSTANCE_SWAP`
 - `Supporting text` — `TEXT`
-- `Disabled` or `Loading` — nested properties when independent of the public visual axes
+- independent `Disabled`/`Loading` behavior — nested property or documented state mechanism rather than arbitrary variant multiplication
 
-Expose only properties that consumers should edit. Keep internal slot mechanics private.
+Expose only properties a consumer should edit.
 
 ## Variable binding
 
-Create variables before components. Bind fills, strokes, text colors, padding, gaps, dimensions, radii, opacity, and boolean visibility wherever Figma permits. `Color` roles must alias `Primitives`; component layers must not bind directly to `Primitives`.
+Create approved variables before dependent components.
 
-- Containers use `color/background/*` or the matching `color/status/*/background`.
-- Text uses `color/text/*` or the matching `color/status/*/text`.
-- Icons and vectors use `color/icon/*` or the matching `color/status/*/icon`.
-- Strokes use `color/border/*` or the matching `color/status/*/border`.
-- Components bind global semantic roles by default. Add `component/{name}/*` aliases only when the component-token criteria in [Design Tokens](../01-foundations/design-tokens.md) are met.
+- `Color` semantic roles alias `Primitives` or the project's approved raw source collection.
+- Production component layers do not bind directly to raw project colors unless the approved architecture explicitly says that raw color is itself the public semantic contract.
+- Containers bind background/surface semantic roles.
+- Text binds text semantic roles.
+- Icons/vectors bind icon semantic roles.
+- Strokes bind border semantic roles.
+- Status elements bind property-specific status roles.
+- Add component aliases only when the component-token criteria in [Design Tokens](../01-foundations/design-tokens.md) are met.
 
-Text uses Text Styles. Shadows use Effect Styles. Code syntax is set only after the production token names are known.
+Use approved Text Styles for text and Effect Styles for elevation. Do not hard-code another project's token names merely because an example file used them.
 
 ## Variant presentation
 
-Lay component variants out inside their component set with:
+Public component sets use deterministic canvas organization:
 
 - `State` as columns.
-- `Size` and then `Intent` as rows.
+- `Size`, then `Intent` as rows when those axes exist.
 - `16px` gap between variants.
-- `40px` internal set padding.
-- `64px` between public component sets.
+- `40px` component-set internal padding.
+- `64px` between sibling public component sets.
 
-Variant presentation is part of component construction. A separate landing frame is not. After component QA passes, follow [Optional Component Documentation](optional-component-documentation.md): ask the user whether to build it and proceed only after explicit approval.
+When an axis does not exist, remove it rather than inventing placeholders.
 
-## Component completion boundary
+## Foundation documentation construction
 
-- Build and validate the production component before offering documentation.
-- Do not create a landing frame, placeholder frame, or documentation-only helper during the default component build.
-- Ask the item-specific documentation question only after metadata and screenshot validation pass.
-- If approved, derive the frame from the finished Figma component and its item specification; do not rely on a static specimen template.
-- Reuse the documentation chrome already approved in the target file and select the body structure from the component's actual public API.
-- Show public names, dimensions, usage, anatomy, state behavior and relevant color pairings. Keep variant multiplication, private bindings, internal IDs and raw QA logs outside the guide.
-- Show every public variant-axis value and property, dimension/specification rows, materially different mode behavior, relevant decision examples and scoped accessibility status.
-- Convert the item recipe into an editorial guide; do not render the Markdown recipe table or recreate the full component-set matrix in Figma.
-- Give every displayed instance a visible label and a sentence explaining when or why a designer chooses it.
-- Documentation approval for one item does not authorize documentation for another item.
+All mandatory Foundation guides use [Documentation Construction Contract](documentation-visual-language.md).
+
+That contract fixes:
+
+- page order;
+- assigned root width per Foundation;
+- `Y = 0` top-level alignment;
+- `200px` horizontal guide gap;
+- canonical `476px` documentation header;
+- shared body padding and `112px` major-section rhythm;
+- documentation typography scale;
+- fixed Foundation → pattern mapping;
+- exact semantic-variable table geometry;
+- exact palette swatch geometry;
+- specimen/measured/guidance pattern geometry;
+- screenshot QA.
+
+Do not reinterpret those values from an external reference. External references are explanatory evidence only.
+
+## Optional component documentation
+
+After a component passes QA, ask whether to build its named guide.
+
+When approved:
+
+- use the same canonical documentation chrome as Foundations;
+- use the project's actual component instances and values;
+- use connected instances at 100% scale;
+- document every public axis/property without reproducing the full Cartesian product by default;
+- keep private helpers, variant math, node IDs, and raw binding dumps internal;
+- do not redesign the documentation shell for each component.
+
+See [Optional Component Documentation](optional-component-documentation.md).
 
 ## Naming
 
-- Public components: PascalCase, for example `Button`.
+- Public components: PascalCase, e.g. `Button`.
 - Style-split sets: `Button/Primary`, `Button/Secondary`.
 - Private parts: `_Button/Content`, `_Input/Indicator`.
 - Variant properties: `Size=Small, Intent=Default, State=Hover`.
-- Property values use Title Case; booleans use native `true` and `false`.
+- Property values: Title Case where user-visible in the Assets panel; booleans use native `true`/`false`.
 
 ## Required internal QA
 
-- Component set contains no more than 30 variants.
-- Every instance remains connected to a main component.
-- No production layer has fractional X, Y, W, or H values.
-- Structural measurements are divisible by 4.
-- Only documented stroke, vector, shadow, and pill exceptions remain.
-- Every visual property uses a semantic variable or approved Style.
-- Text expansion to 200% does not clip critical content.
-- Interactive controls expose visible focus and meet a minimum `44×44px` target in product composition.
-- Light and Dark modes are reviewed for the approved brand; additional branded themes are reviewed only when explicitly included in scope.
-- The published asset name, description, status, and owner are present.
-- Component completion does not depend on an optional documentation landing frame.
+- Every public set contains `≤30` variants.
+- Every production instance stays connected.
+- No structural production layer has fractional geometry.
+- Structural measurements follow the 4px rule.
+- Only documented rendering exceptions remain.
+- Visual properties bind to approved semantic variables/Styles.
+- Critical content survives 200% text expansion.
+- Interactive controls have visible focus and meet approved target geometry in product composition.
+- Every approved appearance mode is reviewed.
+- Published assets have required naming/description/ownership metadata.
+- Component completion does not depend on optional documentation.
+- Mandatory Foundation guides match the canonical documentation geometry and assigned pattern.
+- No example-project brand value appears as an unapproved current-project default.
 
 ## Documentation completeness gate
 
-Follow [Documentation Acceptance](documentation-acceptance.md) for every guide. Do not accept a Foundation with an incomplete reference or an approved component guide missing public options. Verify actual specimen bindings, visible text, names and resolved values per entry. A native variable description, text box containing a hex value, or generic example does not replace the required visual reference.
+Follow [Documentation Acceptance](documentation-acceptance.md).
 
-Also reject documentation that is technically complete but structurally unclear. Screenshot review must confirm hierarchy, grouping, alignment, legibility, real semantic relationships, brand consistency, and no overlap between top-level documentation frames.
+Reject a guide when:
+
+- approved/implemented/documented inventories disagree;
+- a specimen is not actually bound/measured as claimed;
+- visible values are stale;
+- required entries are absent;
+- the wrong canonical documentation pattern is used;
+- canonical frame width, shell, body rhythm, table geometry, or canvas placement differs;
+- screenshot review shows clipping, weak grouping, overlap, or brand leakage;
+- an example project's identity has become a reusable default.
