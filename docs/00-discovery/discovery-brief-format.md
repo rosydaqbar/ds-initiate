@@ -1,6 +1,6 @@
 # Discovery Brief Format
 
-This brief records **project-specific input** for one generated design system. It must never be copied back into the reusable repository as a default. See [Project Data Boundary](../06-governance/project-data-boundary.md).
+This brief records **project-specific input** for one generated design system. It applies only to the current project. See [Project Data Boundary](../06-governance/project-data-boundary.md).
 
 Use exact values where known. Mark unresolved implementation values as `BLOCKED` or `REQUIRES APPROVAL`.
 
@@ -78,7 +78,7 @@ Record at minimum:
 - accessibility/language/content requirements;
 - first-release component inventory;
 - production tokens/assets to preserve;
-- explicit departures from repository defaults.
+- explicit departures from framework defaults.
 
 Discovery approval authorizes only entries marked `APPROVED` or `PRODUCTION SOURCE`.
 
