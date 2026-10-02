@@ -16,6 +16,7 @@ The framework provides:
 - Primitive → semantic → optional component-token architecture.
 - 4px structural construction rule.
 - Component object-selection rules and `≤30` public-variant limit.
+- Explicit component execution modes: **YOLO everything** or **One by one**.
 - Auto Layout/property/binding construction rules.
 - Deterministic Foundation-documentation page order, frame widths, shell geometry, body-pattern mapping, table anatomy, canvas placement, and QA.
 - Release and output-validation procedure.
@@ -56,6 +57,7 @@ Start with:
 - [Documentation Construction Contract](docs/06-governance/documentation-visual-language.md)
 - [Machine-readable documentation layout contract](docs/06-governance/documentation-layout-contract.json)
 - [Mandatory Foundation Documentation](docs/06-governance/foundation-documentation.md)
+- [Component Execution Mode](docs/06-governance/component-execution-mode.md)
 - [Documentation Acceptance](docs/06-governance/documentation-acceptance.md)
 
 `AGENTS.md` defines how an executor should use these specifications during a project build.
@@ -73,7 +75,9 @@ Build a design system for [brand and product] in [Figma URL] using this reposito
 
 Start with Discovery: inspect the target file, ask me up to 10 specific brand-style questions, summarize the resolved project direction and first-release scope, list unresolved project-sensitive values, then wait for approval.
 
-After approval, build Foundations → Atoms → Molecules → Organisms using the mandatory 4px construction rule.
+After approval, build Foundations first using the mandatory 4px construction rule.
+
+Before implementing the first Atom, Molecule, or Organism, ask me whether I want to **YOLO everything** or build **One by one**. Do not infer the mode. In YOLO mode, implement the complete approved component scope in dependency order without routine confirmation pauses, but keep per-component validation and stop for real blockers. In one-by-one mode, implement and validate one component, report it, then wait for my approval before continuing.
 
 Foundation documentation is mandatory. Follow docs/06-governance/documentation-visual-language.md and docs/06-governance/documentation-layout-contract.json exactly for page order, assigned root widths, canonical header/footer shell, body pattern, semantic-table geometry, specimen/measured layouts, canvas placement, and screenshot QA. Populate that fixed construction only with the current project's approved brand values, typography, tokens, assets, and copy. Do not inherit brand values from any example project or external reference.
 

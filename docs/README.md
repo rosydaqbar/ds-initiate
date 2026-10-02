@@ -37,6 +37,7 @@ Atomic level and library section remain specification metadata; do not add them 
 - [Project Data Boundary](06-governance/project-data-boundary.md)
 - [4px construction grid](01-foundations/4px-grid.md)
 - [Figma construction standard](06-governance/figma-construction-standard.md)
+- [Component Execution Mode](06-governance/component-execution-mode.md)
 - [Documentation Construction Contract](06-governance/documentation-visual-language.md)
 - [Executable component specification format](06-governance/component-specification-format.md)
 
@@ -54,6 +55,8 @@ Foundation guides use the fixed structure in [Documentation Construction Contrac
 The current project supplies brand-sensitive values through approved Discovery. The framework supplies the construction grammar.
 
 Use [Mandatory Foundation Documentation](06-governance/foundation-documentation.md) and [Documentation Acceptance](06-governance/documentation-acceptance.md) for Foundation coverage and validation.
+
+Before component implementation begins, use [Component Execution Mode](06-governance/component-execution-mode.md) to ask whether the approved component scope should run as **YOLO everything** or **One by one**.
 
 Use [Optional Component Documentation](06-governance/optional-component-documentation.md) only after the named component passes QA and the user approves that guide.
 

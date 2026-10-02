@@ -61,11 +61,13 @@ Copy this file for every Atom, Molecule, or Organism. Replace every bracketed va
 
 **Build status:** Optional. Do not create during the component build.
 
-After component QA passes, ask:
+After component QA passes, follow the active [Component Execution Mode](component-execution-mode.md):
 
-> “The [Component name] component is complete. Should I build its optional designer documentation from [[filename].md]([filename].md)?”
+- **One by one:** ask:
+  > “The [Component name] component is complete. Should I build its optional designer documentation from [[filename].md]([filename].md)?”
+- **YOLO everything:** do not interrupt the implementation batch. Defer the documentation decision until the approved component scope is complete, then ask which completed component guides, if any, the user wants to build.
 
-If approved, re-inspect the final component metadata and screenshot, then create or update `Documentation / [Component name]` using [Optional Component Documentation](optional-component-documentation.md).
+If documentation is approved, re-inspect the final component metadata and screenshot, then create or update `Documentation / [Component name]` using [Optional Component Documentation](optional-component-documentation.md).
 
 The recipe table below is an internal build instruction. Convert each row into visible headings, short explanations, and annotated connected-instance examples. Never reproduce the table or the complete component-set matrix in Figma. Every displayed style, size, state, and editable option needs a visible label and a sentence explaining when or why to choose it.
 

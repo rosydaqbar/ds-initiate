@@ -32,9 +32,10 @@ Read these files before completing a build or specification:
 6. `docs/06-governance/documentation-visual-language.md`
 7. `docs/06-governance/documentation-layout-contract.json`
 8. `docs/06-governance/component-specification-format.md`
-9. `docs/06-governance/foundation-documentation.md`
-10. `docs/06-governance/optional-component-documentation.md`
-11. The target item specification and every dependency linked from it
+9. `docs/06-governance/component-execution-mode.md`
+10. `docs/06-governance/foundation-documentation.md`
+11. `docs/06-governance/optional-component-documentation.md`
+12. The target item specification and every dependency linked from it
 
 The JSON layout contract is the numeric source of truth for documentation geometry. The Markdown construction contract explains semantics and behavior. If they conflict, stop and report the exact conflict instead of choosing one silently.
 
@@ -126,6 +127,15 @@ Populate the fixed construction with the current project's approved values. Do n
 
 Build Atoms before Molecules and Molecules before Organisms.
 
+Before creating the first Atom, Molecule, or Organism in an approved component scope, resolve the required execution-mode gate in [Component Execution Mode](docs/06-governance/component-execution-mode.md). Do not infer the mode.
+
+Ask the user whether to:
+
+- **YOLO everything** — implement the complete approved component scope in dependency order without routine confirmation pauses between components; or
+- **One by one** — implement and validate one component, report it, then wait for approval before continuing.
+
+The selected mode controls pacing only. It never overrides dependency order, validation, blocking questions, approved scope, project-data boundaries, or construction rules.
+
 For each component:
 
 - use one component when there is no public visual axis;
@@ -155,6 +165,8 @@ Every component specification contains:
 
 Component guides are optional after component QA. Ask before building each named component guide.
 
+In YOLO mode, do not interrupt the implementation batch with guide-approval questions after each component. Finish the approved component implementation scope first, then ask which completed component guides, if any, the user wants to build.
+
 If approved, follow `docs/06-governance/optional-component-documentation.md` and the canonical documentation shell.
 
 ## Figma execution
@@ -164,13 +176,14 @@ When the user explicitly authorizes a Figma build or update:
 1. Inspect the target file first.
 2. Complete and approve Discovery before project-sensitive visual mutation.
 3. Build Foundations before dependent components.
-4. Build documentation from the canonical framework contracts.
-5. Mutate sequentially, one validated unit at a time.
-6. Reuse exact returned IDs; never guess IDs.
-7. Validate structure and appearance after each unit.
-8. Screenshot-review mandatory Foundation documentation.
-9. Keep implementation logs out of designer-facing frames.
-10. Do not automatically create optional component documentation.
+4. Before the first component mutation, resolve the component execution mode explicitly with the user.
+5. Build documentation from the canonical framework contracts.
+6. Mutate sequentially, one validated unit at a time. YOLO mode removes routine approval pauses; it does not remove per-unit validation.
+7. Reuse exact returned IDs; never guess IDs.
+8. Validate structure and appearance after each unit.
+9. Screenshot-review mandatory Foundation documentation.
+10. Keep implementation logs out of designer-facing frames.
+11. Do not automatically create optional component documentation.
 
 Specification completion does not authorize Figma mutation. Figma inspection does not authorize Figma mutation.
 

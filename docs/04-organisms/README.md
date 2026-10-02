@@ -4,7 +4,7 @@ Organisms are larger interface regions assembled from atoms and molecules. They 
 
 They are stored together at one Atomic Design level without product-surface categories.
 
-Each item file contains an optional, item-specific landing-frame recipe. Build and validate the Organism and its dependencies first; offer its documentation afterward and create it only when the user approves.
+Each item file contains an optional, item-specific landing-frame recipe. Build and validate the Organism and its dependencies first. Follow [Component Execution Mode](../06-governance/component-execution-mode.md) for pacing: offer its documentation after QA in **One by one** mode, or defer guide decisions until the approved batch is complete in **YOLO everything** mode. Create documentation only when the user approves it.
 
 - [Activity Feed](activity-feed.md)
 - [Chart Panel](chart-panel.md)
