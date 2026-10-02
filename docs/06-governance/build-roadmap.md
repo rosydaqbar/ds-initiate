@@ -23,13 +23,24 @@ For every Foundation:
 
 Documentation width, shell, row anatomy, and body pattern are framework-defined and should not be reinterpreted during execution.
 
+## Component execution mode gate
+
+Before Phase 2 begins, follow [Component Execution Mode](component-execution-mode.md) and ask the user to choose **YOLO everything** or **One by one** for the approved component scope.
+
+Do not infer the mode.
+
+- In **YOLO everything**, continue through the approved component scope in dependency order without routine confirmation pauses, while still validating every component before dependent work continues.
+- In **One by one**, stop after each validated component, report the result, and wait for approval before starting the next component.
+
+A mode choice changes pacing, not quality gates, scope boundaries, dependency order, or blocking-question requirements.
+
 ## Phase 2 — Atoms
 
 Build and validate the smallest reusable controls and visual elements.
 
 Use approved project tokens/Styles only. Do not borrow visual values from an example project.
 
-After an Atom passes component QA, ask whether to build its optional designer guide. If approved, use the fixed component-guide shell and section order in [Optional Component Documentation](optional-component-documentation.md).
+After an Atom passes component QA, optional designer documentation still requires explicit approval. In YOLO mode, defer guide-approval questions until the approved implementation batch is complete. In one-by-one mode, the guide may be offered after the current Atom passes QA. If approved, use the fixed component-guide shell and section order in [Optional Component Documentation](optional-component-documentation.md).
 
 ## Phase 3 — Molecules
 
