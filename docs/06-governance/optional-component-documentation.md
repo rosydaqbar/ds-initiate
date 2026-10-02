@@ -10,14 +10,15 @@ Read [Project Data Boundary](project-data-boundary.md) and [Documentation Constr
 
 A component is complete when its production Figma objects, variants, properties, variables, interactions, publishing information, and internal QA are complete. A documentation frame is not required for component completion.
 
-Use this sequence:
+Use this sequence together with [Component Execution Mode](component-execution-mode.md):
 
 1. Build and internally validate the component.
-2. Ask: `The {Component} component is complete. Should I build its optional designer documentation from {filename}.md?`
-3. If declined, create nothing.
-4. If approved, inspect the finished public API and build/update `Documentation / {Component}`.
+2. In **One by one** mode, ask: `The {Component} component is complete. Should I build its optional designer documentation from {filename}.md?`
+3. In **YOLO everything** mode, do not pause after each component. Finish the approved implementation batch first, then ask which completed component guides, if any, should be built.
+4. If documentation is declined for a named component, create nothing for that guide.
+5. If approved, inspect the finished public API and build/update `Documentation / {Component}`.
 
-Approval applies only to that named component.
+Approval applies only to each named component that the user selects.
 
 ## Project boundary
 
